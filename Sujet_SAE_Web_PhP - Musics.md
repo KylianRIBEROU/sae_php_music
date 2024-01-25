@@ -37,6 +37,7 @@ albums et playlists favoris
 CRUD playlists accessible a la personne ayant créé la playlist
 
 ## Organisation et délais
+
 Par groupes de 3
 
 Contraintes
