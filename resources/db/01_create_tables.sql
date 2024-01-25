@@ -1,105 +1,101 @@
-CREATE TABLE album (
-  PRIMARY KEY (idAlbum),
-  idAlbum    integer auto-increment NOT NULL,
-  nomAlbum   varchar(200),
-  imageAlbum varchar(200),
-  idA        integer auto-increment NOT NULL,
-  idT        integer auto-increment NULL
+
+
+CREATE TABLE utilisateur (
+  idU        INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  nomU       VARCHAR(100) UNIQUE,
+  motdepasse VARCHAR(200),
+  admin      INTEGER
 );
 
-CREATE TABLE appartient (
-  PRIMARY KEY (idP, idT),
-  idP integer auto-increment NOT NULL,
-  idT integer auto-increment NOT NULL
+
+CREATE TABLE album (
+  idAlbum   INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  titreAlbum VARCHAR(100),
+  imageAlbum varchar(200),
+  anneeSortie INTEGER,
+  idA       INTEGER NOT NULL,
+  FOREIGN KEY (idA) REFERENCES artiste (idA)
 );
 
 CREATE TABLE artiste (
-  PRIMARY KEY (idA),
-  idA  integer auto-increment NOT NULL,
-  nomA varchar(100) unique
+  idA  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  nomA VARCHAR(100) UNIQUE
 );
 
 CREATE TABLE detient (
-  PRIMARY KEY (idT, idG),
-  idT integer auto-increment NOT NULL,
-  idG integer auto-increment NOT NULL
+  idAlbum INTEGER NOT NULL,
+  idG INTEGER NOT NULL,
+  PRIMARY KEY (idAlbum, idG),
+  FOREIGN KEY (idAlbum) REFERENCES album (idAlbum),
+  FOREIGN KEY (idG) REFERENCES genre (idG)
 );
 
 CREATE TABLE favAlbum (
+  idU     INTEGER NOT NULL,
+  idAlbum INTEGER NOT NULL,
   PRIMARY KEY (idU, idAlbum),
-  idU     integer auto-increment NOT NULL,
-  idAlbum integer auto-increment NOT NULL
+  FOREIGN KEY (idU) REFERENCES utilisateur (idU),
+  FOREIGN KEY (idAlbum) REFERENCES album (idAlbum)
 );
 
 CREATE TABLE favTitre (
+  idU INTEGER NOT NULL,
+  idT INTEGER NOT NULL,
   PRIMARY KEY (idU, idT),
-  idU integer auto-increment NOT NULL,
-  idT integer auto-increment NOT NULL
+  FOREIGN KEY (idU) REFERENCES utilisateur (idU),
+  FOREIGN KEY (idT) REFERENCES titre (idT)
 );
 
 CREATE TABLE genre (
-  PRIMARY KEY (idG),
-  idG  integer auto-increment NOT NULL,
-  nomG unique varchar(100)
+  idG  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  nomG VARCHAR(100) UNIQUE
 );
 
 CREATE TABLE image (
-  PRIMARY KEY (idImage),
-  idImage   integer auto-increment NOT NULL,
+  idImage   INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   lienImage VARCHAR(42) NOT NULL,
   pos       VARCHAR(42),
-  idA       integer auto-increment NOT NULL
+  idA       INTEGER NOT NULL,
+  FOREIGN KEY (idA) REFERENCES artiste (idA)
 );
 
+
+
+
+
+
 CREATE TABLE note (
+  idU     INTEGER NOT NULL,
+  idAlbum INTEGER NOT NULL,
+  note    INTEGER NOT NULL,
   PRIMARY KEY (idU, idAlbum),
-  idU     integer auto-increment NOT NULL,
-  idAlbum integer auto-increment NOT NULL,
-  note    integer NOT NULL
+  FOREIGN KEY (idU) REFERENCES utilisateur (idU),
+  FOREIGN KEY (idAlbum) REFERENCES album (idAlbum)
 );
 
 CREATE TABLE playlist (
-  PRIMARY KEY (idP),
-  idP  integer auto-increment NOT NULL,
-  nomP varchar 100
+  idP  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  nomP VARCHAR(100),
+  idU INTEGER NOT NULL,
+  FOREIGN KEY (idU) REFERENCES utilisateur (idU)
 );
 
 CREATE TABLE titre (
-  PRIMARY KEY (idT),
-  idT         integer auto-increment NOT NULL,
-  labelT      varchar(100),
-  anneeSortie integer,
-  duree       integer,
-  idA         integer auto-increment NOT NULL
+  idT         INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  labelT      VARCHAR(100),
+  anneeSortie INTEGER,
+  duree       INTEGER,
+  idA         INTEGER NOT NULL,
+  idAlbum 	  INTEGER,
+  FOREIGN KEY (idAlbum) REFERENCES album (idAlbum)
+  FOREIGN KEY (idA) REFERENCES artiste (idA)
 );
 
-CREATE TABLE utilisateur (
-  PRIMARY KEY (idU),
-  idU        integer auto-increment NOT NULL,
-  nomU       unique varchar(100),
-  motdepasse varchar(200),
-  admin      integer
+
+CREATE TABLE appartient (
+  idP INTEGER NOT NULL,
+  idT INTEGER NOT NULL,
+  PRIMARY KEY (idP, idT),
+  FOREIGN KEY (idP) REFERENCES playlist(idP),
+  FOREIGN KEY (idT) REFERENCES titre (idT)
 );
-
-ALTER TABLE album ADD FOREIGN KEY (idT) REFERENCES titre (idT);
-ALTER TABLE album ADD FOREIGN KEY (idA) REFERENCES artiste (idA);
-
-ALTER TABLE appartient ADD FOREIGN KEY (idT) REFERENCES titre (idT);
-ALTER TABLE appartient ADD FOREIGN KEY (idP) REFERENCES playlist (idP);
-
-ALTER TABLE detient ADD FOREIGN KEY (idG) REFERENCES genre (idG);
-ALTER TABLE detient ADD FOREIGN KEY (idT) REFERENCES titre (idT);
-
-ALTER TABLE favAlbum ADD FOREIGN KEY (idAlbum) REFERENCES album (idAlbum);
-ALTER TABLE favAlbum ADD FOREIGN KEY (idU) REFERENCES utilisateur (idU);
-
-ALTER TABLE favTitre ADD FOREIGN KEY (idT) REFERENCES titre (idT);
-ALTER TABLE favTitre ADD FOREIGN KEY (idU) REFERENCES utilisateur (idU);
-
-ALTER TABLE image ADD FOREIGN KEY (idA) REFERENCES artiste (idA);
-
-ALTER TABLE note ADD FOREIGN KEY (idAlbum) REFERENCES album (idAlbum);
-ALTER TABLE note ADD FOREIGN KEY (idU) REFERENCES utilisateur (idU);
-
-ALTER TABLE titre ADD FOREIGN KEY (idA) REFERENCES artiste (idA);
-

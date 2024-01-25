@@ -1,20 +1,23 @@
-CF7, 0N ARTISTE, 11 IMAGE
-ARTISTE: idA[integer not null auto-increment], nomA[varchar(100) unique]
-CF8, 0N ARTISTE, 11 ALBUM
-ALBUM: idAlbum [integer not null auto-increment], nomAlbum [varchar(200)], imageAlbum[varchar(200)]
+CF9, 11 PLAYLIST, 0N UTILISATEUR
+UTILISATEUR: idU[integer not null auto-increment], nomU[unique varchar(100)], motdepasse[varchar(200)], admin[integer]
 NOTE, 0N UTILISATEUR, 0N ALBUM: note[integer not null]
 :
+:
 
-IMAGE: idImage[integer not null auto-increment], lienImage [not null], pos
-CF2, 0N ARTISTE, 11 titre
-titre: idT[integer not null auto-increment], labelT [varchar(100)], anneeSortie [integer], duree[integer]
-COMPOSE, 01 ALBUM, 0N titre
+PLAYLIST: idP[integer not null auto-increment], nomP[varchar 100]
+fav_titre, 0N UTILISATEUR, 0N titre
 fav_album, 0N UTILISATEUR, 0N ALBUM
-UTILISATEUR: idU[integer not null auto-increment], nomU[unique varchar(100)], motdepasse[varchar(200)], admin[integer]
+ALBUM: idAlbum [integer not null auto-increment], nomAlbum [varchar(200)], imageAlbum[varchar(200)]
+:
+
+APPARTIENT, 0N PLAYLIST, 0N titre
+titre: idT[integer not null auto-increment], labelT [varchar(100)], anneeSortie [integer], duree[integer]
+COMPOSE, 0N ALBUM, 01 titre
+CF8, 0N ARTISTE, 11 ALBUM
+IMAGE: idImage[integer not null auto-increment], lienImage [not null], pos
 
 GENRE: idG[integer not null auto-increment], nomG[unique varchar(100)]
 DETIENT, 0N titre, 0N GENRE
-APPARTIENT, 0N PLAYLIST, 0N titre
-PLAYLIST: idP[integer not null auto-increment], nomP[varchar 100]
-fav_titre, 0N UTILISATEUR, 0N titre
-:
+CF2, 0N ARTISTE, 11 titre
+ARTISTE: idA[integer not null auto-increment], nomA[varchar(100) unique]
+CF7, 0N ARTISTE, 11 IMAGE
