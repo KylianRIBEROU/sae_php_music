@@ -7,6 +7,7 @@ namespace db_models;
 use PDO;
 use models\Appartient;
 
+//TODO: continuer les modeles BD avec delete en cascade
 class AppartientBD
 {
     private PDO $pdo;
