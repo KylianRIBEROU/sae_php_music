@@ -1,5 +1,4 @@
 
-
 CREATE TABLE utilisateur (
   idU        INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   nomU       VARCHAR(100) UNIQUE,

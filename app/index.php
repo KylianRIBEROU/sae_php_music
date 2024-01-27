@@ -1,3 +1,8 @@
 <?php 
 
-// php c'est nul ahahazieefi s,e^dqsghv rf)d q^sg,
+require_once 'configuration/config.php';
+
+// Autoloader 
+
+require 'classes/autoloader/autoloader.php';
+Autoloader::register();
