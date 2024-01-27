@@ -1,3 +1,4 @@
+
 CREATE TABLE utilisateur (
   idU        INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   nomU       VARCHAR(100) UNIQUE,
@@ -56,6 +57,11 @@ CREATE TABLE image (
   idA       INTEGER NOT NULL,
   FOREIGN KEY (idA) REFERENCES artiste (idA)
 );
+
+
+
+
+
 
 CREATE TABLE note (
   idU     INTEGER NOT NULL,
