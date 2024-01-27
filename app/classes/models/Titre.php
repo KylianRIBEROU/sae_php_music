@@ -15,6 +15,8 @@ class Titre {
     private int $duree;
     private int $idA;
 
+    private int $idAlbum;
+
     // avec documentation
 
     /**
@@ -24,14 +26,16 @@ class Titre {
      * @param int $anneeSortie
      * @param int $duree
      * @param int $idA
+     * @param int $idAlbum (optionnel)
      */
-    public function __construct(int $idT, string $labelT, int $anneeSortie, int $duree, int $idA)
+    public function __construct(int $idT, string $labelT, int $anneeSortie, int $duree, int $idA, int $idAlbum = null)
     {
         $this->idT = $idT;
         $this->labelT = $labelT;
         $this->anneeSortie = $anneeSortie;
         $this->duree = $duree;
         $this->idA = $idA;
+        $this->idAlbum = $idAlbum;
     }
 
     /**
@@ -75,6 +79,14 @@ class Titre {
     }
 
     /**
+     * @return int | null
+     */
+    public function getIdAlbum(): int
+    {
+        return $this->idAlbum;
+    }
+
+    /**
      * @param int $idT
      */
     public function setIdT(int $idT): void
@@ -114,4 +126,11 @@ class Titre {
         $this->idA = $idA;
     }
     
+    /**
+     * @param int $idAlbum
+     */
+    public function setIdAlbum(int $idAlbum): void
+    {
+        $this->idAlbum = $idAlbum;
+    }
 }

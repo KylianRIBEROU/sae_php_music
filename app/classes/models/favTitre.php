@@ -11,7 +11,7 @@ class favTitre {
         private int $idT;
     
         /**
-        * favTitre constructor.
+        * favTitre constructor, association entre un titre et un utilisateur, manyToMany
         * @param int $idU
         * @param int $idT
         */

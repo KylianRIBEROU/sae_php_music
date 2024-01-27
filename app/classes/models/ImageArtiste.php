@@ -14,8 +14,6 @@ class ImageArtiste {
 
     private int $idA;
 
-    // avec documentation
-
     /**
      * ImageArtiste constructor.
      * @param int $idImage

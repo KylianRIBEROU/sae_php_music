@@ -20,17 +20,18 @@ class AppartientBD
     /**
      * Crée une nouvelle association "Appartient" entre un titre et une playlist dans la base de données.
      *
-     * @param Appartient $appartient
+     * @param int $idP L'ID de la playlist.
+     * @param int $idT L'ID du titre.
      * @return bool True si l'association "Appartient" a été créée avec succès, sinon false.
      */
-    public function createAppartient(Appartient $appartient): bool
+    public function createAppartient(int $idP, int $idT): bool
     {
         $query = 'INSERT INTO appartient (idP, idT) VALUES (:idP, :idT)';
 
         try {
             $stmt = $this->pdo->prepare($query);
-            $stmt->bindValue(':idP', $appartient->getIdP());
-            $stmt->bindValue(':idT', $appartient->getIdT());
+            $stmt->bindValue(':idP', $idP);
+            $stmt->bindValue(':idT', $idT);
             return $stmt->execute();
         } catch (\PDOException $e) {
             // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)

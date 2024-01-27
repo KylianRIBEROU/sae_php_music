@@ -6,16 +6,31 @@ namespace db_models;
 
 use PDO;
 use models\Utilisateur;
+use db_models\PlaylistBD;
+use db_models\NoteBD;
+use db_models\FavTitreBD;
+use db_models\FavAlbumBD;
 
 class UtilisateurBD
 {
     private PDO $pdo;
 
-    //TODO: rajouter playlistBD pour pouvoir supprimer les playlist associees a un utilisateur supprime
+    private PlaylistBD $playlistBD;
+
+    private NoteBD $noteBD;
+
+    private FavTitreBD $favTitreBD;
+
+    private FavAlbumBD $favAlbumBD;
+
 
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
+        $this->playlistBD = new PlaylistBD($pdo);
+        $this->noteBD = new NoteBD($pdo);
+        $this->favTitreBD = new FavTitreBD($pdo);
+        $this->favAlbumBD = new FavAlbumBD($pdo);
     }
 
     /**
@@ -102,8 +117,14 @@ class UtilisateurBD
      * @param int $idU L'ID de l'utilisateur à supprimer.
      * @return bool True si l'utilisateur a été supprimé avec succès, sinon false.
      */
-    public function deleteUtilisateur(int $idU): bool
-    {
+    public function deleteUtilisateur(int $idU): bool{
+
+        // suppression des associations avant de supprimer l'utilisateur
+        $this->playlistBD->deleteAllPlaylistsByIdU($idU);
+        $this->noteBD->deleteNotesByIdU($idU);
+        $this->favTitreBD->deleteFavTitreByIdU($idU);
+        $this->favAlbumBD->deleteFavAlbumByIdU($idU);
+
         $query = 'DELETE FROM utilisateur WHERE idU = :idU';
 
         try {

@@ -10,6 +10,7 @@ class Playlist {
 
     private string $nomP;
 
+
     private int $idU;
 
     /**

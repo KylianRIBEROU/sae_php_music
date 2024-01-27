@@ -11,7 +11,7 @@ class favAlbum {
     private int $idAlbum;
 
     /**
-     * favAlbum constructor.
+     * favAlbum constructor, association entre un album et un utilisateur, manyToMany
      * @param int $idU
      * @param int $idAlbum
      */

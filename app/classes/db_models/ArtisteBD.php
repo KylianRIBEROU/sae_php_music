@@ -5,14 +5,22 @@ declare(strict_types=1);
 namespace db_models;
 
 use PDO;
+use db_models\ImageArtisteBD;
+use db_models\AlbumBD;
+use db_models\TitreBD;
 use models\Artiste;
 
 class ArtisteBD
 {
     private PDO $pdo;
 
-    //todo : ajouter autres objetsbd pour suppr artiste en cascade (titre, imageartiste, ...)
     private ImageArtisteBD $imageArtisteBD;
+
+    private AlbumBD $albumBD; //TODO
+
+    private TitreBD $titreBD;
+
+
 
     public function __construct(PDO $pdo, ImageArtisteBD $imageArtisteBD)
     {
@@ -99,6 +107,8 @@ class ArtisteBD
 
     {
         $this->imageArtisteBD->deleteAllImageByArtiste($idA);
+        $this->albumBD->deleteAlbumsByIdA($idA);
+        $this->titreBD->deleteTitresByIdA($idA); 
         
         $query = 'DELETE FROM artiste WHERE idA = :idA';
 

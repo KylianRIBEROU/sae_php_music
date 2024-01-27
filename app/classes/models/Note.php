@@ -8,19 +8,19 @@ class Note {
 
     private int $idU;
 
-    private int $idT;
+    private int $idAlbum;
 
     private int $note;
 
     /**
-     * Note constructor.
+     * Note constructor, association entre un album et un utilisateur, manyToMany, avec une note
      * @param int $idU
-     * @param int $idT
+     * @param int $idAlbum
      * @param int $note
      */
-    public function __construct(int $idU, int $idT, int $note) {
+    public function __construct(int $idU, int $idAlbum, int $note) {
         $this->idU = $idU;
-        $this->idT = $idT;
+        $this->$idAlbum = $idAlbum;
         $this->note = $note;
     }
 
@@ -34,8 +34,8 @@ class Note {
     /**
      * @return int
      */
-    public function getIdT(): int {
-        return $this->idT;
+    public function getIdAlbum(): int {
+        return $this->idAlbum;
     }
 
     /**
@@ -55,11 +55,11 @@ class Note {
     }
 
     /**
-     * @param int $idT
+     * @param int $idAlbum
      * @return void
      */
-    public function setIdT(int $idT): void {
-        $this->idT = $idT;
+    public function setIdAlbum(int $idAlbum): void {
+        $this->$idAlbum = $idAlbum;
     }
 
     /**

@@ -12,7 +12,7 @@ class Detient{
 
 
     /**
-     * Detient constructor.
+     * Detient constructeur: association  entre un titre et un genre, un titre détient un genre
      * @param int $idG
      * @param int $idT
      */

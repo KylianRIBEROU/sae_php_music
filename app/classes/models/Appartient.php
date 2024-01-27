@@ -11,7 +11,7 @@ class Appartient {
     private int $idT;
 
     /**
-     * Appartient constructor. association entre titre et playlist 
+     * Appartient constructor. association entre titre et playlist, manyToMany
      * @param int $idP
      * @param int $idT
      */
