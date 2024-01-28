@@ -7,7 +7,8 @@ NOTE, 0N UTILISATEUR, 0N ALBUM: note[integer not null]
 PLAYLIST: idP[integer not null auto-increment], nomP[varchar 100]
 fav_titre, 0N UTILISATEUR, 0N titre
 fav_album, 0N UTILISATEUR, 0N ALBUM
-ALBUM: idAlbum [integer not null auto-increment], nomAlbum [varchar(200)], imageAlbum[varchar(200)]
+
+ALBUM: idAlbum [integer not null auto-increment], titreAlbum [varchar(200)], imageAlbum[varchar(200)], anneeSortie[integer]
 :
 
 APPARTIENT, 0N PLAYLIST, 0N titre
@@ -20,4 +21,6 @@ GENRE: idG[integer not null auto-increment], nomG[unique varchar(100)]
 DETIENT, 0N titre, 0N GENRE
 CF2, 0N ARTISTE, 11 titre
 ARTISTE: idA[integer not null auto-increment], nomA[varchar(100) unique]
+
 CF7, 0N ARTISTE, 11 IMAGE
+
