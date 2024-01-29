@@ -89,6 +89,39 @@ class UtilisateurBD
     }
 
     /**
+     * Récupère un utilisateur par nom depuis la base de données.
+     *
+     * @param string $nomU Le nom de l'utilisateur.
+     * @return Utilisateur|null L'objet utilisateur récupéré, ou null s'il n'est pas trouvé.
+     */
+    public function getUtilisateurByNom(string $nomU): Utilisateur | null 
+    {
+        $query = 'SELECT * FROM utilisateur WHERE nomU = :nomU';
+
+        try {
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue(':nomU', $nomU);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                return new Utilisateur(
+                    (int)$result['idU'],
+                    $result['nomU'],
+                    $result['motdepasse'],
+                    (bool)$result['admin']
+                );
+            }
+
+            return null;
+        } catch (\PDOException $e) {
+            // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
+            return null;
+        }
+    }
+
+    /**
      * Met à jour un utilisateur dans la base de données.
      *
      * @param Utilisateur $utilisateur L'objet utilisateur mis à jour.
@@ -135,5 +168,55 @@ class UtilisateurBD
             // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
             return false;
         }
+    }
+
+    /**
+     * Vérifie si un utilisateur existe dans la base de données.
+     */
+    public function checkUtilisateurExiste(string $nomU): bool {
+        $query = 'SELECT * FROM utilisateur WHERE nomU = :nomU';
+
+        try {
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue(':nomU', $nomU);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                return true;
+            }
+
+            return false;
+        } catch (\PDOException $e) {
+            // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
+            return false;
+        }
+    }
+
+    /**
+     * Vérifie si les credentials d'un utilisateur sont corrects.
+     */
+    public function checkCredentials(string $nomU, string $password): bool {
+        $query = 'SELECT * FROM utilisateur WHERE nomU = :nomU AND motdepasse = :password';
+
+        try {
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue(':nomU', $nomU);
+            $stmt->bindValue(':password', $password);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                return true;
+            }
+
+            return false;
+        } catch (\PDOException $e) {
+            // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
+            return false;
+        }
+
     }
 }

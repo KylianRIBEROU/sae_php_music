@@ -16,16 +16,16 @@ class ArtisteBD
 
     private ImageArtisteBD $imageArtisteBD;
 
-    private AlbumBD $albumBD; //TODO
+    private AlbumBD $albumBD;
 
     private TitreBD $titreBD;
 
 
 
-    public function __construct(PDO $pdo, ImageArtisteBD $imageArtisteBD)
+    public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
-        $this->imageArtisteBD = $imageArtisteBD;
+        $this->imageArtisteBD = new ImageArtisteBD($pdo);
     }
 
     /**

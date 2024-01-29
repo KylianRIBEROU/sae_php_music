@@ -3,6 +3,23 @@ $viewDir = '/views/';
 $route = $_SERVER['REQUEST_URI'];
 $hxRequest = isset($_SERVER['HTTP_HX_REQUEST']) && $_SERVER['HTTP_HX_REQUEST'] == 'true';
 
+function get_sqlite_connection(): PDO | null{
+   try {
+      $db = new PDO('sqlite:data/app.db');
+      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      return $db;
+   } catch (PDOException $e) {
+      // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
+      return null;
+   }
+}
+
+$db = get_sqlite_connection();
+
+if ($db != null ){
+   
+}
+
 register_shutdown_function(function () {
    global $main, $hxRequest, $viewDir, $route, $nav, $player;
    if ($hxRequest) {
