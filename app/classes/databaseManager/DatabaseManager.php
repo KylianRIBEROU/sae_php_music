@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace databasemanager;
+namespace databaseManager;
 
 use PDO;
+use PDOException;
 use db_models\AlbumBD;
 use db_models\ArtisteBD;
 use db_models\TitreBD;
@@ -25,22 +26,34 @@ class DatabaseManager {
 
     private UtilisateurBD $utilisateurBD;
 
-    private function __construct(PDO $pdo)
+    private function __construct()
     {
-        $this->pdo = $pdo;
-        $this->albumBD = new AlbumBD($pdo);
-        $this->artisteBD = new ArtisteBD($pdo);
-        $this->titreBD = new TitreBD($pdo);
-        $this->utilisateurBD = new UtilisateurBD($pdo);
+        $this->pdo = self::get_sqlite_connection();
+        $this->albumBD = new AlbumBD($this->pdo);
+        $this->artisteBD = new ArtisteBD($this->pdo);
+        $this->titreBD = new TitreBD($this->pdo);
+        $this->utilisateurBD = new UtilisateurBD($this->pdo);
     }
 
-    public static function getInstance(PDO $pdo): DatabaseManager
+    public static function getInstance(): DatabaseManager
     {
         if (self::$instance === null) {
-            self::$instance = new DatabaseManager($pdo);
+            self::$instance = new DatabaseManager();
         }
         return self::$instance;
     }
+
+    public static function get_sqlite_connection(): PDO | null{
+        try {
+           $db = new PDO('sqlite:data/app.db'); // chemin depuis l'endroit où get_instance est appelé pour la 1ere fois. Ici, c'est index.php
+           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           return $db;
+        } catch (PDOException $e) {
+           // Gérer l'exception
+            $e -> getMessage();
+           return null; 
+        }
+     }
 
     /**
      * @return PDO
