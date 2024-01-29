@@ -13,6 +13,8 @@ use db_models\UtilisateurBD;
 
 class DatabaseManager {
 
+    private static ?DatabaseManager $instance = null;
+
     private PDO $pdo;
 
     private AlbumBD $albumBD;
@@ -23,13 +25,21 @@ class DatabaseManager {
 
     private UtilisateurBD $utilisateurBD;
 
-    public function __construct(PDO $pdo)
+    private function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
         $this->albumBD = new AlbumBD($pdo);
         $this->artisteBD = new ArtisteBD($pdo);
         $this->titreBD = new TitreBD($pdo);
         $this->utilisateurBD = new UtilisateurBD($pdo);
+    }
+
+    public static function getInstance(PDO $pdo): DatabaseManager
+    {
+        if (self::$instance === null) {
+            self::$instance = new DatabaseManager($pdo);
+        }
+        return self::$instance;
     }
 
     /**
@@ -72,5 +82,45 @@ class DatabaseManager {
         return $this->utilisateurBD;
     }
 
-    
+    //setters
+
+    /**
+     * @param PDO $pdo
+     */
+    public function setPdo(PDO $pdo): void
+    {
+        $this->pdo = $pdo;
+    }
+
+    /**
+     * @param AlbumBD $albumBD
+     */
+    public function setAlbumBD(AlbumBD $albumBD): void
+    {
+        $this->albumBD = $albumBD;
+    }
+
+    /**
+     * @param ArtisteBD $artisteBD
+     */
+    public function setArtisteBD(ArtisteBD $artisteBD): void
+    {
+        $this->artisteBD = $artisteBD;
+    }
+
+    /**
+     * @param TitreBD $titreBD
+     */
+    public function setTitreBD(TitreBD $titreBD): void
+    {
+        $this->titreBD = $titreBD;
+    }
+
+    /**
+     * @param UtilisateurBD $utilisateurBD
+     */
+    public function setUtilisateurBD(UtilisateurBD $utilisateurBD): void
+    {
+        $this->utilisateurBD = $utilisateurBD;
+    }
 }

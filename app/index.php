@@ -1,4 +1,12 @@
 <?php
+
+require_once __DIR__ .'/classes/autoloader/autoloader.php';
+
+Autoloader::register();
+
+use databaseManager\DatabaseManager;
+
+
 $viewDir = '/views/';
 $route = $_SERVER['REQUEST_URI'];
 $hxRequest = isset($_SERVER['HTTP_HX_REQUEST']) && $_SERVER['HTTP_HX_REQUEST'] == 'true';
@@ -14,10 +22,10 @@ function get_sqlite_connection(): PDO | null{
    }
 }
 
-$db = get_sqlite_connection();
+$pdo_sqlite = get_sqlite_connection();
 
-if ($db != null ){
-   
+if ($pdo_sqlite != null ){
+   $dbManager = DatabaseManager::getInstance($pdo_sqlite);
 }
 
 register_shutdown_function(function () {
