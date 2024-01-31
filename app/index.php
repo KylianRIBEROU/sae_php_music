@@ -5,8 +5,12 @@ require_once __DIR__ .'/classes/autoloader/autoloader.php';
 Autoloader::register();
 
 use databaseManager\DatabaseManager;
-
+use models\Utilisateur;
 $dbManager = DatabaseManager::getInstance();
+
+
+// $util = new Utilisateur('admin', 'admin');
+// $dbManager->getUtilisateurBD()->createUtilisateur('admin', 'admin');
 $viewDir = '/views/';
 
 session_start();
