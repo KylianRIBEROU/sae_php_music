@@ -1,7 +1,34 @@
 <?php
+
+require_once __DIR__ .'/classes/autoloader/autoloader.php';
+
+Autoloader::register();
+
+use models\Utilisateur;
+use pdoFactory\PDOFactory;
+
+$pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+$u = new Utilisateur(0, 'admin', 'admin', 1);
+$u->create();
+
 $viewDir = '/views/';
-$route = $_SERVER['REQUEST_URI'];
+
+session_start();
+
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){ 
+   $route = '/login';
+}
+else{ 
+   $route = $_SERVER['REQUEST_URI'];
+}
+
+
 $hxRequest = isset($_SERVER['HTTP_HX_REQUEST']) && $_SERVER['HTTP_HX_REQUEST'] == 'true';
+
+
+
+
+
 
 register_shutdown_function(function () {
    global $main, $hxRequest, $viewDir, $route, $nav, $player;
