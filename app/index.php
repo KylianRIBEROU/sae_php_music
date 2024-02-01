@@ -4,18 +4,18 @@ require_once __DIR__ .'/classes/autoloader/autoloader.php';
 
 Autoloader::register();
 
-use databaseManager\DatabaseManager;
 use models\Utilisateur;
-$dbManager = DatabaseManager::getInstance();
+use pdoFactory\PDOFactory;
 
+$pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+$u = new Utilisateur(0, 'admin', 'admin', 1);
+$u->create();
 
-// $util = new Utilisateur('admin', 'admin');
-// $dbManager->getUtilisateurBD()->createUtilisateur('admin', 'admin');
 $viewDir = '/views/';
 
 session_start();
 
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){ // je comprends rien à PHP, a vérifier
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){ 
    $route = '/login';
 }
 else{ 

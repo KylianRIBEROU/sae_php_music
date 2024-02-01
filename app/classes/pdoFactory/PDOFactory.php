@@ -28,7 +28,7 @@ class PDOFactory
         return $this->pdo;
     }
 
-    public static function get_sqlite_connection(): PDO | null{
+    private static function get_sqlite_connection(): PDO | null{
         try {
            $db = new PDO('sqlite:data/app.db'); // chemin depuis l'endroit où get_instance est appelé pour la 1ere fois. Ici, c'est index.php
            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

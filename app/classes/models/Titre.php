@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace models;
-
+use pdoFactory\PDOFactory;
 class Titre {
 
     private int $idT;
@@ -132,5 +132,122 @@ class Titre {
     public function setIdAlbum(int $idAlbum): void
     {
         $this->idAlbum = $idAlbum;
+    }
+
+    
+    /**
+     * @param int $idT
+     * @return Titre|null
+     */
+    public static function getTitreById(int $idT): Titre | null {
+        $query = "SELECT * FROM titre WHERE idT = :idT";
+        $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
+        $stmt->bindValue(":idT", $idT);
+        $stmt->execute();
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($row) {
+            $titre = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["idA"], $row["idAlbum"]);
+            return $titre;
+        }
+        return null;
+
+    }
+
+    /**
+     * @param int $idA
+     * @return array
+     */
+    public static function getTitresByAuteurId(int $idA): array {
+        $query = "SELECT * FROM titre WHERE idA = :idA";
+        $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
+        $stmt->bindValue(":idA", $idA);
+        $stmt->execute();
+        $titres = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $titres[] = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["idA"], $row["idAlbum"]);
+        }
+        return $titres;
+    }
+
+    /**
+     * @param int $idAlbum
+     * @return array
+     */
+    public static function getTitresByAlbumId(int $idAlbum): array {
+        $query = "SELECT * FROM titre WHERE idAlbum = :idAlbum";
+        $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
+        $stmt->bindValue(":idAlbum", $idAlbum);
+        $stmt->execute();
+        $titres = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $titres[] = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["idA"], $row["idAlbum"]);
+        }
+        return $titres;
+    }
+
+    /**
+     * Crée un titre dans la base de données.
+     */
+    public function create(): void {
+        $query = "INSERT INTO titre (labelT, anneeSortie, duree, idA, idAlbum) VALUES (:labelT, :anneeSortie, :duree, :idA, :idAlbum)";
+        $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
+        $stmt->bindValue(":labelT", $this->getLabelT());
+        $stmt->bindValue(":anneeSortie", $this->getAnneeSortie());
+        $stmt->bindValue(":duree", $this->getDuree());
+        $stmt->bindValue(":idA", $this->getIdA());
+        $stmt->bindValue(":idAlbum", $this->getIdAlbum());
+        $stmt->execute();
+    }
+
+    /**
+     * Met à jour un titre dans la base de données.
+     * @param Titre $titre
+     */
+    public function update(int $idT, Titre $titre): void {
+        $query = "UPDATE titre SET labelT = :labelT, anneeSortie = :anneeSortie, duree = :duree, idA = :idA, idAlbum = :idAlbum WHERE idT = :idT";
+        $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
+        $stmt->bindValue(":idT", $idT);
+        $stmt->bindValue(":labelT", $titre->getLabelT());
+        $stmt->bindValue(":anneeSortie", $titre->getAnneeSortie());
+        $stmt->bindValue(":duree", $titre->getDuree());
+        $stmt->bindValue(":idA", $titre->getIdA());
+        $stmt->bindValue(":idAlbum", $titre->getIdAlbum());
+        $stmt->execute();
+    }
+
+    /**
+     * Supprime un titre de la base de données.
+     * @param int $idT
+     */
+    public static function deleteById(int $idT): void {
+        // suppression des associations avant de supprimer le titre
+        Appartient::deleteAppartientByIdT($idT);
+        FavTitre::deleteFavTitreByIdT($idT);
+
+        $query = "DELETE FROM titre WHERE idT = :idT";
+        $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
+        $stmt->bindValue(":idT", $idT);
+        $stmt->execute();
+    }
+
+    public function delete(): void {
+        $this->deleteById($this->getIdT());
+    }
+    /**
+     * supprime tous les titres d'un auteur
+     * @param int $idA
+     */
+    public static function deleteTitresByIdA(int $idA): void {
+        $titres = self::getTitresByAuteurId($idA);
+        foreach ($titres as $titre) {
+            self::deleteById($titre->getIdT());
+        }
+    }
+
+    public static function deleteTitresByIdAlbum(int $idAlbum): void {
+        $titres = self::getTitresByAlbumId($idAlbum);
+        foreach ($titres as $titre) {
+            self::deleteById($titre->getIdT());
+        }
     }
 }
