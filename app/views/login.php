@@ -8,7 +8,7 @@
 <body>
 <div>
     <h2>Connexion</h2>
-    <form action="classes/accessManager/login_manager.php" method="post">
+    <form action="liena mettre" method="post">
         <label for="username">Nom d'utilisateur :</label>
         <input type="text" id="username" name="username" required>
 
