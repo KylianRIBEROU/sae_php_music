@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace models;
 use pdoFactory\PDOFactory;
+
 class Utilisateur
 {
     private int $idU;
     private string $nom;
     private string $password;
-
     private bool $admin;
 
     public function __construct(int $idU, string $nom, string $password, bool $admin)
@@ -79,7 +79,8 @@ class Utilisateur
         try {
             $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
             $stmt->bindValue(':nom', $this->getNom());
-            $stmt->bindValue(':password', $this->getPassword());
+            $encrypted_pwd = password_hash($this->getPassword(), PASSWORD_DEFAULT);
+            $stmt->bindValue(':password', $encrypted_pwd);
             $stmt->bindValue(':admin', $this->getAdmin(), \PDO::PARAM_BOOL);
             return $stmt->execute();
         } catch (\PDOException $e) {
@@ -166,7 +167,8 @@ class Utilisateur
             $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
             $stmt->bindValue(':idU', $this->getIdU());
             $stmt->bindValue(':nom', $this->getNom());
-            $stmt->bindValue(':password', $this->getPassword());
+            $new_encrypted_pwd = password_hash($this->getPassword(), PASSWORD_DEFAULT);
+            $stmt->bindValue(':password', $new_encrypted_pwd);
             $stmt->bindValue(':admin', $this->getAdmin(), \PDO::PARAM_BOOL);
             return $stmt->execute();
         } catch (\PDOException $e) {
@@ -203,7 +205,34 @@ class Utilisateur
     /**
      * Vérifie si un utilisateur existe dans la base de données.
      */
-    public static function checkUtilisateurExiste(string $nomU): bool {
+    public static function checkUtilisateurExiste(string $nomU): Utilisateur | null{
+        $query = 'SELECT * FROM utilisateur WHERE nomU = :nomU';
+
+        try {
+            $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
+            $stmt->bindValue(':nomU', $nomU);
+            $stmt->execute();
+
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($result) {
+            return new Utilisateur(
+                (int)$result['idU'],
+                $result['nomU'],
+                $result['motdepasse'],
+                (bool)$result['admin']
+            );
+        } else {
+            return null;
+        }
+        } catch (\PDOException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Vérifie si les credentials d'un utilisateur sont corrects.
+     */
+    public static function checkCredentials(string $nomU, string $password): bool {
         $query = 'SELECT * FROM utilisateur WHERE nomU = :nomU';
 
         try {
@@ -214,34 +243,8 @@ class Utilisateur
             $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
             if ($result) {
-                return true;
+                return password_verify($password, $result['motdepasse']);
             }
-
-            return false;
-        } catch (\PDOException $e) {
-            // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
-            return false;
-        }
-    }
-
-    /**
-     * Vérifie si les credentials d'un utilisateur sont corrects.
-     */
-    public function checkCredentials(string $nomU, string $password): bool {
-        $query = 'SELECT * FROM utilisateur WHERE nomU = :nomU AND motdepasse = :password';
-
-        try {
-            $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
-            $stmt->bindValue(':nomU', $nomU);
-            $stmt->bindValue(':password', $password);
-            $stmt->execute();
-
-            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-            if ($result) {
-                return true;
-            }
-
             return false;
         } catch (\PDOException $e) {
             // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
