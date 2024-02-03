@@ -106,6 +106,11 @@ class Detient{
         }
     }
 
+
+    /**
+     * Supprime toutes les associations Detient avec un genre donné
+     * ( un genre peut etre associé à un ou plusieurs albums)
+     */
     public static function deleteDetientByIdG(int $idG): bool {
         $sql = "DELETE FROM detient WHERE idG = :idG";
         $db = PDOFactory::getInstancePDOFactory()->get_PDO();
@@ -118,5 +123,19 @@ class Detient{
         }
     }
 
-    // public static function deleteDetientByIdT($int )
+    /**
+     * Supprime toutes les associations Detient avec un album donné
+     *  ( un album peut etre associé à un ou plusieurs genres)
+     */
+    public static function deleteDetientByIdAlbum(int $idAlbum): bool {
+        $sql = "DELETE FROM detient WHERE idAlbum = :idAlbum";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":idAlbum", $idAlbum);
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
