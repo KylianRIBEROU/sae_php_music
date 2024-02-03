@@ -55,6 +55,32 @@ class Detient{
         return new Detient((int)$row["idG"], (int)$row["idAlbum"]);
     }
 
+    public static function getDetientByIdG(int $idG): array {
+        $sql = "SELECT * FROM detient WHERE idG = :idG";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":idG", $idG);
+        $stmt->execute();
+        $detient = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $detient[] = new Detient((int)$row["idG"], (int)$row["idAlbum"]);
+        }
+        return $detient;
+    }
+
+    public static function getDetientByIdAlbum(int $idAlbum): array {
+        $sql = "SELECT * FROM detient WHERE idAlbum = :idAlbum";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":idAlbum", $idAlbum);
+        $stmt->execute();
+        $detient = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $detient[] = new Detient((int)$row["idG"], (int)$row["idAlbum"]);
+        }
+        return $detient;
+    }
+
     public function save(): bool {
         $sql = "INSERT INTO detient (idG, idAlbum) VALUES (:idG, :idAlbum)";
         $db = PDOFactory::getInstancePDOFactory()->get_PDO();
