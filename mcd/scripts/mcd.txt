@@ -1,0 +1,20 @@
+APPARTIENT, 0N PLAYLIST, 0N titre
+titre: idT[integer not null auto-increment], labelT [varchar(100)], anneeSortie [integer], duree[integer]
+CIF2, 0N ARTISTE, 11 titre
+ARTISTE: idA[integer not null auto-increment], nomA[varchar(100) unique]
+CIF7, 0N ARTISTE, 11 IMAGE
+IMAGE: idImage[integer not null auto-increment], lienImage [not null], pos
+
+PLAYLIST: idP[integer not null auto-increment], nomP[varchar 100]
+fav_titre, 0N UTILISATEUR, 0N titre
+NOTE, 0N UTILISATEUR, 0N ALBUM: note[integer not null]
+COMPOSE, 0N ALBUM, 01 titre
+CIF8, 0N ARTISTE, 11 ALBUM
+:
+
+CIF9, 11 PLAYLIST, 0N UTILISATEUR
+UTILISATEUR: idU[integer not null auto-increment], nomU[unique varchar(100)], motdepasse[varchar(200)], admin[integer]
+fav_album, 0N UTILISATEUR, 0N ALBUM
+ALBUM: idAlbum [integer not null auto-increment], titreAlbum [varchar(200)], imageAlbum[varchar(200)], anneeSortie[integer]
+DETIENT, 0N album, 0N GENRE
+GENRE: idG[integer not null auto-increment], nomG[unique varchar(100)]
