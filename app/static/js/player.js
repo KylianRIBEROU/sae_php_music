@@ -1,3 +1,5 @@
+
+// default values 
 let track_list = [
     {
       name: "Spectre",
@@ -12,13 +14,16 @@ let track_list = [
         path: "../static/sound/Alan Walker - Fade [COPYRIGHTED NCS Release].mp3"
     },
 ];
+let track_index = 0;
+
+// 
 
 let curr_track = document.createElement('audio');
 let isPlaying = false;
 let playpause_btn = document.getElementById("playpause-track");
 let volume_slider = document.getElementById("volume-slider");
 let volume_btn = document.getElementById("volume-btn");
-let track_index = 0;
+
 let muted = false
 
 let track_name = document.getElementById("track-name");
@@ -55,6 +60,18 @@ function apiCall(){
     });
 }
 
+function localSave(){
+    
+    localStorage.setItem('track_list', JSON.stringify([...track_list]));
+    localStorage.setItem('track_index', track_index);
+
+    localStorage.setItem('seek_slider', parseFloat(seek_slider.value));
+    console.log(parseFloat(seek_slider.value));
+
+
+    console.log('Saving to local storage');
+}
+
 
 // Reset Values
 function resetValues() {
@@ -88,7 +105,7 @@ function loadTrack(track_index) {
         curr_track.addEventListener("ended", nextTrack);
     }
 
-    apiCall();
+
 }
 
 function playpauseTrack() {
@@ -138,15 +155,20 @@ function mute(){
     }
 }
 
+
+function seekTo() {
+    seekto = curr_track.duration * (seek_slider.value / 100);
+    curr_track.currentTime = seekto;
+}
+
 function seekUpdate() {
     let seekPosition = 0;
-  
-    // Check if the current track duration is a legible number
+    // apiCall();
+    localSave();
+    //Check if the current track duration is a legible number
     if (!isNaN(curr_track.duration)) {
       seekPosition = curr_track.currentTime * (100 / curr_track.duration);
       seek_slider.value = seekPosition;
-
-      console.log(seekPosition);
   
       // Calculate the time left and the total duration
       let currentMinutes = Math.floor(curr_track.currentTime / 60);
@@ -167,10 +189,6 @@ function seekUpdate() {
 
 
 
-function seekTo() {
-    let seekto = curr_track.duration * (seek_slider.value / 100);
-    curr_track.currentTime = seekto;
-}
 
 
 function nextTrack() {

@@ -33,28 +33,48 @@
 </div>
 <script src="../static/js/player.js" ></script>
 <script>
-    (async () => {
+    console.log('Before load session ----------------------')
+    console.log(track_index);
+    console.log(track_list);
+    if (localStorage.getItem('track_list') != null) {
         try {
-            const response = await fetch('../api/track.php', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const data = await response.json();
-            console.log(data);
-            track_list = data['track_list'];
-            track_index = data['track_index'];
-            
-            console.log('before')
-            loadTrack(track_index);
-            // seek_slider.value = data['seek_slider'];
-            console.log(data['seek_slider'])
-            // await seekTo();
-            
+            track_list = JSON.parse(localStorage.getItem('track_list'));
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error parsing track list:', error);
         }
-    })();
+    }
+    if (localStorage.getItem('track_index') != null) {
+        track_index = localStorage.getItem('track_index');
+    }
+    loadTrack(track_index);
+    if (localStorage.getItem('seek_slider') != null) {
+        seek_slider.value = parseFloat(localStorage.getItem('seek_slider'));
+        seekTo();
+    }
+    console.log('After load session ----------------------') 
     
+    // fetch('../api/track.php', {
+    //     method: 'GET',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     }
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     console.log(data)
+    //     if (Object.keys(data).length > 1) {
+    //         track_list = data['track_list'];
+    //         track_index = data['track_index'];
+    //         seek_slider.value = parseInt(data['seek_slider']);
+    //         // seekTo();
+    //     }
+
+    //     console.log(track_index);
+    //     console.log(data['track_index']);
+
+    //     loadTrack(track_index);
+    // })
+    // .catch(error => {
+    //     console.error('Error:', error);
+    // });
 </script>
