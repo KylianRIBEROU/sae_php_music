@@ -17,12 +17,9 @@ let track_list = [
 let track_index = 0;
 
 // 
-
 let curr_track = document.createElement('audio');
 let isPlaying = false;
-let playpause_btn = document.getElementById("playpause-track");
-let volume_slider = document.getElementById("volume-slider");
-let volume_btn = document.getElementById("volume-btn");
+
 
 let muted = false
 
@@ -30,11 +27,24 @@ let track_name = document.getElementById("track-name");
 let track_artist = document.getElementById("track-artist");
 let track_img = document.getElementById("track-img");
 
-let seek_slider = document.getElementById("seek-slider");
+
 let curr_time = document.getElementById("current-time");
 let total_duration = document.getElementById("total-duration");
 let updateTimer; 
+let updateApi;
 
+
+//buttons
+let next_btn = document.getElementById("next-track");
+let prev_btn = document.getElementById("prev-track");
+let shuffle_btn = document.getElementById("shuffle-track");
+let repeat_btn = document.getElementById("repeat-track");
+let playpause_btn = document.getElementById("playpause-track");
+let volume_btn = document.getElementById("volume-btn");
+
+//slider
+let seek_slider = document.getElementById("seek-slider");
+let volume_slider = document.getElementById("volume-slider");
 
 function apiCall(){
     fetch('/api/track.php', {
@@ -60,17 +70,17 @@ function apiCall(){
     });
 }
 
-function localSave(){
+// function localSave(){
     
-    localStorage.setItem('track_list', JSON.stringify([...track_list]));
-    localStorage.setItem('track_index', track_index);
+//     localStorage.setItem('track_list', JSON.stringify([...track_list]));
+//     localStorage.setItem('track_index', track_index);
 
-    localStorage.setItem('seek_slider', parseFloat(seek_slider.value));
-    console.log(parseFloat(seek_slider.value));
+//     localStorage.setItem('seek_slider', parseFloat(seek_slider.value));
+//     console.log(parseFloat(seek_slider.value));
 
 
-    console.log('Saving to local storage');
-}
+//     console.log('Saving to local storage');
+// }
 
 
 // Reset Values
@@ -81,6 +91,13 @@ function resetValues() {
 }
 
 function loadTrack(track_index) {
+    if (track_list.length == 0){
+        console.log('No tracks to play');
+        deactivateButtons();
+        return;
+    }
+
+    deactivateButtons();
     setVolume();
     clearInterval(updateTimer);
     resetValues();
@@ -89,14 +106,13 @@ function loadTrack(track_index) {
     curr_track.src = track_list[track_index].path;
     curr_track.load();
 
-    
-    
     track_name.textContent = track_list[track_index].name;
     track_artist.textContent = track_list[track_index].artist;
     track_img.src = track_list[track_index].image;
     
 
     updateTimer = setInterval(seekUpdate, 1000);
+    updateApi = setInterval(apiCall, 10000);
 
     if (track_list.length == 1){
         curr_track.addEventListener("ended", pauseTrack);
@@ -105,7 +121,7 @@ function loadTrack(track_index) {
         curr_track.addEventListener("ended", nextTrack);
     }
 
-
+    activateButtons();
 }
 
 function playpauseTrack() {
@@ -155,16 +171,38 @@ function mute(){
     }
 }
 
-
 function seekTo() {
-    seekto = curr_track.duration * (seek_slider.value / 100);
+    let seekto = curr_track.duration * (seek_slider.value / 100);
     curr_track.currentTime = seekto;
+    apiCall();
+}
+
+async function seekToTime(seek_value){
+    // Wait until seekto is a finite number
+    const seekto_1 = await new Promise((resolve, reject) => {
+        // Function to continuously check and resolve the promise
+        const checkSeekTo = () => {
+            // Calculate the seek position
+            let seekto = curr_track.duration * (seek_value / 100);
+
+            // Check if seekto is a finite number
+            if (isFinite(seekto)) {
+                // Resolve the promise with the finite value of seekto
+                resolve(seekto);
+            } else {
+                // If seekto is not finite, wait for a short interval and check again
+                setTimeout(checkSeekTo, 10);
+            }
+        };
+        // Start checking for seekto
+        checkSeekTo();
+    });
+    // Set the currentTime of the media element
+    curr_track.currentTime = seekto_1;
 }
 
 function seekUpdate() {
     let seekPosition = 0;
-    // apiCall();
-    localSave();
     //Check if the current track duration is a legible number
     if (!isNaN(curr_track.duration)) {
       seekPosition = curr_track.currentTime * (100 / curr_track.duration);
@@ -187,17 +225,13 @@ function seekUpdate() {
     }
 }
 
-
-
-
-
 function nextTrack() {
     if (track_index < track_list.length - 1)
       track_index += 1;
     else track_index = 0;
     loadTrack(track_index);
     playTrack();
-
+    apiCall();
 }
   
 function prevTrack() {
@@ -206,16 +240,45 @@ function prevTrack() {
     else track_index = track_list.length;
     loadTrack(track_index);
     playTrack();
+    apiCall();
 }
 
 function shuffleTrack() {
     track_index = Math.floor(Math.random() * track_list.length);
     loadTrack(track_index);
     playTrack();
+    apiCall();
     
 }
 
 function repeatTrack() {
     loadTrack(track_index);
     playTrack();
+    apiCall();
 }
+
+function deactivateButtons() {
+    playpause_btn.disabled = true;
+    volume_btn.disabled = true;
+    next_btn.disabled = true;
+    prev_btn.disabled = true;
+    shuffle_btn.disabled = true;
+    repeat_btn.disabled = true;
+    //sliders
+    seek_slider.disabled = true;
+    volume_slider.disabled = true;
+}
+
+function activateButtons() {
+    playpause_btn.disabled = false;
+    volume_btn.disabled = false;
+    next_btn.disabled = false;
+    prev_btn.disabled = false;
+    shuffle_btn.disabled = false;
+    repeat_btn.disabled = false;
+    //sliders
+    seek_slider.disabled = false;
+    volume_slider.disabled = false;
+}
+
+deactivateButtons();
