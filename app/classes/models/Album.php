@@ -181,6 +181,7 @@ class Album {
     public static function deleteById(int $idAlbum): bool {
         // supprimer associations avant de supprimer l'album
 
+        Detient::deleteDetientByIdAlbum($idAlbum);
         Note::deleteNoteByidAlbum($idAlbum);
         FavAlbum::deleteFavAlbumByIdAlbum($idAlbum);
 

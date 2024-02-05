@@ -56,36 +56,64 @@ class Appartient {
     }
 
     /**
-    * @param int $idU
-    * @param int $idAlbum
-    * @return favAlbum
-    */
-    public static function getFavAlbum(int $idU, int $idAlbum): favAlbum {
-        $sql = "SELECT * FROM favAlbum WHERE idU = :idU AND idAlbum = :idAlbum";
-        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(":idU", $idU);
-        $stmt->bindValue(":idAlbum", $idAlbum);
+     * @param int $idP
+     * @param int $idT
+     * @return Appartient|null
+     */
+    public static function getAppartient(int $idP, int $idT): ?Appartient {
+        $sql = "SELECT * FROM appartient WHERE idP = :idP AND idT = :idT";
+        $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":idP", $idP);
+        $stmt->bindValue(":idT", $idT);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return new favAlbum((int)$row["idU"], (int)$row["idAlbum"]);
+        if ($row === false) {
+            return null;
+        }
+        return new Appartient((int)$row["idP"], (int)$row["idT"]);
     }
     
     /**
-     * @param int $idU
+     * @param int $idP
      * @return array
      */
-    public static function getFavAlbums(int $idU): array {
-        $sql = "SELECT * FROM favAlbum WHERE idU = :idU";
-        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(":idU", $idU);
+    public static function getAppartients(): array {
+        $sql = "SELECT * FROM appartient";
+        $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $pdo->prepare($sql);
         $stmt->execute();
-        $favAlbums = [];
+        $appartenances = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $favAlbums[] = new favAlbum((int)$row["idU"], (int)$row["idAlbum"]);
+            $appartenances[] = new Appartient((int)$row["idP"], (int)$row["idT"]);
         }
-        return $favAlbums;
+        return $appartenances;
+    }
+
+    public static function getAppartientsByIdP(int $idP): array {
+        $sql = "SELECT * FROM appartient WHERE idP = :idP";
+        $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":idP", $idP);
+        $stmt->execute();
+        $appartenances = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $appartenances[] = new Appartient((int)$row["idP"], (int)$row["idT"]);
+        }
+        return $appartenances;
+    }
+
+    public static function getAppartientsByIdT(int $idT): array {
+        $sql = "SELECT * FROM appartient WHERE idT = :idT";
+        $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":idT", $idT);
+        $stmt->execute();
+        $appartenances = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $appartenances[] = new Appartient((int)$row["idP"], (int)$row["idT"]);
+        }
+        return $appartenances;
     }
     
     public function create(): bool {
