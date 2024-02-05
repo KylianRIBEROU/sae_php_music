@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();
             $_SESSION['id'] = $user->getIdU();
             $_SESSION['loggedin'] = true;
+            $_SESSION['isadmin'] = $user->getAdmin();
             // on redirige l'utilisateur vers la page d'accueil
             header('Location: /');
             exit;

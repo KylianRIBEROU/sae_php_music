@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user->create();
             session_start();
             $_SESSION['id'] = $user->getIdU();
+            $_SESSION['isadmin'] = $user->getAdmin();
             $_SESSION['loggedin'] = true;
             header('Location: /');
             exit;
