@@ -1,1 +1,1 @@
-<h1 class="text-white">ACCUEIL</h1>
+<h1 class="text-white">Parcourir tout</h1>

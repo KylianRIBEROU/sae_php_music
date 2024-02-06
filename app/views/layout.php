@@ -28,9 +28,9 @@ if (!isset($player)) {
    </head>
 
    <body>
-        <div class="grid grid-rows-[10%_1fr_10%] grid-cols-[25%_1fr] h-screen bg-black">
+        <div class="grid grid-rows-[80px_1fr_100px] grid-cols-[350px_1fr] h-screen bg-black">
             <nav class="bg-gray-dark rounded-md p-4 m-2 overflow-auto row-span-2" id="nav"><?php echo $nav; ?></nav>
-            <div class="bg-gray-dark rounded-md px-4 m-2 ml-0 mb-0 flex justify-between items-center"><?php echo $bar ?></div>
+            <div class="bg-gray-dark rounded-md px-4 m-2 ml-0 mb-0 flex items-center"><?php echo $bar ?></div>
             <div class="bg-gray-dark rounded-md p-4 m-2 ml-0" id="main"><?php echo $main; ?></div>
             <div class="bg-black col-span-full grid grid-cols-3 grid-rows-1" id="player"><?php echo $player; ?></div>
         </div>

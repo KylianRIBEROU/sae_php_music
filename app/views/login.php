@@ -1,3 +1,15 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de connexion</title>
+    <link href="../static/css/output.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-dark">
+
 <?php 
 use models\Utilisateur;
 
@@ -11,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (Utilisateur::checkCredentials($user->getNom(), $password)) {
             session_start();
             $_SESSION['id'] = $user->getIdU();
+            $_SESSION['username'] = $user->getNom();
             $_SESSION['loggedin'] = true;
             // on redirige l'utilisateur vers la page d'accueil
             header('Location: /');
@@ -22,30 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de connexion</title>
-    <link href="../static/css/output.css" rel="stylesheet" />
-</head>
-<body class="bg-gray-dark">
-
-<!-- <div>
-    <h2>Connexion</h2>
-    <form action="/login" method="post">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="username" required>
-
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" required>
-
-        <button type="submit">Se connecter</button>
-    </form>
-    <p>Vous n'avez pas de compte ? <a href="/register">Inscrivez-vous ici</a>.</p>
-</div> -->
 
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 
