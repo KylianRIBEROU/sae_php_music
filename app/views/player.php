@@ -1,5 +1,5 @@
 <div class="h-full flex p-2 items-center gap-5">
-    <img src="../static/img/220px-Ryan-adams-orion.jpg" class="rounded-md h-full" alt="Current title image">
+    <img src="../static/img/default.png" class="rounded-md h-full" alt="Current title image">
     <div>
         <h1 class="text-white text-xl font-bold">Oryon</h1>
         <h2 class="text-gray-light text-base font-bold">Ryan Adams</h2>

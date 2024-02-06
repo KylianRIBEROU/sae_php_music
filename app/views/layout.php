@@ -1,6 +1,14 @@
 <?php
+if( !isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
+   header('Location: /login');
+   exit;
+}
+
 if (!isset($nav)) {
    $nav = '<p>no nav</p>';
+}
+if (!isset($bar)) {
+   $bar = '<p>no bar</p>';
 }
 if (!isset($main)) {
    $main = '<p>no main</p>';
@@ -20,8 +28,9 @@ if (!isset($player)) {
    </head>
 
    <body>
-        <div class="grid grid-rows-[90%_10%] grid-cols-[22.5%_77.5%] h-screen bg-black">
-            <nav class="bg-gray-dark rounded-md p-4 m-2 overflow-auto" id="nav"><?php echo $nav; ?></nav>
+        <div class="grid grid-rows-[10%_1fr_10%] grid-cols-[25%_1fr] h-screen bg-black">
+            <nav class="bg-gray-dark rounded-md p-4 m-2 overflow-auto row-span-2" id="nav"><?php echo $nav; ?></nav>
+            <div class="bg-gray-dark rounded-md px-4 m-2 ml-0 mb-0 flex justify-between items-center"><?php echo $bar ?></div>
             <div class="bg-gray-dark rounded-md p-4 m-2 ml-0" id="main"><?php echo $main; ?></div>
             <div class="bg-black col-span-full grid grid-cols-3 grid-rows-1" id="player"><?php echo $player; ?></div>
         </div>
