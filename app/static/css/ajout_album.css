@@ -1,23 +1,116 @@
-.container {
+body {
+    color:white;
+    /* background-color: #121313; */
+    background-color: hsl(0, 0%, 15%);
+}
+
+.titre-ajout-album{
+    margin-top: 3em;
+    margin-left: 1.4em;   
+}
+
+.input-album{
+    max-width: 400px;
+    height:3em;
+    font-size:1em;
+    padding-left: 0.5em;
+    border-radius: 4px;
+    border:none;
+    border-bottom: 2px solid rgb(201, 30, 30);
+}
+
+.input-album-select {
+    max-width: 100px;
+    height: 2.2em;
+    padding: 4px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+.select-artistes {
+    max-width: 400px;
+    height: 2.2em;
+    padding: 4px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+label{
+    font-size: 1.3em;
+}
+
+select {
+
+}
+
+.container {    
     margin-top: 50px;
-    margin-bottom: 50px;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 2em;
     display: flex;
 }
 
 .left-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: red;
+    flex-grow:1;
+}
+
+.left-container > * {
+    margin: 0.5em;
 }
 
 .right-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: yellow;
+    justify-content: space-evenly;
+    flex-basis:40%;
 }
+
+#image-preview {
+    max-width: 400px;
+    max-height: 400px;
+    background-size: cover;
+}
+
+
+.submit-form-button {
+    margin-left: 2em;
+  
+    position: relative;
+    background-color: rgb(230, 34, 77);
+    border-radius: 5px;
+    box-shadow: rgb(121, 18, 55) 0px 4px 0px 0px;
+    padding: 15px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    box-sizing: border-box;
+    max-width: 200px;
+    max-height: 60px;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.submit-form-button::before {
+    content: "";
+    background-color: rgb(248, 50, 93);
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: width 700ms ease-in-out;
+    display: inline-block;
+  }
+  
+  .submit-form-button:hover::before {
+    width: 100%;
+  }
