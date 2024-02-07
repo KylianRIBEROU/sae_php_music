@@ -622,6 +622,11 @@ video {
   margin-right: 0.25rem;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .mb-0 {
   margin-bottom: 0px;
 }
@@ -654,12 +659,12 @@ video {
   margin-top: 0.5rem;
 }
 
-.mt-8 {
-  margin-top: 2rem;
+.mt-4 {
+  margin-top: 1rem;
 }
 
-.mt-0 {
-  margin-top: 0px;
+.mt-8 {
+  margin-top: 2rem;
 }
 
 .block {
@@ -700,6 +705,10 @@ video {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-8 {
+  height: 2rem;
 }
 
 .min-h-full {
@@ -1024,24 +1033,19 @@ video {
   border-color: rgb(166 167 166 / var(--tw-border-opacity));
 }
 
+.hover\:bg-gray-dark-hover:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(62 62 62 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-gray-hover:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(26 27 27 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-gray-light:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(166 167 166 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-purple:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(246 19 83 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-gray-dark-hover:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(62 62 62 / var(--tw-bg-opacity));
 }
 
 .hover\:text-white:hover {

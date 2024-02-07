@@ -10,31 +10,7 @@
 </head>
 <body class="bg-gray-dark">
 
-<?php 
-use models\Utilisateur;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // on récupère les données du formulaire
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    // on vérifie si l'utilisateur existe
-    $user = Utilisateur::checkUtilisateurExiste($username);
-    if ($user) {
-        if (Utilisateur::checkCredentials($user->getNom(), $password)) {
-            session_start();
-            $_SESSION['id'] = $user->getIdU();
-            $_SESSION['username'] = $user->getNom();
-            $_SESSION['loggedin'] = true;
-            // on redirige l'utilisateur vers la page d'accueil
-            header('Location: /');
-            exit;
-        }
-    }
-    // si l'utilisateur n'existe pas ou si le mot de passe est incorrect, on affiche un message d'erreur
-    echo '<p>Identifiant ou mot de passe incorrect.</p>';
-}
-
-?>
 
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 
@@ -46,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="post" action="/login">
         <div>
           <label for="username" class="block text-sm font-medium leading-6 text-white">Nom d'utilisateur</label>
-          <div class="mt-2 mb-2">
+          <div class="my-2">
             <input id="username" name="username" type="text" required class="bg-gray block w-full rounded-md border-0 py-1.5 px-3 text-white shadow-sm ring-1 ring-inset ring-gray-light placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-purple sm:text-sm sm:leading-6 focus:outline-none">
           </div>
         </div>
@@ -55,11 +31,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="flex items-center justify-between">
             <label for="password" class="block text-sm font-medium leading-6 text-white">Mot de passe</label>
           </div>
-          <div class="mt-2">
+          <div class="my-2">
             <input id="password" name="password" type="password" autocomplete="current-password" required class="bg-gray block w-full rounded-md border-0 px-3 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-light placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-purple sm:text-sm sm:leading-6 focus:outline-none">
         </div>
 
-        <div class="mt-8">
+        <div id="error-block" class="h-4">
+        <?php 
+        use models\Utilisateur;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // on récupère les données du formulaire
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            // on vérifie si l'utilisateur existe
+            $user = Utilisateur::checkUtilisateurExiste($username);
+            if ($user) {
+                if (Utilisateur::checkCredentials($user->getNom(), $password)) {
+                    session_start();
+                    $_SESSION['id'] = $user->getIdU();
+                    $_SESSION['username'] = $user->getNom();
+                    $_SESSION['loggedin'] = true;
+                    // on redirige l'utilisateur vers la page d'accueil
+                    header('Location: /');
+                    exit;
+                }
+            }
+            // si l'utilisateur n'existe pas ou si le mot de passe est incorrect, on affiche un message d'erreur
+            echo '<p class="text-gray-light my-2 text-sm font-medium leading-6">Identifiant ou mot de passe incorrect.</p>';
+        }
+        ?>
+        </div>
+
+        <div class="mt-4">
           <button type="submit" class="flex w-full justify-center rounded-md bg-purple px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple">Se connecter</button>
         </div>
       </form>
