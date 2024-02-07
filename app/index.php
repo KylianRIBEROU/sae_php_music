@@ -65,6 +65,9 @@ switch ($route) {
    case '/playlists':
       require __DIR__ . $viewDir . 'playlists.php';
       break;
+   case '/search':
+      require __DIR__ . $viewDir . 'search.php';
+      break;
    default:
       http_response_code(404);
       require __DIR__ . $viewDir . '404.php';

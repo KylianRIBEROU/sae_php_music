@@ -663,10 +663,6 @@ video {
   margin-top: 1rem;
 }
 
-.mt-8 {
-  margin-top: 2rem;
-}
-
 .block {
   display: block;
 }
@@ -699,16 +695,16 @@ video {
   height: 1rem;
 }
 
+.h-\[150px\] {
+  height: 150px;
+}
+
 .h-full {
   height: 100%;
 }
 
 .h-screen {
   height: 100vh;
-}
-
-.h-8 {
-  height: 2rem;
 }
 
 .min-h-full {
@@ -761,6 +757,10 @@ video {
 
 .grid-cols-\[350px_1fr\] {
   grid-template-columns: 350px 1fr;
+}
+
+.grid-cols-\[repeat\(auto-fill\2c minmax\(150px\2c 1fr\)\)\] {
+  grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
 }
 
 .grid-rows-1 {
