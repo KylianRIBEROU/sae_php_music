@@ -18,8 +18,6 @@ session_start();
 
 $route = $_SERVER['REQUEST_URI'];
 
-$route = $_SERVER['REQUEST_URI'];
-
 $hxRequest = isset($_SERVER['HTTP_HX_REQUEST']) && $_SERVER['HTTP_HX_REQUEST'] == 'true';
 
 

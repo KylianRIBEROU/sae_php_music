@@ -62,6 +62,7 @@
                       session_start();
                       $_SESSION['id'] = $user->getIdU();
                       $_SESSION['username'] = $user->getNom();
+                      $_SESSION['isadmin'] = $user->getAdmin();
                       $_SESSION['loggedin'] = true;
                       header('Location: /');
                       exit;
