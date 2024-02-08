@@ -66,7 +66,7 @@ class Artiste {
         return $this->nomA;
     }
 
-    public static function getArtisteById(int $idA): Artiste
+    public static function getArtisteById(int $idA): Artiste | null
     {
         $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
         $sql = "SELECT * FROM artiste WHERE idA = :idA";
@@ -75,7 +75,21 @@ class Artiste {
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row === false) {
-            throw new PDOException("Erreur : l'artiste n'existe pas");
+            return null;
+        }
+        return new Artiste($row['idA'], $row['nomA']);
+    }
+
+    public static function getArtisteByNom(string $nomA): Artiste | null
+    {
+        $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $sql = "SELECT * FROM artiste WHERE nomA = :nomA";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':nomA', $nomA, PDO::PARAM_STR);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row === false) {
+            return null;
         }
         return new Artiste($row['idA'], $row['nomA']);
     }

@@ -74,6 +74,8 @@ select {
     max-width: 400px;
     max-height: 400px;
     background-size: cover;
+    margin-bottom: 1em;
+    border-radius: 2px;
 }
 
 

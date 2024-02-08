@@ -1,16 +1,43 @@
 <?php
-// if post request 
-
+use models\Artiste;
+use models\Album;
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-// traiter la création d'album et rediriger quelque part
     $nom_album = $_POST['labelAlbum'];
-    $anneeSortie = $POST['anneeSortie'];
+    $anneeSortie = $_POST['anneeSortie'];
+
 
     // get les genres et l'image, sauvegarder l'image qq part et 
     // enregistrer son lien en BD
-    $nomArtiste = $_POST['artistes[]'];
+    $nomArtiste = $_POST['artistes'];
+    $artiste = Artiste::getArtisteByNom($nomArtiste);
 
-    $image = $_POST['image'];
+    $dossier_images = __DIR__. "/../../static/img/";
+
+    if ($_FILES["image-album"]["error"] > 0 || $_FILES["image-album"]["name"] == "") {
+        $image = "default.jpg";
+        }
+    else {
+    $chemin_image = $dossier_images . basename($_FILES["image-album"]["name"]);
+        try {
+            move_uploaded_file($_FILES["image-album"]["tmp_name"], $chemin_image);
+        } catch (Exception $e) {
+            echo "Erreur lors de l'upload de l'image";
+            $image = "default.jpg";
+            var_dump($e->getMessage());
+        }
+    }  
+
+
+    // $album = new Album(0, $nom_album, $anneeSortie, $image, $artiste->getIdA());
+    // $album.create();
+
+    // ajouter ensuite les associations aux 
+    // genres ( faudrait déjà qu'on puisse les sélectionner lol xd )
+    
+    
+    // rediriger vers l'accueil du panel admin 
+    // header('Location: /admin');
+    // exit();
 
 }
 
@@ -38,8 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             <label for="anneeSortie">Année de sortie</label>
             <select class="input-album-select" id="anneeSortie" name="anneeSortie">
             <?php
-            use models\Artiste;
-            for ($i = 1940; $i <= date("Y"); $i++) {
+            for ($i = date("Y"); $i > 1939; $i--) {
                 echo '<option value="'.$i.'">'.$i.'</option>';
             }
             ?>
@@ -58,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             <!-- artiste de l'album -->
             <label for="artistes">Artiste</label>
-            <select class="select-artistes" id="artistes" name="artistes[]">
+            <select class="select-artistes" id="artistes" name="artistes">
             <option value="Sélectionner un artiste">Sélectionner un artiste</option>
                 <?php
                 $artistes=Artiste::getAllArtistes();
