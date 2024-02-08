@@ -1,1 +1,1 @@
-not found 404
+<h1 class="text-white">not found 404</h1>

@@ -15,23 +15,14 @@ $viewDir = '/views/';
 
 session_start();
 
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){ 
-   $route = '/login';
-}
-else{ 
-   $route = $_SERVER['REQUEST_URI'];
-}
+$route = $_SERVER['REQUEST_URI'];
 
 
 $hxRequest = isset($_SERVER['HTTP_HX_REQUEST']) && $_SERVER['HTTP_HX_REQUEST'] == 'true';
 
 
-
-
-
-
 register_shutdown_function(function () {
-   global $main, $hxRequest, $viewDir, $route, $nav, $player;
+   global $main, $hxRequest, $viewDir, $route, $nav, $player, $isConnected, $bar;
    if ($hxRequest) {
       echo $main;
    }
@@ -52,11 +43,15 @@ require __DIR__ . $viewDir . 'nav.php';
 $nav = ob_get_clean();
 
 ob_start();
+require __DIR__ . $viewDir . 'bar.php';
+$bar = ob_get_clean();
+
+ob_start();
 require __DIR__ . $viewDir . 'player.php';
 $player = ob_get_clean();
 
 ob_start();
-switch ($route) {
+switch (parse_url($route)['path']){
    case '':
    case '/':
       require __DIR__ . $viewDir . 'main.php';
@@ -70,8 +65,10 @@ switch ($route) {
    case '/playlists':
       require __DIR__ . $viewDir . 'playlists.php';
       break;
+   case '/search':
+      require __DIR__ . $viewDir . 'search.php';
+      break;
    default:
-      http_response_code(404);
       require __DIR__ . $viewDir . '404.php';
 }
 $main = ob_get_clean();
