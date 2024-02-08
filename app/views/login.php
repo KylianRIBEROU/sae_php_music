@@ -50,6 +50,7 @@
                     session_start();
                     $_SESSION['id'] = $user->getIdU();
                     $_SESSION['username'] = $user->getNom();
+                    $_SESSION['isadmin'] = $user->getAdmin();
                     $_SESSION['loggedin'] = true;
                     // on redirige l'utilisateur vers la page d'accueil
                     echo '<h1> redirect </h1>';
