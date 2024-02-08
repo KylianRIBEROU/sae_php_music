@@ -134,6 +134,19 @@ class Titre {
         $this->idAlbum = $idAlbum;
     }
 
+    /**
+     * get tous les titres
+     * return @array
+     */
+    public static function getAllTitres(): array {
+        $query = "SELECT * FROM titre";
+        $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->query($query);
+        $titres = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $titres[] = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["idA"], $row["idAlbum"]);
+        }
+        return $titres;
+    }
     
     /**
      * @param int $idT

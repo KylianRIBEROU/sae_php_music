@@ -24,9 +24,12 @@ class Album {
      * @param int $anneeSortie
      * @param int $idA
      */
-    public function __construct(int $idAlbum, string $titreAlbum, string $imageAlbum, int $anneeSortie, int $idA) {
+    public function __construct(int $idAlbum, string $titreAlbum, mixed $imageAlbum, int $anneeSortie, int $idA) {
         $this->idAlbum = $idAlbum;
         $this->titreAlbum = $titreAlbum;
+        if (empty($imageAlbum)) {
+            $imageAlbum = "default.png";
+        }
         $this->imageAlbum = $imageAlbum;
         $this->anneeSortie = $anneeSortie;
         $this->idA = $idA;
@@ -108,6 +111,21 @@ class Album {
         $this->idA = $idA;
     } 
     
+
+    /**
+     * Renvoie une liste contenant tous les albums
+     * @return array
+     */
+    public static function getAllAlbums(): array {
+        $sql = "SELECT * FROM album";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->query($sql);
+        $albums = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
+        }
+        return $albums;
+    }
 
     /**
      * @param int $idAlbum

@@ -6,12 +6,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les paramètres de requête
     
     $post_body = file_get_contents('php://input');
-    $_SESSION = json_decode($post_body, true);
+    $_SESSION['player'] = json_decode($post_body, true);
     // Envoyer la réponse JSON
     header('Content-Type: application/json');
     echo json_encode($post_body);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $response = $_SESSION;
+    if (isset($_SESSION['player'])) {
+        $response = $_SESSION['player'];
+    } else {
+        $response = array();
+    }
     // Envoyer la réponse JSON
     header('Content-Type: application/json');
     echo json_encode($response);
