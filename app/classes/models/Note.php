@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace models;
 
+use pdoFactory\PDOFactory;
+use PDO;
+use PDOException;
+
 class Note {
 
     private int $idU;
@@ -69,4 +73,80 @@ class Note {
     public function setNote (int $note): void {
         $this->note = $note;
     }
+
+    public static function getNoteByIdUAndidAlbum(int $idU, int $idAlbum): Note {
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $db->prepare("SELECT * FROM note WHERE idU = :idU AND idAlbum = :idAlbum");
+        $req->bindParam(":idU", $idU);
+        $req->bindParam(":idAlbum", $idAlbum);
+        $req->execute();
+        $noteBD = $req->fetch();
+        return new Note((int)$noteBD['idU'], (int)$noteBD['idAlbum'], (int)$noteBD['note']);
+    }
+
+    public static function getNotes(): array {
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $db->prepare("SELECT * FROM note");
+        $req->execute();
+        $notes = [];
+        $notesBD = $req->fetchAll();
+        foreach ($notesBD as $note) {
+            $notes[] = new Note((int)$note['idU'], (int)$note['idAlbum'], (int)$note['note']);
+        }
+        return $notes;
+    }
+
+    public static function getNoteByAlbumId(int $idAlbum): array {
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $db->prepare("SELECT * FROM note WHERE idAlbum = :idAlbum");
+        $req->bindParam(":idAlbum", $idAlbum);
+        $req->execute();
+        $notes = [];
+        $notesBD = $req->fetchAll();
+        foreach ($notesBD as $note) {
+            $notes[] = new Note((int)$note['idU'], (int)$note['idAlbum'], (int)$note['note']);
+        }
+        return $notes;
+    }
+
+    public function create(): bool{
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $db->prepare("INSERT INTO note (idU, idAlbum, note) VALUES (:idU, :idAlbum, :note)");
+        $req->bindParam(":idU", $this->idU);
+        $req->bindParam(":idAlbum", $this->idAlbum);
+        $req->bindParam(":note", $this->note);
+        return $req->execute();
+    }
+
+    public function update(): bool{
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $db->prepare("UPDATE note SET note = :note WHERE idU = :idU AND idAlbum = :idAlbum");
+        $req->bindParam(":idU", $this->idU);
+        $req->bindParam(":idAlbum", $this->idAlbum);
+        $req->bindParam(":note", $this->note);
+        return $req->execute();
+    }
+
+    public function delete(): bool{
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $db->prepare("DELETE FROM note WHERE idU = :idU AND idAlbum = :idAlbum");
+        $req->bindParam(":idU", $this->idU);
+        $req->bindParam(":idAlbum", $this->idAlbum);
+        return $req->execute();
+    }
+
+    public static function deleteNoteByidAlbum(int $idAlbum): bool{
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $db->prepare("DELETE FROM note WHERE idAlbum = :idAlbum");
+        $req->bindParam(":idAlbum", $idAlbum);
+        return $req->execute();
+    }
+
+    public static function deleteNoteByidU(int $idU): bool{
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $db->prepare("DELETE FROM note WHERE idU = :idU");
+        $req->bindParam(":idU", $idU);
+        return $req->execute();
+    }
+
 }

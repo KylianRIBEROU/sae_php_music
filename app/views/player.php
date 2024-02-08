@@ -1,5 +1,5 @@
 <div class="h-full flex p-2 items-center gap-5">
-    <img src="" class="rounded-md h-full" alt="Current title image" id="track-img">
+    <img src="../static/img/default.png" class="rounded-md h-full" alt="Current title image">
     <div>
         <h1 class="text-white text-xl font-bold" id="track-name">No sound</h1>
         <h2 class="text-gray-light text-base font-bold" id="track-artist" >No artist</h2>

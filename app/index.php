@@ -4,32 +4,25 @@ require_once __DIR__ .'/classes/autoloader/autoloader.php';
 
 Autoloader::register();
 
-use databaseManager\DatabaseManager;
+use models\Utilisateur;
+use pdoFactory\PDOFactory;
 
+$pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+$u = new Utilisateur(0, 'admin1', 'admin', 1);
+$u->create();
 
 $viewDir = '/views/';
+
+session_start();
+
 $route = $_SERVER['REQUEST_URI'];
+
+
 $hxRequest = isset($_SERVER['HTTP_HX_REQUEST']) && $_SERVER['HTTP_HX_REQUEST'] == 'true';
 
-function get_sqlite_connection(): PDO | null{
-   try {
-      $db = new PDO('sqlite:data/app.db');
-      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      return $db;
-   } catch (PDOException $e) {
-      // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
-      return null;
-   }
-}
-
-$pdo_sqlite = get_sqlite_connection();
-
-if ($pdo_sqlite != null ){
-   $dbManager = DatabaseManager::getInstance($pdo_sqlite);
-}
 
 register_shutdown_function(function () {
-   global $main, $hxRequest, $viewDir, $route, $nav, $player;
+   global $main, $hxRequest, $viewDir, $route, $nav, $player, $isConnected, $bar;
    if ($hxRequest) {
       echo $main;
    }
@@ -50,11 +43,15 @@ require __DIR__ . $viewDir . 'nav.php';
 $nav = ob_get_clean();
 
 ob_start();
+require __DIR__ . $viewDir . 'bar.php';
+$bar = ob_get_clean();
+
+ob_start();
 require __DIR__ . $viewDir . 'player.php';
 $player = ob_get_clean();
 
 ob_start();
-switch ($route) {
+switch (parse_url($route)['path']){
    case '':
    case '/':
       require __DIR__ . $viewDir . 'main.php';
@@ -68,8 +65,10 @@ switch ($route) {
    case '/playlists':
       require __DIR__ . $viewDir . 'playlists.php';
       break;
+   case '/search':
+      require __DIR__ . $viewDir . 'search.php';
+      break;
    default:
-      http_response_code(404);
       require __DIR__ . $viewDir . '404.php';
 }
 $main = ob_get_clean();
