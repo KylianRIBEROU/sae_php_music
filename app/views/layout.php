@@ -24,6 +24,7 @@ if (!isset($player)) {
       <link href="../static/css/output.css" rel="stylesheet" /> 
       <script src="https://unpkg.com/htmx.org@1.9.10"></script>
       <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+      
    </head>
 
    <body class="bg-black">
