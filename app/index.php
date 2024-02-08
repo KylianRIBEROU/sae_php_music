@@ -51,7 +51,7 @@ require __DIR__ . $viewDir . 'player.php';
 $player = ob_get_clean();
 
 ob_start();
-switch ($route) {
+switch (parse_url($route)['path']){
    case '':
    case '/':
       require __DIR__ . $viewDir . 'main.php';
@@ -69,7 +69,6 @@ switch ($route) {
       require __DIR__ . $viewDir . 'search.php';
       break;
    default:
-      http_response_code(404);
       require __DIR__ . $viewDir . '404.php';
 }
 $main = ob_get_clean();
