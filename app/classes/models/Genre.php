@@ -119,6 +119,15 @@ class Genre {
         return true;
     }
 
+    public static function deleteById(int $idG): bool {
+        Detient::deleteDetientByIdG($idG);
+
+        $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $pdo->prepare("DELETE FROM genre WHERE idG = :idG");
+        $req->bindParam(":idG", $idG);
+        return $req->execute();
+    }
+
     public function delete(): bool {
         Detient::deleteDetientByIdG($this->idG);
 

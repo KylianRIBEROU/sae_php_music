@@ -108,6 +108,21 @@ class Album {
         $this->idA = $idA;
     } 
     
+    /**
+     * get tous les noms d'albums
+     * @return array
+     */
+    public static function getAllNomsAlbums(): array {
+        $sql = "SELECT titreAlbum FROM album";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $nomsAlbums = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $nomsAlbums[] = $row["titreAlbum"];
+        }
+        return $nomsAlbums;
+    }
 
     /**
      * @param int $idAlbum

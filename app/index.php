@@ -30,6 +30,15 @@ register_shutdown_function(function () {
       http_response_code(200);
       require __DIR__ . $viewDir . 'login.php';
    }
+   elseif ($route == '/logout') {
+      session_unset();
+      header('Location: /login');
+      exit();
+   }
+   elseif ($route == '/profil') {
+      http_response_code(200);
+      require __DIR__ . $viewDir . 'profil.php';
+   }
    elseif ($route == '/register') {
       http_response_code(200);
       require __DIR__ . $viewDir . 'register.php';
@@ -41,6 +50,22 @@ register_shutdown_function(function () {
    elseif ($route == '/admin/ajout-album'){
       http_response_code(200);
       require __DIR__ . $adminDir . 'ajout_album.php';
+   }
+   elseif ($route == '/admin/ajout-artiste'){
+      http_response_code(200);
+      require __DIR__ . $adminDir . 'ajout_artiste.php'; // IL FAUDRA FACTORISER TOUT CA
+   }
+   elseif ($route == '/admin/ajout-genre'){
+      http_response_code(200);
+      require __DIR__ . $adminDir . 'ajout_genre.php';
+   }
+   elseif ($route == '/admin/genres'){
+      http_response_code(200);
+      require __DIR__ . $adminDir . 'genres.php';
+   }
+   elseif (parse_url($route)['path'] == '/admin/update-genre') { // il faut passer l'id  !!! 
+      http_response_code(200);
+      require __DIR__ . $adminDir . 'update_genre.php';
    }
    else {
       require __DIR__ . $viewDir . 'layout.php';

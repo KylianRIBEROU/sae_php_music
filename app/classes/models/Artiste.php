@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace models;
 
 use pdoFactory\PDOFactory;
-use models\ImageArtiste;
 use models\Album;
 use models\Titre;
 use PDO;
@@ -16,17 +15,24 @@ class Artiste {
 
     private string $nomA;
 
+    private string $imageA;
+
     // avec documentation
 
     /**
      * Artiste constructor.
      * @param int $idA
      * @param string $nomA
+     * @param string $imageA
      */
-    public function __construct(int $idA, string $nomA)
-    {
+    public function __construct(int $idA, string $nomA, mixed $imageA) {
         $this->idA = $idA;
         $this->nomA = $nomA;
+        if ( $imageA === null || $imageA === "") {
+            $this->imageA = "default.jpg";
+        } else {
+            $this->imageA = $imageA;
+        }
     }
 
     /**
@@ -46,6 +52,14 @@ class Artiste {
     }   
 
     /**
+     * @return string
+     */
+    public function getImageA(): string
+    {
+        return $this->imageA;
+    }
+
+    /**
      * @param int $idA
      */
     public function setIdA(int $idA): void
@@ -59,6 +73,14 @@ class Artiste {
     public function setNomA(string $nomA): void
     {
         $this->nomA = $nomA;
+    }
+
+    /**
+     * @param string $imageA
+     */
+    public function setImageA(string $imageA): void
+    {
+        $this->imageA = $imageA;
     }
 
     public function __toString(): string
@@ -77,7 +99,7 @@ class Artiste {
         if ($row === false) {
             return null;
         }
-        return new Artiste($row['idA'], $row['nomA']);
+        return new Artiste($row['idA'], $row['nomA'], $row['imageA']);
     }
 
     public static function getArtisteByNom(string $nomA): Artiste | null
@@ -91,7 +113,7 @@ class Artiste {
         if ($row === false) {
             return null;
         }
-        return new Artiste($row['idA'], $row['nomA']);
+        return new Artiste($row['idA'], $row['nomA'], $row['imageA']);
     }
 
     public static function getAllArtistes(): array
@@ -103,7 +125,7 @@ class Artiste {
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $artistes = [];
         foreach ($rows as $row) {
-            $artistes[] = new Artiste($row['idA'], $row['nomA']);
+            $artistes[] = new Artiste($row['idA'], $row['nomA'], $row['imageA']);
         }
         return $artistes;
     }
@@ -111,18 +133,20 @@ class Artiste {
     public function create(): bool 
     {
         $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
-        $sql = "INSERT INTO artiste (nomA) VALUES (:nomA)";
+        $sql = "INSERT INTO artiste (nomA, imageA) VALUES (:nomA, :imageA)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':nomA', $this->nomA, PDO::PARAM_STR);
+        $stmt->bindValue(':imageA', $this->imageA, PDO::PARAM_STR);
         return $stmt->execute();     
     }
 
     public function update(): bool 
     {
         $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
-        $sql = "UPDATE artiste SET nomA = :nomA WHERE idA = :idA";
+        $sql = "UPDATE artiste SET nomA = :nomA, imageA = :imageA WHERE idA = :idA";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':nomA', $this->nomA, PDO::PARAM_STR);
+        $stmt->bindValue(':imageA', $this->imageA, PDO::PARAM_STR);
         $stmt->bindValue(':idA', $this->idA, PDO::PARAM_INT);
         return $stmt->execute();     
     }
@@ -130,7 +154,6 @@ class Artiste {
     public function delete(): bool 
     {
         // supprimer associations artiste
-        ImageArtiste::deleteImageArtisteByIdA($this->idA);
         Album::deleteAlbumsByIdA($this->idA);
         Titre::deleteTitresByIdA($this->idA);
 
@@ -140,10 +163,4 @@ class Artiste {
         $stmt->bindValue(':idA', $this->idA, PDO::PARAM_INT);
         return $stmt->execute();     
     }
-
-
-
-
-
-
 }
