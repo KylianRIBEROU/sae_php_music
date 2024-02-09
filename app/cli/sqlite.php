@@ -1,11 +1,19 @@
-<?php 
+<?php
+require "classes/autoloader/autoloader.php";
+use dataloader\YamlLoader;
 
 define('SQLITE_DB', __DIR__.'/../data/app.db');
-
+Autoloader::register();
 $pdo = new PDO('sqlite:' . SQLITE_DB);
 
 try {
     $action = $argv[1];
+    if (count($argv) > 2) {
+        $args = array_slice($argv, 2);
+    }
+    else {
+        $args = [];
+    }
 }
 catch (Exception $e) {
     echo 'argument manquant. Syntaxe : php sqlite.php [create-database, create-tables, drop-tables]' . PHP_EOL;
@@ -31,6 +39,17 @@ switch ($action){
         unlink(SQLITE_DB);
         break;
 
+    case 'import-yml':
+        $file = $args[0];
+        echo '→ Importation du fichier "' . $file . '"' . PHP_EOL;
+        try {
+            $albums = YamlLoader::load($file);
+        } catch (Exception $e) {
+            echo '→ ' . $e->getMessage() . PHP_EOL;
+        }
+        echo '→ ' . count($albums) . ' albums importés' . PHP_EOL;
+        var_dump($albums);
+        break;
     default:
         echo 'Action incorrecte 🙀. Actions possibles [create-database, create-tables, drop-tables]' . PHP_EOL;
         break;

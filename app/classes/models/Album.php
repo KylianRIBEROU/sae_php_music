@@ -67,6 +67,7 @@ class Album {
         return $this->idA;
     }
 
+
     /**
      * @param int $idAlbum
      * @return void
