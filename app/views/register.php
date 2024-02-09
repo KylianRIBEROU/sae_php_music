@@ -60,6 +60,9 @@
                       $user = new Utilisateur(0, $username, $password, 0);
                       $user->create();
                       session_start();
+                      // obligé de redéfinir user, sinon id en session = 0
+                      $user = Utilisateur::checkUtilisateurExiste($username);
+                
                       $_SESSION['id'] = $user->getIdU();
                       $_SESSION['username'] = $user->getNom();
                       $_SESSION['isadmin'] = $user->getAdmin();

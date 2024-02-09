@@ -6,9 +6,7 @@ if (!isset ($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
     exit;
 }
 
-var_dump($_SESSION);
-
-$title = "Profil de " . $_SESSION['username'];
+$title = "Profil de " . ucfirst($_SESSION['username']);
 $msg_erreur_motdepasse = "";
 $msg_confirmation_suppression = "";
 
@@ -51,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title><?= $title ?></title>
 </head>
 <body>
+    <a href="/accueil">Retour à l'accueil</a>
     <h1><?= $title ?></h1>
     <p>Vous êtes connecté en tant que <?= $_SESSION['username'] ?></p>
 
