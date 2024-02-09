@@ -20,8 +20,8 @@
     </div>
 
     <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded bg-gray py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu">
-        <a href="#" class="block p-3 mx-1 text-sm text-white rounded hover:bg-gray-dark-hover ">Profil</a>
-        <a href="#" class="block p-3 mx-1 text-sm text-white rounded hover:bg-gray-dark-hover">Déconnexion</a>
+        <a href="/profil" class="block p-3 mx-1 text-sm text-white rounded hover:bg-gray-dark-hover ">Profil</a>
+        <a href="/logout" class="block p-3 mx-1 text-sm text-white rounded hover:bg-gray-dark-hover">Déconnexion</a>
     </div>
 </div>
 

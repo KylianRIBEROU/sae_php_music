@@ -101,6 +101,15 @@ class Genre {
         return $tabGenres;
     }
 
+    public static function getGenresByIdAlbum(int $idAlbum): array {
+        $liste_detient = Detient::getDetientByIdAlbum($idAlbum);
+        $tabGenres = [];
+        foreach ($liste_detient as $detient) {
+            array_push($tabGenres, self::getGenreById($detient->getIdG())); 
+        }
+        return $tabGenres;
+    }
+    
     public function create(): bool {
         $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
         $req = $pdo->prepare("INSERT INTO genre (nomG) VALUES (:nomG)");
@@ -117,6 +126,15 @@ class Genre {
         $req->bindParam(":idG", $this->idG);
         $req->execute();
         return true;
+    }
+
+    public static function deleteById(int $idG): bool {
+        Detient::deleteDetientByIdG($idG);
+
+        $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $pdo->prepare("DELETE FROM genre WHERE idG = :idG");
+        $req->bindParam(":idG", $idG);
+        return $req->execute();
     }
 
     public function delete(): bool {

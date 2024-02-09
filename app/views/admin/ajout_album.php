@@ -1,7 +1,18 @@
 <?php
+
 use models\Artiste;
 use models\Album;
+
+$artiste_empty_erreur = "";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+    if ($_POST["artistes"] == "Sélectionner un artiste") {
+        $artiste_empty_erreur = "Veuillez sélectionner un artiste !";
+    }
+
+    else {
+
     $nom_album = $_POST['labelAlbum'];
     $anneeSortie = $_POST['anneeSortie'];
 
@@ -18,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
     else {
     $chemin_image = $dossier_images . basename($_FILES["image-album"]["name"]);
+    $image = basename($_FILES["image-album"]["name"]);
         try {
             move_uploaded_file($_FILES["image-album"]["tmp_name"], $chemin_image);
         } catch (Exception $e) {
@@ -38,20 +50,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     // rediriger vers l'accueil du panel admin 
     // header('Location: /admin');
     // exit();
-
+    }
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/ajout_album.css">
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+
     <title>Ajout d'album</title>
 </head>
 <body>
+    <a id="retour-accueil" href="/admin"><i style="margin: 0.4em" class="fas fa-arrow-circle-left"></i>Retour</a>
     <div>
         <h1 class="titre-ajout-album">Ajouter un album</h1>
     </div>
@@ -93,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                 };
                 ?>
             </select>
+            <p class ="erreur-album"><?php echo $artiste_empty_erreur; ?></p>
         </div>
         <div class="right-container">
             <!-- select images ici  --> 

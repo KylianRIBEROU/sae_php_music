@@ -30,9 +30,13 @@ if (!isset ($_SESSION['isadmin']) || !$_SESSION['isadmin']) {
         </div>
         <div>
             <h2>Artistes</h2>
-            <a href="/admin/artistes">Ajouter un artiste</a>
+            <a href="/admin/ajout-artiste">Ajouter un artiste</a>
             <a href="/admin/artistes">Gérer les artistes</a>
         </div>
+        <div>
+            <h2>Genres</h2>
+            <a href="/admin/ajout-genre">Ajouter un genre</a>
+            <a href="/admin/genres">Gérer les genres</a>
     </div>
 </body>
 </html>
