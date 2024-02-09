@@ -63,6 +63,10 @@ register_shutdown_function(function () {
       http_response_code(200);
       require __DIR__ . $adminDir . 'genres.php';
    }
+   elseif ($route == '/admin/albums'){
+      http_response_code(200);
+      require __DIR__ . $adminDir . 'albums.php';
+   }
    elseif (parse_url($route)['path'] == '/admin/update-genre') { // il faut passer l'id  !!! 
       http_response_code(200);
       require __DIR__ . $adminDir . 'update_genre.php';

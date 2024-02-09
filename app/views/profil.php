@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title><?= $title ?></title>
 </head>
 <body>
-    <a href="/accueil">Retour à l'accueil</a>
+    <a href="/">Retour à l'accueil</a>
     <h1><?= $title ?></h1>
     <p>Vous êtes connecté en tant que <?= $_SESSION['username'] ?></p>
 
