@@ -9,8 +9,7 @@ use models\favAlbum;
 use pdoFactory\PDOFactory;
 
 $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
-// $u = new Utilisateur(0, 'admin1', 'admin', 1);
-// $u->create();
+
 
 $viewDir = '/views/';
 $adminDir ='/views/admin/';

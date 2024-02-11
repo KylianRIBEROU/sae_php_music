@@ -250,7 +250,6 @@ class Utilisateur
             // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
             return false;
         }
-
     }
     
 }

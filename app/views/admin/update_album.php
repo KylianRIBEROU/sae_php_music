@@ -1,3 +1,21 @@
+<?php
+
+use models\Album;
+use models\Genre;
+use models\Artiste;
+$album_exists_erreur = "Un album existe déjà avec ce nom !";
+$id_album = $_GET['id_album'];
+
+$album = Album::getAlbumById($id_album);
+
+$genres_album = Genre::getGenresByIdAlbum($id_album);
+
+$auteur = Artiste::getArtisteById($album->getIdA());
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

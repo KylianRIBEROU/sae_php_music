@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="genres"></div>
         <button class="ajout-genre" onclick="window.location.href='/admin/ajout-genre'" style="cursor: pointer;">
             <a id="ajout-genre" href="#">Ajouter un genre</a>
-</button>
+        </button>
         <?php
             $genres = Genre::getAllGenres();
 

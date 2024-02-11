@@ -1,8 +1,10 @@
 <?php 
 use models\Album;
 use models\Artiste;
+use models\Titre;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     if (isset($_POST['supprimer_album'])) {
         $album_id = $_POST['album_id'];
         Album::deleteById($album_id);
@@ -34,7 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($albums as $album) {
                 echo "<div class='album'>";
                 echo "<img src='/static/img/" . $album->getImageAlbum() . "' alt='photo album' class='photo-album'>";
-                echo "<p class='titre-album'>" . $album->getTitreAlbum() ." - ". (Artiste::getArtisteById($album->getIdA()))->getNomA() . "</p>";
+                echo "<div class = 'infos-album'>";
+                echo "<p class='titre-album'>" . $album->getTitreAlbum() ." - ". (Artiste::getArtisteById($album->getIdA()))->getNomA()."</p>";
+                echo "<p>Nombre de titres : " . count(Titre::getTitresByAlbumId($album->getIdA())) . "</p>";
+                echo "<p>Année de sortie : " . $album->getAnneeSortie() . "</p>";
+                echo "</div>";
                 echo "<div class='modifs'>";
                 echo "<form method='get' action='/admin/update-album'>";
                 echo "<input type='hidden' name='album_id' value='" . $album->getIdAlbum() . "'>"; 
@@ -42,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "</form>";
                 
                 echo "<form method='post'>";
+                echo "<input type='hidden' name='album_id' value='" . $album->getIdAlbum() . "'>"; 
                 echo "<button class='btn-supprimer' type='submit' name='supprimer_album'><i style='margin: 4px; color: red; margin-right:2em;' class='fas fa-trash'></i></button>"; // Icône de poubelle
                 echo "</form>";
                 echo "</div>";

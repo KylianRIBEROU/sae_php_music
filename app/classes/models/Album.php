@@ -111,25 +111,8 @@ class Album {
      */
     public function setIdA(int $idA): void {
         $this->idA = $idA;
-    } 
+    }
 
-
-    /**
-     * get tous les albums
-     * @return array
-     */
-    // public static function getAllAlbums(): array {
-    //     $sql = "SELECT * FROM album";
-    //     $db = PDOFactory::getInstancePDOFactory()->get_PDO();
-    //     $stmt = $db->prepare($sql);
-    //     $stmt->execute();
-    //     $albums = [];
-    //     while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-    //         $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
-    //     }
-    //     return $albums;
-    // }
-    
     /**
      * get tous les noms d'albums
      * @return array
@@ -179,6 +162,23 @@ class Album {
         return null;
     }
 
+    /**
+     * @param string $titreAlbum
+     */
+    public static function getAlbumByTitreAlbum(string $titreAlbum): Album | null {
+        $sql = "SELECT * FROM album WHERE titreAlbum = :titreAlbum";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":titreAlbum", $titreAlbum);
+        $stmt->execute();
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($row) {
+            $album = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
+            return $album;
+        }
+        return null;
+    }
+
     public static function getAlbumsByIdG(int $idG):array {
         $liste_detient = Detient::getDetientByIdG($idG);
         $albums = [];
@@ -186,6 +186,16 @@ class Album {
             array_push($albums, Album::getAlbumById($detient->getIdAlbum()));
         }
         return $albums;
+    }
+
+    public function addGenre(Genre $genre): void {
+        $detient = new Detient($genre->getIdG(), $this->getIdAlbum());
+        $detient->create();
+    }
+
+    public function removeGenre(Genre $genre): void {
+        $detient = Detient::getDetient($genre->getIdG(), $this->getIdAlbum());
+        $detient->delete();
     }
 
     /**
@@ -240,7 +250,6 @@ class Album {
      * @return bool
      */
     public static function deleteById(int $idAlbum): bool {
-        // supprimer associations avant de supprimer l'album
 
         Detient::deleteDetientByIdAlbum($idAlbum);
         Note::deleteNoteByidAlbum($idAlbum);

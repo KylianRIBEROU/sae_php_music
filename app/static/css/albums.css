@@ -28,7 +28,7 @@ body {
     align-items: center;
     justify-content: center;
     max-width: 60vw;
-    background-color: black;
+    background-color: #1c1c1c;
     border-radius: 1em;
 }
 
@@ -48,13 +48,21 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row;
     width: 100%;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     border-radius: 1em;
-    background-color: #1c1c1c;
+    background-color: #333;
     flex-wrap: wrap;
 }
+
+.infos-album {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} 
 
 .photo-album {
     width: 200px;
