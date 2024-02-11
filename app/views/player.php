@@ -1,5 +1,5 @@
 <div class="h-full flex p-2 items-center gap-5">
-    <img src="../static/img/default.png" class="rounded-md h-full" alt="Current title image">
+    <img src="../static/img/default.png" class="rounded-md h-full" alt="Current title image" id="track-img">
     <div>
         <h1 class="text-white text-xl font-bold" id="track-name">No sound</h1>
         <h2 class="text-gray-light text-base font-bold" id="track-artist" >No artist</h2>
@@ -66,23 +66,23 @@
         }
         else {
             console.error('No track list found');
-            // console.log("Creating default track list");
-            // let track_list = [
-            //     {
-            //     name: "Spectre",
-            //     artist: "Alan Walker",
-            //     image: "../static/img/ncs.jpg",
-            //     path: "../static/sound/Alan Walker - Spectre [COPYRIGHTED NCS Release].mp3"
-            //     },
-            //     {
-            //         name: "Faded",
-            //         artist: "Alan Walker",
-            //         image: "../static/img/ncs.jpg",
-            //         path: "../static/sound/Alan Walker - Fade [COPYRIGHTED NCS Release].mp3"
-            //     },
-            // ];
-            // let track_index = 0;
-            // loadTrack(track_index);
+            console.log("Creating default track list");
+            track_list = [
+                {
+                name: "Spectre",
+                artist: "Alan Walker",
+                image: "../static/img/ncs.jpg",
+                path: "../static/sound/Alan Walker - Spectre [COPYRIGHTED NCS Release].mp3"
+                },
+                {
+                    name: "Faded",
+                    artist: "Alan Walker",
+                    image: "../static/img/ncs.jpg",
+                    path: "../static/sound/Alan Walker - Fade [COPYRIGHTED NCS Release].mp3"
+                },
+            ];
+            track_index = 0;
+            loadTrack(track_index);
         }
     })
     .catch(error => {

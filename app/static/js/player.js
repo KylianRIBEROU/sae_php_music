@@ -1,22 +1,7 @@
 
-// default values 
-let track_list = [
-    {
-      name: "Spectre",
-      artist: "Alan Walker",
-      image: "../static/img/ncs.jpg",
-      path: "../static/sound/Alan Walker - Spectre [COPYRIGHTED NCS Release].mp3"
-    },
-    {
-        name: "Faded",
-        artist: "Alan Walker",
-        image: "../static/img/ncs.jpg",
-        path: "../static/sound/Alan Walker - Fade [COPYRIGHTED NCS Release].mp3"
-    },
-];
+let track_list = [];
 let track_index = 0;
 
-// 
 let curr_track = document.createElement('audio');
 let isPlaying = false;
 
@@ -237,7 +222,7 @@ function nextTrack() {
 function prevTrack() {
     if (track_index > 0)
       track_index -= 1;
-    else track_index = track_list.length;
+    else track_index = track_list.length-1;
     loadTrack(track_index);
     playTrack();
     apiCall();

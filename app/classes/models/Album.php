@@ -118,17 +118,17 @@ class Album {
      * get tous les albums
      * @return array
      */
-    public static function getAllAlbums(): array {
-        $sql = "SELECT * FROM album";
-        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $albums = [];
-        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
-        }
-        return $albums;
-    }
+    // public static function getAllAlbums(): array {
+    //     $sql = "SELECT * FROM album";
+    //     $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+    //     $stmt = $db->prepare($sql);
+    //     $stmt->execute();
+    //     $albums = [];
+    //     while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+    //         $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
+    //     }
+    //     return $albums;
+    // }
     
     /**
      * get tous les noms d'albums
@@ -147,6 +147,21 @@ class Album {
     }
 
     /**
+     * Renvoie une liste contenant tous les albums
+     * @return array
+     */
+    public static function getAllAlbums(): array {
+        $sql = "SELECT * FROM album";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->query($sql);
+        $albums = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
+        }
+        return $albums;
+    }
+
+    /**
      * @param int $idAlbum
      * @return array
      */
@@ -158,7 +173,7 @@ class Album {
         $stmt->execute();
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);
         if ($row) {
-            $album = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["anneeSortie"], $row["duree"], $row["idA"]);
+            $album = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
             return $album;
         }
         return null;
@@ -185,7 +200,7 @@ class Album {
         $stmt->execute();
         $albums = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["anneeSortie"], $row["duree"], $row["idA"]);
+            $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
         }
         return $albums;
     }

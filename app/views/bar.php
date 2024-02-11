@@ -12,7 +12,7 @@
 
 <div class="relative ml-3">
     <div class="flex items-center">
-        <h2 class="text-white mr-3"><?php echo ucfirst($_SESSION['username']); ?></h2>
+        <h2 class="text-white mr-3"><?php echo ucfirst(strtolower($_SESSION['username'])); ?></h2>
 
         <button type="button" class="rounded-full bg-gray" id="user-menu-button">
             <img class="h-12 w-12 rounded-full" src="https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=<?php echo $_SESSION['username'] ?>" alt="profile image">
