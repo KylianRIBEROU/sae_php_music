@@ -139,7 +139,7 @@ class Album {
         $stmt->execute();
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);
         if ($row) {
-            $album = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["anneeSortie"], $row["duree"], $row["idA"]);
+            $album = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
             return $album;
         }
         return null;
@@ -157,7 +157,7 @@ class Album {
         $stmt->execute();
         $albums = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["anneeSortie"], $row["duree"], $row["idA"]);
+            $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
         }
         return $albums;
     }
