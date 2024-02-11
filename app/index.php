@@ -4,12 +4,10 @@ require_once __DIR__ .'/classes/autoloader/autoloader.php';
 
 Autoloader::register();
 
-use models\Utilisateur;
 use pdoFactory\PDOFactory;
 
 $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
-// $u = new Utilisateur(0, 'admin1', 'admin', 1);
-// $u->create();
+
 
 $viewDir = '/views/';
 $adminDir ='/views/admin/';

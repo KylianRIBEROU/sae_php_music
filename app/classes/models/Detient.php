@@ -81,7 +81,7 @@ class Detient{
         return $detient;
     }
 
-    public function save(): bool {
+    public function create(): bool {
         $sql = "INSERT INTO detient (idG, idAlbum) VALUES (:idG, :idAlbum)";
         $db = PDOFactory::getInstancePDOFactory()->get_PDO();
         $stmt = $db->prepare($sql);

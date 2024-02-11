@@ -22,7 +22,7 @@ body {
     align-items: center;
     justify-content: center;
     max-width: 60vw;
-    background-color: black;
+    background-color: #1c1c1c;
     border-radius: 1em;
 }
 
@@ -46,7 +46,7 @@ body {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     border-radius: 1em;
-    background-color: #1c1c1c;
+    background-color: #333;
 }
 
 .ajout-genre {

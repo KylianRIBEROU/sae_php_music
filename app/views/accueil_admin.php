@@ -13,10 +13,16 @@ if (!isset ($_SESSION['isadmin']) || !$_SESSION['isadmin']) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/accueil_admin.css">
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
     <title>Panel administrateur</title>
 </head>
 <body>
-    <h1>Panel administrateur</h1>
+    <div class="header">
+        <a id="retour-accueil" href="/"><i style="margin: 0.4em" class="fas fa-arrow-circle-left"></i>Accueil</a>
+        <h1>Panel administrateur</h1>
+    </div>
+    
     <div class ="choix-admin">
         <div>
             <h2>Utilisateurs</h2>

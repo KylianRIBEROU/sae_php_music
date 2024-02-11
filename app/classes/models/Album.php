@@ -164,6 +164,23 @@ class Album {
         return null;
     }
 
+    /**
+     * @param string $titreAlbum
+     */
+    public static function getAlbumByTitreAlbum(string $titreAlbum): Album | null {
+        $sql = "SELECT * FROM album WHERE titreAlbum = :titreAlbum";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":titreAlbum", $titreAlbum);
+        $stmt->execute();
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($row) {
+            $album = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["anneeSortie"], $row["duree"], $row["idA"]);
+            return $album;
+        }
+        return null;
+    }
+
     public static function getAlbumsByIdG(int $idG):array {
         $liste_detient = Detient::getDetientByIdG($idG);
         $albums = [];
@@ -171,6 +188,16 @@ class Album {
             array_push($albums, Album::getAlbumById($detient->getIdAlbum()));
         }
         return $albums;
+    }
+
+    public function addGenre(Genre $genre): void {
+        $detient = new Detient($genre->getIdG(), $this->getIdAlbum());
+        $detient->create();
+    }
+
+    public function removeGenre(Genre $genre): void {
+        $detient = Detient::getDetient($genre->getIdG(), $this->getIdAlbum());
+        $detient->delete();
     }
 
     /**

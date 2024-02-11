@@ -2,10 +2,17 @@
 
 use models\Artiste;
 use models\Album;
+use models\Genre;
 
 $artiste_empty_erreur = "";
+$genre_already_exists_erreur = "Un genre existe déjà avec ce nom !";
 
+var_dump($_POST);
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+    var_dump($_FILES);
+
+    if (isset($_POST['ajout_album'])){
 
     if ($_POST["artistes"] == "Sélectionner un artiste") {
         $artiste_empty_erreur = "Veuillez sélectionner un artiste !";
@@ -40,17 +47,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     }  
 
 
-    // $album = new Album(0, $nom_album, $anneeSortie, $image, $artiste->getIdA());
-    // $album.create();
+    $album = new Album(0, $nom_album, $anneeSortie, $image, $artiste->getIdA());
+    $album->create();
 
-    // ajouter ensuite les associations aux 
-    // genres ( faudrait déjà qu'on puisse les sélectionner lol xd )
-    
+    // get l'album avec l'id correspondant
+    $album = Album::getAlbumByTitreAlbum($nom_album);
+
+    foreach ($_POST['genres[]'] as $genre) {
+        if ($genre != "" && !Genre::existsByNomG($genre)){
+            $new_genre = new Genre(0, $genre);
+            $new_genre->create();
+
+            // marche pas psk idAlbum = 0, et idGenre aussi !!
+            // sauf si on change le modèle, il faut  une Clef fonctionnelle
+            // de chaque coté
+            $genre = Genre::getGenreByNom($genre);
+            $album->addGenre($genre);
+        }
+    }    
     
     // rediriger vers l'accueil du panel admin 
-    // header('Location: /admin');
-    // exit();
+    header('Location: /admin');
+    exit();
     }
+}
+
+elseif (isset($_POST['valider_nouveau_genre'])){
+   
+}
 }
 ?>
 <!DOCTYPE html>
@@ -64,11 +88,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <title>Ajout d'album</title>
 </head>
 <body>
-    <a id="retour-accueil" href="/admin"><i style="margin: 0.4em" class="fas fa-arrow-circle-left"></i>Retour</a>
+    <div class="header">
+        <a id="retour-accueil" href="/admin"><i style="margin: 0.4em" class="fas fa-arrow-circle-left"></i>Retour</a>
+    </div>
     <div>
         <h1 class="titre-ajout-album">Ajouter un album</h1>
     </div>
-    <form method="post" enctype="multipart/form-data">
+    <form id="form-album" method="post" enctype="multipart/form-data">
     <div class="container">
         <div class="left-container">
             <label for="labelAlbum">Nom de l'album</label>
@@ -84,16 +110,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             ?>
             </select>
             <!-- genres de l'album -->
-            <label for="genres">Genres</label>
-            <select id="genres" name="genres[]" multiple>
-            <?php 
-            use models\Genre;
-            $genres = Genre::getAllGenres();
-            foreach ($genres as $genre) {
-                echo '<option value="'.$genre->getNomG().'">'.$genre->getNomG().'</option>';
-            };
-            ?>
-            </select>
+            <div class="genres">
+              <label for="genres">Genres</label>
+              <div class="genres-checkboxes">
+                <div class="genre">
+                    <!-- bouton pour ajouter un genre -->
+                    <button type="button" id="ajout-genre">Ajouter un genre</button>
+                </div>
+                <?php 
+                $genres = Genre::getAllGenres();
+                foreach ($genres as $genre) {
+                    echo '<div class="genre">';
+                    echo '<input type="checkbox" id="'.$genre->getNomG().'" name="genres[]" value="'.$genre->getNomG().'">';
+                    echo '<label for="'.$genre->getNomG().'">'.$genre->getNomG().'</label>';
+                    echo '</div>';
+                };
+                ?>
+                
+                <div class="genre" style="display: none;" id="add-genre-form">
+                        <label for="nouveau-genre">Nouveau genre</label>
+                        <input form="form-genre" type="text" id="nouveau-genre" name="nouveau_genre" placeholder="Entrez nouveau genre..." required>
+                        <button form="form-genre" id="valider-nouveau-genre" name="nouveau_genre">Valider</button>
+                </div>
+                <p class="erreur-genre" style="display: none;"> <?php echo $genre_already_exists_erreur?></p>
+              </div>
+            </div>
 
             <!-- artiste de l'album -->
             <label for="artistes">Artiste</label>
@@ -116,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             <input id="image-picker" type="file" accept="image/*" name="image-album">
         </div>
     </div>
-        <button type="submit" class="submit-form-button" name="ajout_album">Ajouter l'album</button>
+        <button form="form-album" type="submit" class="submit-form-button" name="ajout_album">Ajouter l'album</button>
     </form>
 </body>
 </html>

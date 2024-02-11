@@ -1,4 +1,4 @@
-
+-- ces fichiers sql sont pas du tout à jour. Manipuler la base avec le CLI PHP.
 CREATE TABLE utilisateur (
   idU        INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   nomU       VARCHAR(100) UNIQUE,
@@ -9,7 +9,7 @@ CREATE TABLE utilisateur (
 
 CREATE TABLE album (
   idAlbum   INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  titreAlbum VARCHAR(100),
+  titreAlbum VARCHAR(200) unique,
   imageAlbum varchar(200),
   anneeSortie INTEGER,
   idA       INTEGER NOT NULL,
@@ -57,11 +57,6 @@ CREATE TABLE image (
   idA       INTEGER NOT NULL,
   FOREIGN KEY (idA) REFERENCES artiste (idA)
 );
-
-
-
-
-
 
 CREATE TABLE note (
   idU     INTEGER NOT NULL,

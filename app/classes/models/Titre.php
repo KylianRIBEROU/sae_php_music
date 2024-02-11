@@ -13,7 +13,10 @@ class Titre {
 
     private int $anneeSortie;
 
-    private int $duree;
+    private string $duree;
+
+    private string $url;
+    
     private int $idA;
 
     private int $idAlbum;
@@ -25,16 +28,22 @@ class Titre {
      * @param int $idT
      * @param string $labelT
      * @param int $anneeSortie
-     * @param int $duree
+     * @param string $duree
+     * @param string $url
      * @param int $idA
-     * @param int $idAlbum (optionnel)
+     * @param int $idAlbum
      */
-    public function __construct(int $idT, string $labelT, int $anneeSortie, int $duree, int $idA, int $idAlbum = null)
+    public function __construct(int $idT, string $labelT, int $anneeSortie, string $duree, mixed $url , int $idA, int $idAlbum = null)
     {
         $this->idT = $idT;
         $this->labelT = $labelT;
         $this->anneeSortie = $anneeSortie;
         $this->duree = $duree;
+        if ($url === null) {
+            $this->url = "nosoundtrack.mp3";
+        } else {
+            $this->url = $url;
+        }
         $this->idA = $idA;
         $this->idAlbum = $idAlbum;
     }
@@ -66,9 +75,17 @@ class Titre {
     /**
      * @return int
      */
-    public function getDuree(): int
+    public function getDuree(): string
     {
         return $this->duree;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 
     /**
@@ -112,11 +129,19 @@ class Titre {
     }
 
     /**
-     * @param int $duree
+     * @param string $duree
      */
-    public function setDuree(int $duree): void
+    public function setDuree(string $duree): void
     {
         $this->duree = $duree;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl(string $url): void
+    {
+        $this->url = $url;
     }
 
     /**
@@ -147,7 +172,7 @@ class Titre {
         $stmt->execute();
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);
         if ($row) {
-            $titre = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["idA"], $row["idAlbum"]);
+            $titre = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["url"], $row["idA"], $row["idAlbum"]);
             return $titre;
         }
         return null;
@@ -165,7 +190,7 @@ class Titre {
         $stmt->execute();
         $titres = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $titres[] = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["idA"], $row["idAlbum"]);
+            $titres[] = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["url"], $row["idA"], $row["idAlbum"]);
         }
         return $titres;
     }
@@ -190,7 +215,7 @@ class Titre {
         $stmt->execute();
         $titres = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $titres[] = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["idA"], $row["idAlbum"]);
+            $titres[] = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["url"], $row["idA"], $row["idAlbum"]);
         }
         return $titres;
     }
@@ -199,11 +224,12 @@ class Titre {
      * Crée un titre dans la base de données.
      */
     public function create(): void {
-        $query = "INSERT INTO titre (labelT, anneeSortie, duree, idA, idAlbum) VALUES (:labelT, :anneeSortie, :duree, :idA, :idAlbum)";
+        $query = "INSERT INTO titre (labelT, anneeSortie, duree, url, idA, idAlbum) VALUES (:labelT, :anneeSortie, :duree, :url, :idA, :idAlbum)";
         $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
         $stmt->bindValue(":labelT", $this->getLabelT());
         $stmt->bindValue(":anneeSortie", $this->getAnneeSortie());
         $stmt->bindValue(":duree", $this->getDuree());
+        $stmt->bindValue(":url", $this->getUrl());
         $stmt->bindValue(":idA", $this->getIdA());
         $stmt->bindValue(":idAlbum", $this->getIdAlbum());
         $stmt->execute();
@@ -214,12 +240,13 @@ class Titre {
      * @param Titre $titre
      */
     public function update(int $idT, Titre $titre): void {
-        $query = "UPDATE titre SET labelT = :labelT, anneeSortie = :anneeSortie, duree = :duree, idA = :idA, idAlbum = :idAlbum WHERE idT = :idT";
+        $query = "UPDATE titre SET labelT = :labelT, anneeSortie = :anneeSortie, duree = :duree, url = :url, idA = :idA, idAlbum = :idAlbum WHERE idT = :idT";
         $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
         $stmt->bindValue(":idT", $idT);
         $stmt->bindValue(":labelT", $titre->getLabelT());
         $stmt->bindValue(":anneeSortie", $titre->getAnneeSortie());
         $stmt->bindValue(":duree", $titre->getDuree());
+        $stmt->bindValue(":url", $titre->getUrl());
         $stmt->bindValue(":idA", $titre->getIdA());
         $stmt->bindValue(":idAlbum", $titre->getIdAlbum());
         $stmt->execute();

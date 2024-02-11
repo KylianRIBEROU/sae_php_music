@@ -13,7 +13,7 @@ CIF8, 0N ARTISTE, 11 ALBUM
 :
 
 APPARTIENT, 0N PLAYLIST, 0N titre
-titre: idT[integer not null auto-increment], labelT [varchar(100)], anneeSortie [integer], duree[integer]
+titre: idT[integer not null auto-increment], labelT [varchar(100)], anneeSortie [integer], duree[varchar(10)], url[varchar(200)]
 CIF2, 0N ARTISTE, 11 titre
 ARTISTE: idA[integer not null auto-increment], nomA[varchar(100) unique], imageA[varchar(200)]
 :
