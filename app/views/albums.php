@@ -30,7 +30,7 @@ $artiste = Artiste::getArtisteById($album->getIdA());
         <h1 class="text-white text-7xl font-bold"><?php echo $album->getTitreAlbum(); ?></h1>
         <div class="flex items-center gap-3">
             <img class="rounded-full h-10" src="../static/img/default.png" alt="Image de l'artiste <?php echo $artiste->getNomA(); ?>">
-            <h3 class="text-white"><span class="font-bold"><?php echo $artiste->getNomA(); ?></span> • <?php echo $album->getAnneeSortie(); ?> • <?php echo count($titres); ?> titre(s)</h3>
+            <h3 class="text-white"><span hx-get="/artists?id=<?php echo $artiste->getIdA(); ?>" hx-target="#main" class="font-bold hover:cursor-pointer hover:underline"><?php echo $artiste->getNomA(); ?></span> • <?php echo $album->getAnneeSortie(); ?> • <?php echo count($titres); ?> titre(s)</h3>
         </div>
     </div>
 </div>

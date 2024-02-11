@@ -104,6 +104,9 @@ switch (parse_url($route)['path']){
    case '/playlists':
       require __DIR__ . $viewDir . 'playlists.php';
       break;
+   case '/artists':
+      require __DIR__ . $viewDir . 'artists.php';
+      break;
    case '/search':
       require __DIR__ . $viewDir . 'search.php';
       break;

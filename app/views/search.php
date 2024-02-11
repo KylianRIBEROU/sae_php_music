@@ -24,7 +24,6 @@ use models\Album;
 use models\Artiste;
 use models\Titre;
 use models\Genre;
-use models\Detient;
 
 $albums = Album::getAllAlbums();
 $artistes = Artiste::getAllArtistes();
@@ -38,6 +37,9 @@ if (isset($_SESSION['search']) && !empty($_SESSION['search'])){
     foreach ($albums as $album) {
         $artisteAlbum = Artiste::getArtisteById($album->getIdA());
         $titresAlbum = Titre::getTitresByAlbumId($album->getIdAlbum());
+        $genresAlbum = Genre::getGenresByIdAlbum($album->getIdAlbum());
+
+
         // si le titre de l'album contient la recherche
         if (preg_match('/' . preg_quote($_SESSION['search'], '/') . '/i', $album->getTitreAlbum())){
             if (!in_array($album, $albumsSearch)){
@@ -49,6 +51,25 @@ if (isset($_SESSION['search']) && !empty($_SESSION['search'])){
             foreach ($titresAlbum as $titreAlbum) {
                 if (!in_array($titreAlbum, $titresSearch)){
                     array_push($titresSearch, $titreAlbum);
+                }
+            }
+        }
+
+        if (isset($genresAlbum)){
+            foreach ($genresAlbum as $genre) {
+                // si le genre de l'album contient la recherche
+                if (preg_match('/' . preg_quote($_SESSION['search'], '/') . '/i', $genre->getNomG())){
+                    if (!in_array($album, $albumsSearch)){
+                        array_push($albumsSearch, $album);
+                    }
+                    if (!in_array($artisteAlbum, $artistesSearch)){
+                        array_push($artistesSearch, $artisteAlbum);
+                    }
+                    foreach ($titresAlbum as $titreAlbum) {
+                        if (!in_array($titreAlbum, $titresSearch)){
+                            array_push($titresSearch, $titreAlbum);
+                        }
+                    }
                 }
             }
         }
@@ -159,8 +180,8 @@ if (isset($_SESSION['search']) && !empty($_SESSION['search'])){
 </ul>
 
 
-<h1 class="text-white">Filtre : <?php echo $_SESSION['filter'] ?></h1>
-<h1 class="text-white">Search : <?php echo $_SESSION['search'] ?></h1>
+<!-- <h1 class="text-white">Filtre : <?php //echo $_SESSION['filter'] ?></h1>
+<h1 class="text-white">Search : <?php //echo $_SESSION['search'] ?></h1> -->
 
 
 
@@ -193,7 +214,7 @@ if (isset($_SESSION['search']) && !empty($_SESSION['search'])){
     <?php
     foreach ($artistes as $artiste) {
         ?>
-        <li class=" p-4 bg-gray rounded hover:bg-gray-dark-hover transition-colors cursor-pointer ">
+        <li hx-get="/artists?id=<?php echo $artiste->getIdA() ?>" hx-target="#main" class=" p-4 bg-gray rounded hover:bg-gray-dark-hover transition-colors cursor-pointer ">
             <img class="rounded-full" src="../static/img/default.png" alt="Image de l'artiste <?php echo $artiste->getNomA(); ?>">
             <p class="text-white text-base mt-3 font-bold"><?php echo $artiste->getNomA(); ?></p>
         </li>
@@ -204,7 +225,40 @@ if (isset($_SESSION['search']) && !empty($_SESSION['search'])){
 <?php } ?>
 
 <?php if ($_SESSION['filter'] == 'tout' || $_SESSION['filter'] == 'titres') { ?>
-    <h2 class="text-white text-2xl">Titres</h2>
+    <h2 class="text-white text-2xl mb-3">Titres</h2>
+
+
+    <ul>
+        <?php if ($_SESSION['filter'] == 'titres'){ ?>
+        <li class=" text-white grid grid-cols-[48px_1fr_48px_48px_48px] gap-3 h-10">
+            <div class="flex justify-center items-center">#</div>
+            <div class="flex items-center">Titre</div>
+            <div></div>
+            <div class="flex justify-center items-center"><i class="far fa-clock"></i></div>
+            <div></div>
+        </li>
+        <?php } ?>
+        <?php for ($i = 0; $i < count($titres); $i++) { ?>
+            <li class="text-white grid grid-cols-[48px_1fr_48px_48px_48px] gap-3 h-16 rounded-md hover:bg-gray-dark-hover group">
+                <div class="flex justify-center items-center">
+                    <div class="group-hover:hidden"><?php echo $i+1; ?></div>
+                    <div class="text-white text-xs hidden group-hover:block"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="flex items-center">
+                    <?php echo $titres[$i]->getLabelT(); ?>
+                </div>
+                <div class="justify-center items-center flex">
+                    <button class="text-white text-xl hidden group-hover:block"><i class="far fa-heart"></i></button>
+                </div>
+                <div class="flex justify-center items-center">
+                    <?php echo $titres[$i]->getDuree(); ?>
+                </div>
+                <div class="justify-center items-center flex">
+                    <button class="text-white text-lg hidden group-hover:block"><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+            </li>
+        <?php } ?>
+    </ul>
 <?php } ?>
 
 

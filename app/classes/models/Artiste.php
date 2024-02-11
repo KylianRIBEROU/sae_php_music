@@ -29,7 +29,7 @@ class Artiste {
         $this->idA = $idA;
         $this->nomA = $nomA;
         if ( $imageA === null || $imageA === "") {
-            $this->imageA = "default.jpg";
+            $this->imageA = "default.png";
         } else {
             $this->imageA = $imageA;
         }
