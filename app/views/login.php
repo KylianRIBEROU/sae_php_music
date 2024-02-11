@@ -57,6 +57,9 @@
                     header('Location: /');
                     exit;
                 }
+                else {
+                    echo '<p class="text-gray-light my-2 text-sm font-medium leading-6">Identifiant ou mot de passe incorrect.</p>';
+                }
             }
             else{
               echo '<p class="text-gray-light my-2 text-sm font-medium leading-6">Identifiant ou mot de passe incorrect.</p>';

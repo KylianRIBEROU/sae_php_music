@@ -15,7 +15,7 @@ class Utilisateur
     public function __construct(int $idU, string $nom, string $password, bool $admin)
     {
         $this->idU = $idU;
-        $this->nom = $nom;
+        $this->nom = strtolower($nom);
         $this->password = $password;
         $this->admin = $admin;
     }
@@ -48,7 +48,7 @@ class Utilisateur
 
     public function setNom(string $nom): void
     {
-        $this->nom = $nom;
+        $this->nom = strtolower($nom);
     }
 
     public function setPassword(string $password): void
@@ -132,7 +132,7 @@ class Utilisateur
 
         try {
             $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
-            $stmt->bindValue(':nomU', $nomU);
+            $stmt->bindValue(':nomU', strtolower($nomU));
             $stmt->execute();
 
             $result = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -210,7 +210,7 @@ class Utilisateur
 
         try {
             $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
-            $stmt->bindValue(':nomU', $nomU);
+            $stmt->bindValue(':nomU', strtolower($nomU));
             $stmt->execute();
 
             $result = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -237,7 +237,7 @@ class Utilisateur
 
         try {
             $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($query);
-            $stmt->bindValue(':nomU', $nomU);
+            $stmt->bindValue(':nomU', strtolower($nomU));
             $stmt->execute();
 
             $result = $stmt->fetch(\PDO::FETCH_ASSOC);

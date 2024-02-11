@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace models;
 use pdoFactory\PDOFactory;
+use models\Detient;
 class Album {
 
     private int $idAlbum;
@@ -27,10 +28,11 @@ class Album {
     public function __construct(int $idAlbum, string $titreAlbum, mixed $imageAlbum, int $anneeSortie, int $idA) {
         $this->idAlbum = $idAlbum;
         $this->titreAlbum = $titreAlbum;
-        if (empty($imageAlbum)) {
-            $imageAlbum = "default.png";
+        if ( $imageAlbum === null || $imageAlbum === "") {
+            $this->imageAlbum = "default.jpg";
+        } else {
+            $this->imageAlbum = $imageAlbum;
         }
-        $this->imageAlbum = $imageAlbum;
         $this->anneeSortie = $anneeSortie;
         $this->idA = $idA;
     }
@@ -110,7 +112,39 @@ class Album {
     public function setIdA(int $idA): void {
         $this->idA = $idA;
     } 
+
+
+    /**
+     * get tous les albums
+     * @return array
+     */
+    // public static function getAllAlbums(): array {
+    //     $sql = "SELECT * FROM album";
+    //     $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+    //     $stmt = $db->prepare($sql);
+    //     $stmt->execute();
+    //     $albums = [];
+    //     while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+    //         $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
+    //     }
+    //     return $albums;
+    // }
     
+    /**
+     * get tous les noms d'albums
+     * @return array
+     */
+    public static function getAllNomsAlbums(): array {
+        $sql = "SELECT titreAlbum FROM album";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $nomsAlbums = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $nomsAlbums[] = $row["titreAlbum"];
+        }
+        return $nomsAlbums;
+    }
 
     /**
      * Renvoie une liste contenant tous les albums
@@ -143,6 +177,15 @@ class Album {
             return $album;
         }
         return null;
+    }
+
+    public static function getAlbumsByIdG(int $idG):array {
+        $liste_detient = Detient::getDetientByIdG($idG);
+        $albums = [];
+        foreach ($liste_detient as $detient) {
+            array_push($albums, Album::getAlbumById($detient->getIdAlbum()));
+        }
+        return $albums;
     }
 
     /**

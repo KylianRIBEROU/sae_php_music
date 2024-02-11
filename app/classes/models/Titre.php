@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace models;
 use pdoFactory\PDOFactory;
+use models\Appartient;
 class Titre {
 
     private int $idT;
@@ -178,6 +179,15 @@ class Titre {
         $titres = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $titres[] = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["idA"], $row["idAlbum"]);
+        }
+        return $titres;
+    }
+
+    public static function getTitresByIdP(int $idP){
+        $liste_appartient = Appartient::getAppartientsByIdP($idP);
+        $titres = [];
+        foreach ($liste_appartient as $appartient){
+            array_push($titres, self::getTitreById($appartient->getIdT()));
         }
         return $titres;
     }
