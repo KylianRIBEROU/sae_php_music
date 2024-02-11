@@ -7,10 +7,9 @@ use models\Genre;
 $artiste_empty_erreur = "";
 $genre_already_exists_erreur = "Un genre existe déjà avec ce nom !";
 
-var_dump($_POST);
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    var_dump($_FILES);
+    var_dump($_POST);
 
     if (isset($_POST['ajout_album'])){
 
@@ -21,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     else {
 
     $nom_album = $_POST['labelAlbum'];
-    $anneeSortie = $_POST['anneeSortie'];
+    $anneeSortie = intval($_POST['anneeSortie']);
 
 
     // get les genres et l'image, sauvegarder l'image qq part et 
@@ -47,13 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     }  
 
 
-    $album = new Album(0, $nom_album, $anneeSortie, $image, $artiste->getIdA());
+    $album = new Album(0, $nom_album, $image, $anneeSortie, $artiste->getIdA());
     $album->create();
 
     // get l'album avec l'id correspondant
     $album = Album::getAlbumByTitreAlbum($nom_album);
 
-    foreach ($_POST['genres[]'] as $genre) {
+    foreach ($_POST['genres'] as $genre) {
         if ($genre != "" && !Genre::existsByNomG($genre)){
             $new_genre = new Genre(0, $genre);
             $new_genre->create();
@@ -67,8 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     }    
     
     // rediriger vers l'accueil du panel admin 
-    header('Location: /admin');
-    exit();
+    // header('Location: /admin');
+    // exit();
     }
 }
 
@@ -94,11 +93,11 @@ elseif (isset($_POST['valider_nouveau_genre'])){
     <div>
         <h1 class="titre-ajout-album">Ajouter un album</h1>
     </div>
-    <form id="form-album" method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
     <div class="container">
         <div class="left-container">
             <label for="labelAlbum">Nom de l'album</label>
-            <input class="input-album" type="text" name="labelAlbum" required>
+            <input class="input-album" type="text" name="labelAlbum" id="labelAlbum" required>
 
 
             <label for="anneeSortie">Année de sortie</label>
@@ -111,7 +110,7 @@ elseif (isset($_POST['valider_nouveau_genre'])){
             </select>
             <!-- genres de l'album -->
             <div class="genres">
-              <label for="genres">Genres</label>
+              <h3>Genres</h3>
               <div class="genres-checkboxes">
                 <div class="genre">
                     <!-- bouton pour ajouter un genre -->
@@ -126,14 +125,13 @@ elseif (isset($_POST['valider_nouveau_genre'])){
                     echo '</div>';
                 };
                 ?>
-                
-                <div class="genre" style="display: none;" id="add-genre-form">
-                        <label for="nouveau-genre">Nouveau genre</label>
-                        <input form="form-genre" type="text" id="nouveau-genre" name="nouveau_genre" placeholder="Entrez nouveau genre..." required>
-                        <button form="form-genre" id="valider-nouveau-genre" name="nouveau_genre">Valider</button>
-                </div>
                 <p class="erreur-genre" style="display: none;"> <?php echo $genre_already_exists_erreur?></p>
               </div>
+              <div class="genre" style="display: none;max-width: 400px;" id="add-genre-form">
+                        <label for="nouveau-genre">Nouveau genre</label>
+                        <input type="text" id="nouveau-genre" name="nouveau_genre" placeholder="Entrez nouveau genre...">
+                        <a id="valider-nouveau-genre">Valider</a>
+                </div>
             </div>
 
             <!-- artiste de l'album -->
@@ -151,13 +149,11 @@ elseif (isset($_POST['valider_nouveau_genre'])){
         </div>
         <div class="right-container">
             <!-- select images ici  --> 
-            <label for="image-picker">
             <img id="image-preview" src="/static/img/add-image.png" alt="image choisie"/>
-            </label>
             <input id="image-picker" type="file" accept="image/*" name="image-album">
         </div>
     </div>
-        <button form="form-album" type="submit" class="submit-form-button" name="ajout_album">Ajouter l'album</button>
+        <button type="submit" class="submit-form-button" name="ajout_album">Ajouter l'album</button>
     </form>
 </body>
 </html>

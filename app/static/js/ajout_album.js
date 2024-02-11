@@ -1,7 +1,11 @@
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    // Sélection de l'élément input
 // Sélection de l'élément input
-const input = document.getElementById('image-picker');
+let input = document.getElementById('image-picker');
 // Sélection de l'élément image
-const preview = document.getElementById('image-preview');
+let preview = document.getElementById('image-preview');
 
 // Ajout d'un écouteur d'événement sur le changement de fichier
 input.addEventListener('change', function() {
@@ -16,11 +20,11 @@ input.addEventListener('change', function() {
             preview.src = reader.result; // Mise à jour de la source de l'image avec les données de fichier
         }
 
+        // Lecture du contenu du fichier en tant que URL de données
+        reader.readAsDataURL(file);
     }
-});
+    });
 
-
-document.addEventListener("DOMContentLoaded", function() {
     const ajoutGenreBtn = document.querySelector('#ajout-genre');
     let divFormAjoutGenre = document.querySelector('#add-genre-form');
 
@@ -45,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let classGenresCheckboxes = document.querySelector('.genres-checkboxes');
 
     let validerNouveauGenre = document.querySelector('#valider-nouveau-genre');
-    let msgErreurGenre = document.querySelector('#erreur-genre');
+    let msgErreurGenre = document.querySelector('.erreur-genre');
     validerNouveauGenre.addEventListener('click', function() {
 
         let nouveauGenre = inputNouveauGenre.value;
@@ -80,17 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 divFormAjoutGenre.style.display = "none";
             }
         }
-    //     if (nouveauGenre !== '') {
-    //         let xhr = new XMLHttpRequest();
-    //         // avec le genre passé en paramètres
-    //         xhr.open('POST', 'admin/ajout-album.php?newgenre='+nouveauGenre, true);
-    //         xhr.send();
-
-
-    //     //divFormAjoutGenre.style.display = "none";
-    // }
-});
-
+    });
 });
 // document.addEventListener("DOMContentLoaded", function() {
 //     // Sélectionnez le bouton "Ajouter un genre"
