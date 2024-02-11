@@ -1,3 +1,9 @@
+<?php
+if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
+    exit;
+}
+?>
+
 <h1 class="text-white mb-2">Parcourir tout</h1>
 
 <ul class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-5">

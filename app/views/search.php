@@ -132,7 +132,7 @@ if (isset($_SESSION['search']) && !empty($_SESSION['search'])){
     }
     
 
-    foreach ($titre as $titre) {
+    foreach ($titres as $titre) {
         if (preg_match('/' . preg_quote($_SESSION['search'], '/') . '/i', $titre->getLabelT())) {
             if (!in_array($titre, $titresSearch)){
                 array_push($titresSearch, $titre);

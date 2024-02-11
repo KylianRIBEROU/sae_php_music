@@ -60,7 +60,7 @@ class favAlbum {
     * @param int $idAlbum
     * @return favAlbum
     */
-    public static function getFavAlbum(int $idU, int $idAlbum): favAlbum {
+    public static function getFavAlbum(int $idU, int $idAlbum): ?favAlbum {
         $sql = "SELECT * FROM favAlbum WHERE idU = :idU AND idAlbum = :idAlbum";
         $db = PDOFactory::getInstancePDOFactory()->get_PDO();
         $stmt = $db->prepare($sql);
@@ -68,6 +68,9 @@ class favAlbum {
         $stmt->bindValue(":idAlbum", $idAlbum);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$row) {
+            return null; // Return null if no results found
+        }
         return new favAlbum((int)$row["idU"], (int)$row["idAlbum"]);
     }
     

@@ -3,6 +3,7 @@
 use models\Album;
 use models\Artiste;
 use models\Titre;
+use models\favAlbum;
 
 if (isset($_GET['id'] )){
     $id = $_GET['id'];
@@ -36,7 +37,17 @@ $artiste = Artiste::getArtisteById($album->getIdA());
 </div>
 <div class="flex gap-8 items-center my-5">
 <button class=" size-14 text-xl bg-purple text-black justify-center items-center rounded-full transition-transform hover:scale-105"><i class="fas fa-play"></i></button>
-<button class="text-white text-3xl"><i class="far fa-heart"></i></button>
+<?php 
+    $favAlbum = favAlbum::getFavAlbum($_SESSION["id"], $album->getIdAlbum());
+    if ($favAlbum == null){ ?>
+        <button hx-get="/favalbum?id=<?php echo $album->getIdAlbum(); ?>" hx-target="#main" class="text-white text-3xl"><i class="far fa-heart"></i></button>
+    <?php 
+    }
+    else{ ?>
+        <button hx-get="/favalbum?id=<?php echo $album->getIdAlbum(); ?>" hx-target="#main" class="text-purple text-3xl"><i class="fas fa-heart"></i></button>
+    <?php 
+    } 
+?>
 </div>
 
 

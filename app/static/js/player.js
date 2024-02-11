@@ -97,7 +97,7 @@ function loadTrack(track_index) {
     
 
     updateTimer = setInterval(seekUpdate, 1000);
-    updateApi = setInterval(apiCall, 10000);
+    // updateApi = setInterval(apiCall, 10000);
 
     if (track_list.length == 1){
         curr_track.addEventListener("ended", pauseTrack);

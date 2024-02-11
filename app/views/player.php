@@ -1,3 +1,9 @@
+<?php
+if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
+    exit;
+}
+?>
+
 <div class="h-full flex p-2 items-center gap-5">
     <img src="../static/img/default.png" class="rounded-md h-full" alt="Current title image" id="track-img">
     <div>

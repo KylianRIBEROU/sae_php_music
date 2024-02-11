@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
+    exit;
+}
+?>
+
+
 <div class="grow">
 
         <div class="relative min-w-64 w-1/3  ">

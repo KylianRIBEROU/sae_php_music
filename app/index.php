@@ -5,6 +5,7 @@ require_once __DIR__ .'/classes/autoloader/autoloader.php';
 Autoloader::register();
 
 use models\Utilisateur;
+use models\favAlbum;
 use pdoFactory\PDOFactory;
 
 $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
@@ -24,7 +25,12 @@ $hxRequest = isset($_SERVER['HTTP_HX_REQUEST']) && $_SERVER['HTTP_HX_REQUEST'] =
 register_shutdown_function(function () {
    global $main, $hxRequest, $viewDir, $adminDir, $route, $nav, $player, $isConnected, $bar;
    if ($hxRequest) {
-      echo $main;
+      if ($route == '/nav'){
+         echo $nav;
+      }
+      else{
+         echo $main;
+      }
    }
    elseif ($route == '/login') {
       http_response_code(200);
@@ -78,7 +84,13 @@ register_shutdown_function(function () {
 
 
 ob_start();
-require __DIR__ . $viewDir . 'nav.php';
+switch (parse_url($route)['path']){
+   case '/nav':
+      require __DIR__ . $viewDir . 'nav.php';
+      break;
+   default:
+      require __DIR__ . $viewDir . 'nav.php';
+}
 $nav = ob_get_clean();
 
 ob_start();
@@ -109,6 +121,21 @@ switch (parse_url($route)['path']){
       break;
    case '/search':
       require __DIR__ . $viewDir . 'search.php';
+      break;
+   case '/favalbum':
+      if (isset($_SESSION["id"]) && isset($_GET['id'])){
+         $fav = favAlbum::getFavAlbum($_SESSION["id"], $_GET['id']);
+         if ($fav != null){
+            $fav = new favAlbum($_SESSION["id"], $_GET['id']);
+            $fav->delete();
+         }
+         else {
+            $fav = new favAlbum($_SESSION["id"], $_GET['id']); 
+            $fav->create();
+         };
+      };
+      header('HX-Trigger: refreshnav');
+      require __DIR__ . $viewDir . 'albums.php';
       break;
    default:
       require __DIR__ . $viewDir . '404.php';
