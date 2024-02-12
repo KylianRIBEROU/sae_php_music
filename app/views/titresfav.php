@@ -1,56 +1,27 @@
-<?php
-
+<?php 
 use models\Album;
 use models\Artiste;
 use models\Titre;
-use models\favAlbum;
 use models\favTitre;
 
-if (isset($_GET['id'] )){
-    $id = $_GET['id'];
-    $album = Album::getAlbumById($id);
-    if ($album == null){
-
-        echo '<h1 class="text-white">Album non trouvé</h1>';
-        exit;
-    }
-}
-else{
-    echo '<h1 class="text-white">Album non trouvé</h1>';
-    exit;
-}
-
-$titres = Titre::getTitresByAlbumId($album->getIdAlbum());
-$artiste = Artiste::getArtisteById($album->getIdA());
+$titres = favTitre::GetFavTitresByIdU($_SESSION["id"]);
 
 ?>
 
+
+
 <div class="flex items-end gap-5 flex-wrap">
-    <img class="rounded-md" src="../static/img/<?php echo $album->getImageAlbum(); ?>" alt="<?php echo $album->getTitreAlbum(); ?>" class="w-1/2">
+    <img class="rounded-md h-[200px]" src="../static/img/liked-songs-300.png" alt="Titres likés">
     <div>
-        <h4 class="text-white">Album</h4>
-        <h1 class="text-white text-7xl font-bold"><?php echo $album->getTitreAlbum(); ?></h1>
+        <h4 class="text-white">Playlist</h4>
+        <h1 class="text-white text-7xl font-bold">Titres likés</h1>
         <div class="flex items-center gap-3">
-            <img class="rounded-full h-10" src="../static/img/default.png" alt="Image de l'artiste <?php echo $artiste->getNomA(); ?>">
-            <h3 class="text-white"><span hx-get="/artists?id=<?php echo $artiste->getIdA(); ?>" hx-target="#main" class="font-bold hover:cursor-pointer hover:underline"><?php echo $artiste->getNomA(); ?></span> • <?php echo $album->getAnneeSortie(); ?> • <?php echo count($titres); ?> titre(s)</h3>
+            <h3 class="text-white"><span hx-get="/profil" hx-target="#main" class="font-bold hover:cursor-pointer hover:underline"><?php echo ucfirst(strtolower($_SESSION['username'])); ?></span> • <?php echo count($titres); ?> titre(s)</h3>
         </div>
     </div>
 </div>
-<div class="flex gap-8 items-center my-5">
-<button class=" size-14 text-xl bg-purple text-black justify-center items-center rounded-full transition-transform hover:scale-105"><i class="fas fa-play"></i></button>
-<?php 
-    $favAlbum = favAlbum::getFavAlbum($_SESSION["id"], $album->getIdAlbum());
-    if ($favAlbum == null){ ?>
-        <button hx-get="/favalbum?id=<?php echo $album->getIdAlbum(); ?>" hx-target="#main" class="text-white text-3xl"><i class="far fa-heart"></i></button>
-    <?php 
-    }
-    else{ ?>
-        <button hx-get="/favalbum?id=<?php echo $album->getIdAlbum(); ?>" hx-target="#main" class="text-purple text-3xl"><i class="fas fa-heart"></i></button>
-    <?php 
-    } 
-?>
-</div>
 
+<?php exit ?>
 
 <ul>
 <li class=" text-white grid grid-cols-[48px_1fr_48px_48px_48px] gap-3 h-10">
@@ -71,7 +42,6 @@ $artiste = Artiste::getArtisteById($album->getIdA());
         </div>
         <div class="justify-center items-center flex">
             <?php 
-                $favTitre = favTitre::getFavTitre($_SESSION["id"], $titres[$i]->getIdT());
                 if ($favTitre == null){ ?>
                     <button hx-get="/favtitre?id=<?php echo $titres[$i]->getIdT(); ?>" hx-swap="outerHTML" class="text-white text-xl hidden group-hover:block"><i class="far fa-heart"></i></button>
                 <?php 
@@ -91,3 +61,4 @@ $artiste = Artiste::getArtisteById($album->getIdA());
     </li>
 <?php } ?>
 </ul>
+

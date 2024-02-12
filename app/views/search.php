@@ -24,6 +24,7 @@ use models\Album;
 use models\Artiste;
 use models\Titre;
 use models\Genre;
+use models\favTitre;
 
 $albums = Album::getAllAlbums();
 $artistes = Artiste::getAllArtistes();
@@ -248,8 +249,20 @@ if (isset($_SESSION['search']) && !empty($_SESSION['search'])){
                     <?php echo $titres[$i]->getLabelT(); ?>
                 </div>
                 <div class="justify-center items-center flex">
-                    <button class="text-white text-xl hidden group-hover:block"><i class="far fa-heart"></i></button>
+                <?php 
+                $favTitre = favTitre::getFavTitre($_SESSION["id"], $titres[$i]->getIdT());
+                if ($favTitre == null){ ?>
+                    <button hx-get="/favtitre?id=<?php echo $titres[$i]->getIdT(); ?>" hx-swap="outerHTML" class="text-white text-xl hidden group-hover:block"><i class="far fa-heart"></i></button>
+                <?php 
+                }
+                else{ ?>
+                    <button hx-get="/favtitre?id=<?php echo $titres[$i]->getIdT(); ?>" hx-swap="outerHTML" class="text-purple text-xl"><i class="fas fa-heart"></i></button>
+                <?php 
+                }
+                ?>
                 </div>
+
+                
                 <div class="flex justify-center items-center">
                     <?php echo $titres[$i]->getDuree(); ?>
                 </div>

@@ -6,6 +6,7 @@ Autoloader::register();
 
 use models\Utilisateur;
 use models\favAlbum;
+use models\favTitre;
 use pdoFactory\PDOFactory;
 
 $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
@@ -120,6 +121,9 @@ switch (parse_url($route)['path']){
    case '/profil':
       require __DIR__ . $viewDir . 'profil.php';
       break;
+   case '/titrefav':
+      require __DIR__ . $viewDir . 'titresfav.php';
+      break;
    case '/favalbum':
       if (isset($_SESSION["id"]) && isset($_GET['id'])){
          $fav = favAlbum::getFavAlbum($_SESSION["id"], $_GET['id']);
@@ -134,6 +138,21 @@ switch (parse_url($route)['path']){
       };
       header('HX-Trigger: refreshnav');
       require __DIR__ . $viewDir . 'albums.php';
+      break;
+   case '/favtitre':
+      if (isset($_SESSION["id"]) && isset($_GET['id'])){
+         $fav = favTitre::getFavTitre($_SESSION["id"], $_GET['id']);
+         if ($fav != null){
+            $fav = new favTitre($_SESSION["id"], $_GET['id']);
+            $fav->delete();
+            echo '<button hx-get="/favtitre?id='. intval($_GET['id']) . '" hx-swap="outerHTML" class="text-white text-xl hidden group-hover:block"><i class="far fa-heart"></i></button>';
+         }
+         else {
+            $fav = new favTitre($_SESSION["id"], $_GET['id']); 
+            $fav->create();
+            echo '<button hx-get="/favtitre?id='. intval($_GET['id']) . '" hx-swap="outerHTML" class="text-purple text-xl"><i class="fas fa-heart"></i></button>';
+         };
+      };
       break;
    default:
       require __DIR__ . $viewDir . '404.php';

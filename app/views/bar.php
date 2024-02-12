@@ -13,7 +13,7 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                 </svg>
             </div>
-            <input hx-get="/search" hx-target="#main" hx-trigger="keyup changed delay:500ms" type="text" id="search" name="search" autocomplete="off" class="bg-gray block w-full p-3 ps-10 text-sm rounded-full border border-gray-dark  hover:border-gray-light focus:ring-white focus:border-white focus:outline-none focus:ring-1 text-white placeholder:text-gray-light focus:ring-blue-500 " placeholder="Que souhaitez-vous écouter" required>
+            <input hx-get="/search" hx-target="#main" hx-trigger=" keyup[keyCode==13], keyup changed delay:500ms" type="text" id="search" name="search" autocomplete="off" class="bg-gray block w-full p-3 ps-10 text-sm rounded-full border border-gray-dark  hover:border-gray-light focus:ring-white focus:border-white focus:outline-none focus:ring-1 text-white placeholder:text-gray-light focus:ring-blue-500 " placeholder="Que souhaitez-vous écouter" required>
         </div>
 </div>
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace models;
 use pdoFactory\PDOFactory;
+use models\favTitre;
+use models\favAlbum;
 
 class Utilisateur
 {
