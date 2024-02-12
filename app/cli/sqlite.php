@@ -48,7 +48,9 @@ switch ($action){
             echo '→ ' . $e->getMessage() . PHP_EOL;
         }
         echo '→ ' . count($albums) . ' albums importés' . PHP_EOL;
-        var_dump($albums);
+        foreach ($albums as $album) {
+            $album->create();
+        }
         break;
     default:
         echo 'Action incorrecte 🙀. Actions possibles [create-database, create-tables, drop-tables]' . PHP_EOL;
