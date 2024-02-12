@@ -102,6 +102,20 @@ class Playlist {
     }
 
     /**
+     * Get toutes les playlist contenant le titre passé en paramètres
+     * @param int $idT
+     * @return array
+     */
+    public static function getPlaylistsByIdT(int $idT): array{
+        $playlists = [];
+        $appartenances = Appartient::getAppartientsByIdT($idT);
+        foreach ($appartenances as $appartient){
+            array_push($playlists, self::getPlaylistById($appartient->getIdP()));
+        }
+        return $playlists;
+    }
+
+    /**
      * @param int $idU
      * @param string $nomP
      * @return int
@@ -163,7 +177,7 @@ class Playlist {
      * @param int $idT
      * @return bool
      */
-    public function addTitreToPlaylist(int $idP, int $idT): bool {
+    public static function addTitreToPlaylist(int $idP, int $idT): bool {
         return (new Appartient($idP, $idT))->create();
     }
 
@@ -172,7 +186,7 @@ class Playlist {
      * @param int $idT
      * @return bool
      */
-    public function removeTitreFromPlaylist(int $idP, int $idT): bool {
+    public static function removeTitreFromPlaylist(int $idP, int $idT): bool {
         return (new Appartient($idP, $idT))->delete();
     }
 

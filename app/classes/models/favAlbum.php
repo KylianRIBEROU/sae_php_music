@@ -73,12 +73,24 @@ class favAlbum {
         }
         return new favAlbum((int)$row["idU"], (int)$row["idAlbum"]);
     }
-    
+    public static function getFavAlbums(): array {
+        $sql = "SELECT * FROM favAlbum";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $favAlbums = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $favAlbums[] = new favAlbum((int)$row["idU"], (int)$row["idAlbum"]);
+        }
+        return $favAlbums;
+        
+    }
+
     /**
      * @param int $idU
      * @return array
      */
-    public static function getFavAlbums(int $idU): array {
+    public static function getFavAlbumsByIdU(int $idU): array {
         $sql = "SELECT * FROM favAlbum WHERE idU = :idU";
         $db = PDOFactory::getInstancePDOFactory()->get_PDO();
         $stmt = $db->prepare($sql);

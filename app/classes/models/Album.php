@@ -29,7 +29,7 @@ class Album {
         $this->idAlbum = $idAlbum;
         $this->titreAlbum = $titreAlbum;
         if ( $imageAlbum === null || $imageAlbum === "") {
-            $this->imageAlbum = "default.jpg";
+            $this->imageAlbum = "default.png";
         } else {
             $this->imageAlbum = $imageAlbum;
         }

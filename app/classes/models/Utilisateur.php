@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace models;
 use pdoFactory\PDOFactory;
+use models\Album;
+use models\favAlbum;
 
 class Utilisateur
 {
@@ -250,6 +252,18 @@ class Utilisateur
             // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
             return false;
         }
+    }
+
+    /**
+     * Obtenir tous les albums favoris d'un utilisateur
+     */
+    public static function getAllAlbumsFavoris(int $idU):array{
+        $favAlbums = favAlbum::getFavAlbumsByIdU($idU);
+        $albums = [];
+        foreach ($favAlbums as $favAlbum){
+            array_push($albums, Album::getAlbumById($favAlbum->getIdAlbum()));
+        }
+        return $albums;
     }
     
 }
