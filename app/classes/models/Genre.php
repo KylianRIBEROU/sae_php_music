@@ -75,10 +75,40 @@ class Genre {
         return false;
     }
 
+    public static function existsByNomG(string $nomG): bool {
+        $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $pdo->prepare("SELECT * FROM genre WHERE nomG = :nomG");
+        $req->bindParam(":nomG", $nomG);
+        $req->execute();
+        $genre = $req->fetch(PDO::FETCH_ASSOC);
+        if ($genre) {
+            return true;
+        }
+        return false;
+    }
+
     public static function getGenreById(int $idG): Genre | null {
         $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
         $req = $pdo->prepare("SELECT * FROM genre WHERE idG = :idG");
         $req->bindParam(":idG", $idG);
+        $req->execute();
+        $genre = $req->fetch(PDO::FETCH_ASSOC);
+
+        if ($genre) {
+            return new Genre((int)$genre['idG'], $genre['nomG']);
+        }
+        return null;
+    }
+
+    /**
+     * Renvoie un genre selon son nom
+     * @param string $nomG
+     * @return Genre | null
+     */
+    public static function getGenreByNom(string $nomG): Genre | null {
+        $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $pdo->prepare("SELECT * FROM genre WHERE nomG = :nomG");
+        $req->bindParam(":nomG", $nomG);
         $req->execute();
         $genre = $req->fetch(PDO::FETCH_ASSOC);
 
@@ -101,6 +131,45 @@ class Genre {
         return $tabGenres;
     }
 
+    public static function getGenresByIdAlbum(int $idAlbum): array {
+        $liste_detient = Detient::getDetientByIdAlbum($idAlbum);
+        $tabGenres = [];
+        foreach ($liste_detient as $detient) {
+            array_push($tabGenres, self::getGenreById($detient->getIdG())); 
+        }
+        return $tabGenres;
+    }
+
+    /**
+     * Renvoie tous les genres d'un artiste. ( genres de tous ses albums )
+     * @param int $idA
+     * @return array
+     */
+    public static function getGenresByIdA(int $idA):array{
+       $ensembles = [];
+       $albums = Album::getAlbumsByIdA($idA);       
+        foreach ($albums as $album) {
+            $genres = self::getGenresByIdAlbum($album->getIdAlbum());
+            foreach ($genres as $genre) {
+                if (!in_array($genre, $ensembles)) {
+                    array_push($ensembles, $genre);
+                }
+            }
+        } 
+        return $ensembles;
+    }
+
+    /**
+     * Renvoie tous les genres d'un artiste, selon son nom
+     * @param int $idA
+     * @return array
+     */
+    public static function getGenresByNomA(string $nomA):array{
+        $artiste = Artiste::getArtisteByNom($nomA);
+        return self::getGenresByIdA($artiste->getIdA());
+    }
+
+    
     public function create(): bool {
         $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
         $req = $pdo->prepare("INSERT INTO genre (nomG) VALUES (:nomG)");
@@ -117,6 +186,15 @@ class Genre {
         $req->bindParam(":idG", $this->idG);
         $req->execute();
         return true;
+    }
+
+    public static function deleteById(int $idG): bool {
+        Detient::deleteDetientByIdG($idG);
+
+        $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $req = $pdo->prepare("DELETE FROM genre WHERE idG = :idG");
+        $req->bindParam(":idG", $idG);
+        return $req->execute();
     }
 
     public function delete(): bool {

@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
+    exit;
+}
+?>
+
+
 <div class="grow">
 
         <div class="relative min-w-64 w-1/3  ">
@@ -12,7 +19,7 @@
 
 <div class="relative ml-3">
     <div class="flex items-center">
-        <h2 class="text-white mr-3"><?php echo ucfirst($_SESSION['username']); ?></h2>
+        <h2 class="text-white mr-3"><?php echo ucfirst(strtolower($_SESSION['username'])); ?></h2>
 
         <button type="button" class="rounded-full bg-gray" id="user-menu-button">
             <img class="h-12 w-12 rounded-full" src="https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=<?php echo $_SESSION['username'] ?>" alt="profile image">
@@ -20,8 +27,8 @@
     </div>
 
     <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded bg-gray py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu">
-        <a href="#" class="block p-3 mx-1 text-sm text-white rounded hover:bg-gray-dark-hover ">Profil</a>
-        <a href="#" class="block p-3 mx-1 text-sm text-white rounded hover:bg-gray-dark-hover">Déconnexion</a>
+        <a hx-get="/profil" hx-target="#main" class="block p-3 mx-1 text-sm text-white rounded hover:bg-gray-dark-hover ">Profil</a>
+        <a href="/logout" class="block p-3 mx-1 text-sm text-white rounded hover:bg-gray-dark-hover">Déconnexion</a>
     </div>
 </div>
 

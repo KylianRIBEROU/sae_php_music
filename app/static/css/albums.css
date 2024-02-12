@@ -1,0 +1,96 @@
+body {
+    color: white;
+    background-color: hsl(0, 0%, 15%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-supprimer {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btn-modifier {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    margin-right: 1.3em;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    max-width: 60vw;
+    background-color: #1c1c1c;
+    border-radius: 1em;
+}
+
+#retour-accueil {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.container > * {
+    margin: 1em;
+}
+
+.album, .ajout-album {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-radius: 1em;
+    background-color: #333;
+    flex-wrap: wrap;
+}
+
+.infos-album {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} 
+
+.photo-album {
+    width: 200px;
+    height: 200px;
+    border-radius: 0.5em;
+}
+
+.ajout-album {
+    justify-content: center;
+    background-color: #ac4e4e;
+}
+
+#ajout-album {
+    text-decoration: none;
+    color: yellow;
+    font-size: 1.5em;
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.titre-album {
+    font-size: 1.5em;
+    margin-left: 1em;
+}
+
+.modifs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

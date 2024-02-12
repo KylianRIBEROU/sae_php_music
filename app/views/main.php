@@ -1,3 +1,9 @@
+<?php
+if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
+    exit;
+}
+?>
+
 <h1 class="text-white mb-2">Parcourir tout</h1>
 
 <ul class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-5">
@@ -12,7 +18,7 @@
         use models\Genre;
         $genres = Genre::getAllGenres();
         foreach ($genres as $genre) {
-            echo '<li style="background-color : '. randomColor() .'" class="text-white text-center flex items-center justify-center rounded h-[150px] cursor-pointer" hx-get="/search" hx-target="#main" > ';
+            echo '<li style="background-color : '. randomColor() .'" class="text-white text-center flex items-center justify-center rounded h-[150px] cursor-pointer" hx-get="/search?genre='.$genre->getNomG().'" hx-target="#main" > ';
             echo '<p class="text-xl font-bold">'.$genre->getNomG().'</p>';
             echo '</li>';
         }

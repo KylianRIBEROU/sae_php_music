@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace models;
 use pdoFactory\PDOFactory;
+use models\Detient;
 class Album {
 
     private int $idAlbum;
@@ -24,10 +25,14 @@ class Album {
      * @param int $anneeSortie
      * @param int $idA
      */
-    public function __construct(int $idAlbum, string $titreAlbum, string $imageAlbum, int $anneeSortie, int $idA) {
+    public function __construct(int $idAlbum, string $titreAlbum, mixed $imageAlbum, int $anneeSortie, int $idA) {
         $this->idAlbum = $idAlbum;
         $this->titreAlbum = $titreAlbum;
-        $this->imageAlbum = $imageAlbum;
+        if ( $imageAlbum === null || $imageAlbum === "") {
+            $this->imageAlbum = "default.jpg";
+        } else {
+            $this->imageAlbum = $imageAlbum;
+        }
         $this->anneeSortie = $anneeSortie;
         $this->idA = $idA;
     }
@@ -107,8 +112,38 @@ class Album {
      */
     public function setIdA(int $idA): void {
         $this->idA = $idA;
-    } 
-    
+    }
+
+    /**
+     * get tous les noms d'albums
+     * @return array
+     */
+    public static function getAllNomsAlbums(): array {
+        $sql = "SELECT titreAlbum FROM album";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $nomsAlbums = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $nomsAlbums[] = $row["titreAlbum"];
+        }
+        return $nomsAlbums;
+    }
+
+    /**
+     * Renvoie une liste contenant tous les albums
+     * @return array
+     */
+    public static function getAllAlbums(): array {
+        $sql = "SELECT * FROM album";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->query($sql);
+        $albums = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
+        }
+        return $albums;
+    }
 
     /**
      * @param int $idAlbum
@@ -122,10 +157,46 @@ class Album {
         $stmt->execute();
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);
         if ($row) {
-            $album = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["anneeSortie"], $row["duree"], $row["idA"]);
+            $album = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
             return $album;
         }
         return null;
+    }
+
+    /**
+     * @param string $titreAlbum
+     */
+    public static function getAlbumByTitreAlbum(string $titreAlbum): Album | null {
+        $sql = "SELECT * FROM album WHERE titreAlbum = :titreAlbum";
+        $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":titreAlbum", $titreAlbum);
+        $stmt->execute();
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($row) {
+            $album = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
+            return $album;
+        }
+        return null;
+    }
+
+    public static function getAlbumsByIdG(int $idG):array {
+        $liste_detient = Detient::getDetientByIdG($idG);
+        $albums = [];
+        foreach ($liste_detient as $detient) {
+            array_push($albums, Album::getAlbumById($detient->getIdAlbum()));
+        }
+        return $albums;
+    }
+
+    public function addGenre(Genre $genre): void {
+        $detient = new Detient($genre->getIdG(), $this->getIdAlbum());
+        $detient->create();
+    }
+
+    public function removeGenre(Genre $genre): void {
+        $detient = Detient::getDetient($genre->getIdG(), $this->getIdAlbum());
+        $detient->delete();
     }
 
     /**
@@ -140,7 +211,7 @@ class Album {
         $stmt->execute();
         $albums = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["anneeSortie"], $row["duree"], $row["idA"]);
+            $albums[] = new Album((int)$row["idAlbum"], $row["titreAlbum"], $row["imageAlbum"], $row["anneeSortie"], $row["idA"]);
         }
         return $albums;
     }
@@ -180,7 +251,6 @@ class Album {
      * @return bool
      */
     public static function deleteById(int $idAlbum): bool {
-        // supprimer associations avant de supprimer l'album
 
         Detient::deleteDetientByIdAlbum($idAlbum);
         Note::deleteNoteByidAlbum($idAlbum);

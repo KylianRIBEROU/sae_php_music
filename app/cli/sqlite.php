@@ -85,7 +85,8 @@ function createTables()
     'artiste' => <<<EOF
         CREATE TABLE IF NOT EXISTS artiste (
             idA  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            nomA VARCHAR(100) UNIQUE
+            nomA VARCHAR(100) UNIQUE,
+            imageA VARCHAR(200)
         )
     EOF,
 
@@ -126,16 +127,6 @@ function createTables()
         )
     EOF,
 
-    'image' => <<<EOF
-        CREATE TABLE IF NOT EXISTS image (
-            idImage   INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            lienImage VARCHAR(42) NOT NULL,
-            pos       VARCHAR(42),
-            idA       INTEGER NOT NULL,
-            FOREIGN KEY (idA) REFERENCES artiste (idA)
-        )
-    EOF,
-
     'note' => <<<EOF
         CREATE TABLE IF NOT EXISTS note (
             idU     INTEGER NOT NULL,
@@ -161,7 +152,8 @@ function createTables()
             idT         INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             labelT      VARCHAR(100),
             anneeSortie INTEGER,
-            duree       INTEGER,
+            duree       VARCHAR(10),
+            url         VARCHAR(200),
             idAlbum     INTEGER NOT NULL,
             idA         INTEGER NOT NULL,
             FOREIGN KEY (idAlbum) REFERENCES album (idAlbum),
@@ -208,7 +200,6 @@ function dropTables()
         'favAlbum' => 'DROP TABLE IF EXISTS favAlbum',
         'favTitre' => 'DROP TABLE IF EXISTS favTitre',
         'genre' => 'DROP TABLE IF EXISTS genre',
-        'image' => 'DROP TABLE IF EXISTS image',
         'note' => 'DROP TABLE IF EXISTS note',
         'playlist' => 'DROP TABLE IF EXISTS playlist',
         'titre' => 'DROP TABLE IF EXISTS titre',
