@@ -21,7 +21,11 @@ $titres = favTitre::GetFavTitresByIdU($_SESSION["id"]);
     </div>
 </div>
 
-<?php exit ?>
+
+<div class="flex gap-8 items-center my-5">
+<button class=" size-14 text-xl bg-purple text-black justify-center items-center rounded-full transition-transform hover:scale-105"><i class="fas fa-play"></i></button>
+</div>
+
 
 <ul>
 <li class=" text-white grid grid-cols-[48px_1fr_48px_48px_48px] gap-3 h-10">
@@ -31,29 +35,32 @@ $titres = favTitre::GetFavTitresByIdU($_SESSION["id"]);
     <div class="flex justify-center items-center"><i class="far fa-clock"></i></div>
     <div></div>
 </li>
-<?php for ($i = 0; $i < count($titres); $i++) { ?>
+<?php for ($i = 0; $i < count($titres); $i++) { 
+    $titre = Titre::getTitreById($titres[$i]->getIdT()) ?>
+
     <li class="text-white grid grid-cols-[48px_1fr_48px_48px_48px] gap-3 h-16 rounded-md hover:bg-gray-dark-hover group">
         <div class="flex justify-center items-center">
             <div class="group-hover:hidden"><?php echo $i+1; ?></div>
             <div class="text-white text-xs hidden group-hover:block"><i class="fas fa-play"></i></div>
         </div>
         <div class="flex items-center">
-            <?php echo $titres[$i]->getLabelT(); ?>
+            <?php echo $titre->getLabelT(); ?>
         </div>
         <div class="justify-center items-center flex">
             <?php 
+                $favTitre = favTitre::getFavTitre($_SESSION["id"], $titre->getIdT());
                 if ($favTitre == null){ ?>
-                    <button hx-get="/favtitre?id=<?php echo $titres[$i]->getIdT(); ?>" hx-swap="outerHTML" class="text-white text-xl hidden group-hover:block"><i class="far fa-heart"></i></button>
+                    <button hx-get="/favtitre?id=<?php echo $titre->getIdT(); ?>" hx-swap="outerHTML" class="text-white text-xl hidden group-hover:block"><i class="far fa-heart"></i></button>
                 <?php 
                 }
                 else{ ?>
-                    <button hx-get="/favtitre?id=<?php echo $titres[$i]->getIdT(); ?>" hx-swap="outerHTML" class="text-purple text-xl"><i class="fas fa-heart"></i></button>
+                    <button hx-get="/favtitre?id=<?php echo $titre->getIdT(); ?>" hx-swap="outerHTML" class="text-purple text-xl"><i class="fas fa-heart"></i></button>
                 <?php 
                 }
             ?>
         </div>
         <div class="flex justify-center items-center">
-            <?php echo $titres[$i]->getDuree(); ?>
+            <?php echo $titre->getDuree(); ?>
         </div>
         <div class="justify-center items-center flex">
             <button class="text-white text-lg hidden group-hover:block"><i class="fas fa-ellipsis-h"></i></button>
