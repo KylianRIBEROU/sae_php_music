@@ -41,50 +41,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?></title>
-</head>
-<body>
-    <a href="/">Retour à l'accueil</a>
-    <h1><?= $title ?></h1>
-    <p>Vous êtes connecté en tant que <?= $_SESSION['username'] ?></p>
 
-    <div class="delete-account">
-      <form method = "post">
-          <button type="submit" name="deleteaccount">Supprimer mon compte</button>
-      </form>
+<div class="grid grid-cols-[500px_1fr] gap-10">
+    <div>
+        <h2 class="text-white font-bold text-xl">Informations personnelles</h2>
+        <p class="text-gray-light">Consultez et gérez les informations personnelles associées à votre compte utilisateur.</p>
+    </div>
+    <div>
+        <img class="h-20 w-20 rounded-full" src="https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=<?php echo $_SESSION['username'] ?>" alt="profile image">
+        <p class="mt-2 text-white"> Nom d'utilisateur : <?= ucfirst(strtolower($_SESSION['username'])); ?> </p>
     </div>
 
-    <div class="personal-info">
-        <style> /** TEMPORAIRE, A ENLEVER */
-            img {
-                max-width: 100px;
-                max-height: 100px;
-            }
-        </style>
-      <img class="h-12 w-12 rounded-full" src="https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=<?php echo $_SESSION['username'] ?>" alt="profile image">
-      <p> Nom d'utilisateur : <?= $_SESSION['username'] ?> </p>
+    <div>
+        <h2 class="text-white font-bold text-xl">Modifier le mot de passe</h2>
+        <p class="text-gray-light">Mettez à jour votre mot de passe associé à votre compte.</p>
     </div>
-
-    <div class="update-password">
+    <div>
         <form method="post">
-            <label for="currentpassword">Mot de passe actuel</label>
-            <input type="password" name="currentpassword" required>
-            
-            <label for="newpassword">Nouveau mot de passe</label>
-            <input type="password" name="newpassword" required>
+            <div class="flex flex-col gap-3">
+                <label class="text-white" for="currentpassword">Mot de passe actuel</label>
+                <input class="  bg-gray block w-full rounded-md border-0 px-3 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-light placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-purple sm:text-sm sm:leading-6 focus:outline-none" type="password" name="currentpassword" required>
 
-            <label for="newpasswordconfirm">Confirmer le nouveau mot de passe</label>
-            <input type="password" name="newpasswordconfirm" required>
-            
-            <button type="submit">Modifier mon mot de passe</button>
+                
+                <label class="text-white" for="newpassword">Nouveau mot de passe</label>
+                <input class="bg-gray block w-full rounded-md border-0 px-3 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-light placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-purple sm:text-sm sm:leading-6 focus:outline-none" type="password" name="newpassword" required>
+
+                <label class="text-white" for="newpasswordconfirm">Confirmer le nouveau mot de passe</label>
+                <input class="bg-gray block w-full rounded-md border-0 px-3 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-light placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-purple sm:text-sm sm:leading-6 focus:outline-none" type="password" name="newpasswordconfirm" required>
+                
+                <button class="flex w-60 justify-center rounded-md bg-purple px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple" type="submit">Modifier mon mot de passe</button>
+            </div>
         </form>
         <p><?php echo $msg_erreur_motdepasse ?></p>
         <p><?php echo $msg_confirmation_suppression ?></p>
     </div>
-</body>
-</html>
+
+    <div>
+        <h2 class="text-white font-bold text-xl">Supprimer le compte</h2>
+        <p class="text-gray-light">Permet de supprimer définitivement votre compte utilisateur, effaçant toutes les données associées. Veuillez procéder avec prudence car cette action est irréversible.</p>
+    </div>
+    <div>
+        <form method = "post">
+            <button class="flex w-60 justify-center rounded-md bg-purple px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple" type="submit" name="deleteaccount">Supprimer mon compte</button>
+        </form>
+    </div>
+</div>

@@ -69,3 +69,13 @@ INSERT INTO detient (idAlbum, idG) VALUES (12, 10);
 
 
 
+
+
+INSERT INTO titre (idT, labelT, anneeSortie, duree, url, idAlbum, idA) 
+VALUES 
+    (1, 'Whitey''s Theme', 1998, '6:08', NULL ,1, 1),
+    (2, 'My Prayer', 1998, '2:29', NULL ,1, 1),
+    (3, 'Señorita', 1998, '3:22',NULL , 1, 1),
+    (4, 'H.H.T.', 1998, '4:08',NULL , 1, 1),
+    (5, 'Nothing Good is Real', 1998, '3:48', NULL ,1, 1),
+    (6, 'Cuts and Scars', 1998, '2:10',NULL , 1, 1);

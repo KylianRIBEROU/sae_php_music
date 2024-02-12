@@ -40,10 +40,6 @@ register_shutdown_function(function () {
       header('Location: /login');
       exit();
    }
-   elseif ($route == '/profil') {
-      http_response_code(200);
-      require __DIR__ . $viewDir . 'profil.php';
-   }
    elseif ($route == '/register') {
       http_response_code(200);
       require __DIR__ . $viewDir . 'register.php';
@@ -120,6 +116,9 @@ switch (parse_url($route)['path']){
       break;
    case '/search':
       require __DIR__ . $viewDir . 'search.php';
+      break;
+   case '/profil':
+      require __DIR__ . $viewDir . 'profil.php';
       break;
    case '/favalbum':
       if (isset($_SESSION["id"]) && isset($_GET['id'])){

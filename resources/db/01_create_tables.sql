@@ -78,13 +78,13 @@ CREATE TABLE titre (
   idT         INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   labelT      VARCHAR(100),
   anneeSortie INTEGER,
-  duree       INTEGER,
+  duree       TEXT,
+  url         TEXT,
   idA         INTEGER NOT NULL,
   idAlbum 	  INTEGER,
   FOREIGN KEY (idAlbum) REFERENCES album (idAlbum)
   FOREIGN KEY (idA) REFERENCES artiste (idA)
 );
-
 
 CREATE TABLE appartient (
   idP INTEGER NOT NULL,

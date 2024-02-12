@@ -169,7 +169,7 @@ class Titre {
         $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->query($query);
         $titres = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $titres[] = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"], $row["idA"], $row["idAlbum"]);
+            $titres[] = new Titre($row["idT"], $row["labelT"], $row["anneeSortie"], $row["duree"],  $row["url"], $row["idA"], $row["idAlbum"]);
         }
         return $titres;
     }
