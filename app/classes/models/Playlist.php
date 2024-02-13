@@ -123,7 +123,9 @@ class Playlist {
      * @param string $nomP
      * @return void
      */
-    public function update(int $idP, string $nomP): void {
+    public function update(): void {
+        $idP = $this->idP;
+        $nomP = $this->nomP;
         $sql = "UPDATE playlist SET nomP = :nomP WHERE idP = :idP";
         $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($sql);
         $stmt->bindValue(":nomP", $nomP);

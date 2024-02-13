@@ -159,6 +159,28 @@ switch (parse_url($route)['path']){
       if (isset($_SESSION["id"])){
          $playlist = new Playlist(0,'Nouvelle playlist',$_SESSION["id"]);
          $idP = $playlist->create();
+         $_GET['id'] = $idP; // warning: this is a hack
+      };
+      header('HX-Trigger: refreshnav');
+      require __DIR__ . $viewDir . 'playlists.php';
+      break;
+   case '/deleteplaylist':
+      if (isset($_SESSION["id"]) && isset($_GET['id'])){
+         $playlist = Playlist::getPlaylistById($_GET['id']);
+         if ($playlist != null){
+            $playlist->delete();
+         }
+      };
+      header('HX-Trigger: refreshnav');
+      require __DIR__ . $viewDir . 'main.php';
+      break;
+   case '/editplaylist':
+      if (isset($_SESSION["id"]) && isset($_GET['id']) && isset($_GET['name'])){
+         $playlist = Playlist::getPlaylistById($_GET['id']);
+         if ($playlist != null){
+            $playlist->setNomP($_GET['name']);
+            $playlist->update();
+         }
       };
       header('HX-Trigger: refreshnav');
       require __DIR__ . $viewDir . 'playlists.php';
