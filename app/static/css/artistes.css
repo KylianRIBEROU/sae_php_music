@@ -47,6 +47,7 @@ body {
     flex-direction: column;
     justify-content: center;
     margin-left: 1em;
+    max-width: 400px;
 }
 
 #retour-accueil{
@@ -78,12 +79,12 @@ body {
 }
 .ajout-artiste {
     justify-content: center;
-    background-color: #ac4e4e;
+    background-color: #F61353;
 }
 
 #ajout-artiste{
     text-decoration: none;
-    color: yellow;
+    color: white;
     font-size: 1.5em;
     display: block;
     margin-top: 0.5em; margin-bottom: 0.5em;
@@ -99,6 +100,10 @@ body {
     justify-content: space-between;  
 }
 
+
+a{
+    color: #F61353;
+}
 a:link {
     text-decoration: none;
   }
