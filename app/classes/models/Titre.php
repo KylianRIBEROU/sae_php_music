@@ -233,6 +233,15 @@ class Titre {
         return $titres;
     }
 
+    public static function getTitresByPlaylistId(int $idP): array {
+        $liste_appartient = Appartient::getAppartientsByIdP($idP);
+        $titres = [];
+        foreach ($liste_appartient as $appartient){
+            array_push($titres, self::getTitreById($appartient->getIdT()));
+        }
+        return $titres;
+    }
+
     /**
      * Crée un titre dans la base de données.
      */

@@ -8,6 +8,7 @@ use models\Utilisateur;
 use models\favAlbum;
 use models\favTitre;
 use pdoFactory\PDOFactory;
+use models\Playlist;
 
 $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
 
@@ -153,6 +154,14 @@ switch (parse_url($route)['path']){
             echo '<button hx-get="/favtitre?id='. intval($_GET['id']) . '" hx-swap="outerHTML" class="text-purple text-xl"><i class="fas fa-heart"></i></button>';
          };
       };
+      break;
+   case '/createplaylist':
+      if (isset($_SESSION["id"])){
+         $playlist = new Playlist(0,'Nouvelle playlist',$_SESSION["id"]);
+         $idP = $playlist->create();
+      };
+      header('HX-Trigger: refreshnav');
+      require __DIR__ . $viewDir . 'playlists.php';
       break;
    default:
       require __DIR__ . $viewDir . '404.php';

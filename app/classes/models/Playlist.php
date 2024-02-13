@@ -106,8 +106,10 @@ class Playlist {
      * @param string $nomP
      * @return int
      */
-    public function create(int $idU, string $nomP): int {
+    public function create(): int {
         $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $idU = $this->idU;
+        $nomP = $this->nomP;
         $sql = "INSERT INTO playlist (nomP, idU) VALUES (:nomP, :idU)";
         $stmt = $db->prepare($sql);
         $stmt->bindValue(":nomP", $nomP);
