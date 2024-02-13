@@ -72,9 +72,21 @@ register_shutdown_function(function () {
       http_response_code(200);
       require __DIR__ . $adminDir . 'albums.php';
    }
-   elseif (parse_url($route)['path'] == '/admin/update-genre') { // il faut passer l'id  !!! 
+   elseif ($route == '/admin/artistes'){
+      http_response_code(200);
+      require __DIR__ . $adminDir . 'artistes.php'; // IL FAUDRA FACTORISER TOUT CA
+   }
+   elseif (parse_url($route)['path'] == '/admin/artiste') { 
+      http_response_code(200);
+      require __DIR__ . $adminDir . 'detail_artiste.php'; // IL FAUDRA FACTORISER TOUT CA
+   }
+   elseif (parse_url($route)['path'] == '/admin/update-genre') { 
       http_response_code(200);
       require __DIR__ . $adminDir . 'update_genre.php';
+   }
+   elseif (parse_url($route)['path'] == '/admin/update-album') { 
+      http_response_code(200);
+      require __DIR__ . $adminDir . 'update_album.php';
    }
    else {
       require __DIR__ . $viewDir . 'layout.php';

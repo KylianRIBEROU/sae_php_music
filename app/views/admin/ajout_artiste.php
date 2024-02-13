@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $dossier_images = __DIR__. "/../../static/img/";
         if ($_FILES["image-artiste"]["error"] > 0 || $_FILES["image-artiste"]["name"] == "") {
-            $image = "default.jpg";
+            $image = "default.png";
         }
         else {
             $chemin_image = $dossier_images . basename($_FILES["image-artiste"]["name"]);
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 move_uploaded_file($_FILES["image-artiste"]["tmp_name"], $chemin_image);
             } catch (Exception $e) {
-                $image = "default.jpg";
+                $image = "default.png";
                 var_dump($e->getMessage());
             }
         }

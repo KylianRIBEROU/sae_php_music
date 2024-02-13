@@ -2,6 +2,7 @@
 use models\Album;
 use models\Artiste;
 use models\Titre;
+use models\Genre;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -37,13 +38,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "<div class='album'>";
                 echo "<img src='/static/img/" . $album->getImageAlbum() . "' alt='photo album' class='photo-album'>";
                 echo "<div class = 'infos-album'>";
-                echo "<p class='titre-album'>" . $album->getTitreAlbum() ." - ". (Artiste::getArtisteById($album->getIdA()))->getNomA()."</p>";
+                echo "<p class='titre-album'><a " . $album->getTitreAlbum() ." - ". (Artiste::getArtisteById($album->getIdA()))->getNomA()."</p>";
                 echo "<p>Nombre de titres : " . count(Titre::getTitresByAlbumId($album->getIdA())) . "</p>";
                 echo "<p>Année de sortie : " . $album->getAnneeSortie() . "</p>";
                 echo "</div>";
+                echo "<div class='genres-album'>";
+                foreach(Genre::getGenresByIdAlbum($album->getIdAlbum()) as $genre) {
+                    echo "<p class='genre-album'>" . $genre->getNomG() . "</p>";
+                }
+                echo "</div>";
                 echo "<div class='modifs'>";
                 echo "<form method='get' action='/admin/update-album'>";
-                echo "<input type='hidden' name='album_id' value='" . $album->getIdAlbum() . "'>"; 
+                echo "<input type='hidden' name='id_album' value='" . $album->getIdAlbum() . "'>"; 
                 echo "<button class='btn-modifier' type='submit' name='update_album'><i style='margin: 4px; color: green; margin-right:2em;' class='fas fa-pencil-alt'></i></button>"; // Icône de crayon
                 echo "</form>";
                 

@@ -57,6 +57,14 @@ body {
     flex-wrap: wrap;
 }
 
+.genres-album{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
 .infos-album {
     display: flex;
     flex-direction: column;

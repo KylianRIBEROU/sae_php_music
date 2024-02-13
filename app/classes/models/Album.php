@@ -276,4 +276,11 @@ class Album {
             Album::deleteById($album->getIdAlbum());
         }
     }
+
+    public function removeAllGenres(): void {
+        $detients = Detient::getDetientByIdAlbum($this->getIdAlbum());
+        foreach ($detients as $detient) {
+            $detient->delete();
+        }
+    }
 }

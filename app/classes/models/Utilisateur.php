@@ -150,7 +150,6 @@ class Utilisateur
 
             return null;
         } catch (\PDOException $e) {
-            // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
             return null;
         }
     }
@@ -174,7 +173,6 @@ class Utilisateur
             $stmt->bindValue(':admin', $this->getAdmin(), \PDO::PARAM_BOOL);
             return $stmt->execute();
         } catch (\PDOException $e) {
-            // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
             return false;
         }
     }
@@ -199,7 +197,6 @@ class Utilisateur
             $stmt->bindValue(':idU', $idU);
             return $stmt->execute();
         } catch (\PDOException $e) {
-            // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
             return false;
         }
     }

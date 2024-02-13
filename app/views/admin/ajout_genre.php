@@ -34,7 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <title>Ajout genre</title>
 </head>
 <body>
-    <a id="retour-accueil" href="/admin"><i style="margin: 0.4em" class="fas fa-arrow-circle-left"></i>Retour</a>
+    <div class="header">
+        <a id="retour-accueil" href="/admin"><i style="margin: 0.4em" class="fas fa-arrow-circle-left"></i>Retour</a>
+    </div>
     <div>
         <h1 class="titre-ajout-genre">Ajouter un genre</h1>
     </div>
