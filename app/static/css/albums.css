@@ -1,5 +1,6 @@
 body {
-    color: white;
+    color:white;
+    /* background-color: #121313; */
     background-color: hsl(0, 0%, 15%);
     display: flex;
     align-items: center;
@@ -7,20 +8,13 @@ body {
 }
 
 .btn-supprimer {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
+    background: none; border: none; padding: 0; cursor: pointer;
 }
-
 
 .btn-modifier {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    margin-right: 1.3em;
+    background: none; border: none; padding: 0; cursor: pointer; margin-right: 1.3em;
 }
+
 
 .container {
     display: flex;
@@ -33,10 +27,24 @@ body {
     border-radius: 1em;
 }
 
-#retour-accueil {
+.left-infos-album {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.infos-album {
+    margin-left: 1em;
+    max-width: 400px;
+}
+
+#retour-accueil{
     display: flex;
     align-items: center;
-    color: white;
+    color:white;
     text-decoration: none;
     font-size: 1.2em;
 }
@@ -45,61 +53,67 @@ body {
     margin: 1em;
 }
 
-.album, .ajout-album {
+.album, .ajout-album{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row;
+    /**max width is parent size */
     width: 100%;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     border-radius: 1em;
     background-color: #333;
+}
+
+.album{
     flex-wrap: wrap;
 }
-
-.genres-album{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-}
-
-.infos-album {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-} 
-
-.photo-album {
-    width: 200px;
-    height: 200px;
-    border-radius: 0.5em;
-}
-
 .ajout-album {
     justify-content: center;
     background-color: #F61353;
 }
 
-#ajout-album {
+.photo-album {
+    width: 200px;
+    height: 200px;
+    border-radius: 0.3em;
+    margin-left:1em;
+}
+
+#ajout-album{
     text-decoration: none;
     color: white;
     font-size: 1.5em;
     display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.5em; margin-bottom: 0.5em;
 }
 
 .titre-album {
     font-size: 1.5em;
-    margin-left: 1em;
 }
 
 .modifs {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between;  
 }
+
+
+a{
+    color: #F61353;
+}
+a:link {
+    text-decoration: none;
+  }
+  
+  a:visited {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  a:active {
+    text-decoration: underline;
+  }

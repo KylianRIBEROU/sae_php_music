@@ -15,14 +15,6 @@ body {
     background: none; border: none; padding: 0; cursor: pointer; margin-right: 1.3em;
 }
 
-.image-artiste {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-left: 1em;
-    margin-right: 1em;
-}
-
 .container {
     display: flex;
     flex-direction: row;
@@ -63,7 +55,6 @@ body {
 }
 
 
-
 .artiste, .ajout-artiste{
     display: flex;
     align-items: center;
@@ -88,6 +79,14 @@ body {
     font-size: 1.5em;
     display: block;
     margin-top: 0.5em; margin-bottom: 0.5em;
+}
+
+.image-artiste {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
 .titre-artiste {

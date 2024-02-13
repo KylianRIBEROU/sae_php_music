@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="container">
     <a id="retour-accueil" href="/admin"><i style="margin: 0.4em" class="fas fa-arrow-circle-left"></i>Retour</a>
     <h1>Les artistes</h1>
-    <div class="artistes"></div>
     <button class="ajout-artiste" onclick="window.location.href='/admin/ajout-artiste'" style="cursor: pointer;">
         <a id="ajout-artiste" href="#">Ajouter un artiste</a>
     </button>

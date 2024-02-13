@@ -66,6 +66,13 @@ body {
     line-height: 1.5; /* Correspond à 24px */
 }
 
+.left-infos-album {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
 .bouton {
     margin-left: 2em;
@@ -182,17 +189,11 @@ body {
 
 }
 
-.infos-album {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-} 
-
 .photo-album {
     width: 200px;
     height: 200px;
     border-radius: 0.5em;
+    margin:1em;
 }
 
 .ajout-album {
