@@ -1026,10 +1026,6 @@ video {
   border-bottom-width: 1px;
 }
 
-.border-b-\[2px\] {
-  border-bottom-width: 2px;
-}
-
 .border-solid {
   border-style: solid;
 }

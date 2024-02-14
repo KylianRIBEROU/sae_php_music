@@ -16,13 +16,13 @@ use models\Titre;
 <div id="modal" class="fixed top-0 bottom-0 right-0 left-0 bg-[rgba(0,0,0,0.5)] z-50 flex flex-col items-center animate-fade-in">
 	<div class="modal-underlay absolute -z-10 top-0 bottom-0 left-0 right-0" onclick="closeModal()"></div>
 	<div class="modal-content mt-[20vh] max-h-80 w-80 overflow-auto bg-gray-hover p-2 animate-zoom-in">
-        <!-- <header class="flex justify-end items-center">
-            <button class=" w-fit h-fit bg-none text-white text-4xl font-extrabold border-none cursor-pointer " onclick="closeModal()"><span aria-hidden="true">&times;</span></button>
-        </header> -->
         <ul>
         <?php 
             $titre = Titre::getTitreById($_GET['id']);
             $playlists = Playlist::getPlaylistsByIdU($_SESSION["id"] );
+            if (count($playlists) == 0){
+                echo '<h1 class="text-white text-center">Vous n\'avez pas de playlist</h1>';
+            }
             foreach ($playlists as $playlist) {
                 $titres = Titre::getTitresByPlaylistId($playlist->getIdP());
                 if (!in_array($titre, $titres)){ ?>

@@ -267,7 +267,7 @@ if (isset($_SESSION['search']) && !empty($_SESSION['search'])){
                     <?php echo $titres[$i]->getDuree(); ?>
                 </div>
                 <div class="justify-center items-center flex">
-                    <button class="text-gray-light text-lg hidden group-hover:block hover:text-white"><i class="fas fa-plus"></i></button>
+                    <button id="AddTitleToPlaylistButton" hx-get="/popup_playlist?id=<?php echo $titres[$i]->getIdT(); ?>" hx-target="#main" hx-swap="beforeend" class="text-gray-light text-lg hidden group-hover:block hover:text-white"><i class="fas fa-plus"></i></button>
                 </div>
             </li>
         <?php } ?>
