@@ -176,6 +176,7 @@ body {
     width: 100%;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
+    margin-bottom: 1em;
     border-radius: 1em;
     background-color: #333;
     flex-wrap: wrap;

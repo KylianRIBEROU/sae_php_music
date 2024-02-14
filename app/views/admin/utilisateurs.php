@@ -14,6 +14,15 @@ use models\Utilisateur;
 
 $utilisateurs = Utilisateur::getAllUtilisateurs();
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['supprimer_utilisateur'])) {
+        $utilisateur_id = $_POST['utilisateur_id'];
+        $utilisateur = Utilisateur::getUtilisateurById($utilisateur_id);
+        $utilisateur->delete();
+
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -47,8 +56,8 @@ $utilisateurs = Utilisateur::getAllUtilisateurs();
                     echo "<div class='actions-utilisateur'>";
                         echo "<form action='/admin/utilisateurs' method='post'>";
                             echo "<input type='hidden' name='utilisateur_id' value='" . $utilisateur->getIdU() . "'>";
-                            echo "<button type='submit' name='supprimer_utilisateur' class='supprimer-utilisateur'><i class='fas fa-trash-alt'></i></button>";
-                        echo "</form>";
+                            echo "<button class='btn-supprimer' type='submit' name='supprimer_utilisateur'><i style='margin: 4px; color: red; margin-right:2em;' class='fas fa-trash'></i></button>"; // Icône de poubelle
+                            echo "</form>";
                     echo "</div>";
                 echo "</div>";
             }
