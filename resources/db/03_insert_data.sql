@@ -13,11 +13,6 @@ INSERT INTO titre (labelT, anneeSortie, duree, url, idAlbum, idA) VALUES
 ('Senorita', 1998, '3:22', 'Superdrag - Senorita (128 kbps) (1).mp3', 1, 1),
 ('Whiteys Theme', 1998, '6:08', 'Superdrag - Whiteys Theme (64 kbps).mp3', 1, 1);
 
-
-
-
-Superdrag - Cuts & Scars (128 kbps).mp3
-
 INSERT INTO artiste (nomA) VALUES ('16 Horsepower');
 INSERT INTO album (titreAlbum, imageAlbum, anneeSortie, idA) VALUES ('Folklore', '220px-Folklore_hp.jpg', 2002, 2);
 INSERT INTO genre (nomG) VALUES ('Alternative country');
@@ -76,19 +71,11 @@ INSERT INTO detient (idAlbum, idG) VALUES (12, 10);
 
 
  
-
-
-
-
-
-
-
-
-INSERT INTO titre (idT, labelT, anneeSortie, duree, url, idAlbum, idA) 
-VALUES 
-    (1, 'Whitey''s Theme', 1998, '6:08', NULL ,1, 1),
-    (2, 'My Prayer', 1998, '2:29', NULL ,1, 1),
-    (3, 'Señorita', 1998, '3:22',NULL , 1, 1),
-    (4, 'H.H.T.', 1998, '4:08',NULL , 1, 1),
-    (5, 'Nothing Good is Real', 1998, '3:48', NULL ,1, 1),
-    (6, 'Cuts and Scars', 1998, '2:10',NULL , 1, 1);
+-- INSERT INTO titre (idT, labelT, anneeSortie, duree, url, idAlbum, idA) 
+-- VALUES 
+--     (1, 'Whitey''s Theme', 1998, '6:08', NULL ,1, 1),
+--     (2, 'My Prayer', 1998, '2:29', NULL ,1, 1),
+--     (3, 'Señorita', 1998, '3:22',NULL , 1, 1),
+--     (4, 'H.H.T.', 1998, '4:08',NULL , 1, 1),
+--     (5, 'Nothing Good is Real', 1998, '3:48', NULL ,1, 1),
+--     (6, 'Cuts and Scars', 1998, '2:10',NULL , 1, 1);
