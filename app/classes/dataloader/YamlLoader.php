@@ -47,10 +47,8 @@ class YamlLoader // implements LoaderInterface
                     }
                     $album = new Album(0, "", "", 0, 0);
                     $artiste = Artiste::getArtisteByNom($value);
-                    if ($artiste) {
-                        $artist_id = $artiste->getIdA();
-                    } else {
-                        $artiste = new Artiste(0, $value);
+                    if (!$artiste) {
+                        $artiste = new Artiste(0, $value, "");
                         $artiste->create();
                         $artiste = Artiste::getArtisteByNom($value);
                         if (!$artiste) {
