@@ -28,7 +28,7 @@ $titres = favTitre::GetFavTitresByIdU($_SESSION["id"]);
 
 
 <ul>
-<li class=" text-white grid grid-cols-[48px_1fr_48px_48px_48px] gap-3 h-10">
+<li class=" text-white grid grid-cols-[48px_1fr_48px_48px_48px] gap-3 h-10 border-b-[1px] border-gray border-solid">
     <div class="flex justify-center items-center">#</div>
     <div class="flex items-center">Titre</div>
     <div></div>
@@ -63,7 +63,7 @@ $titres = favTitre::GetFavTitresByIdU($_SESSION["id"]);
             <?php echo $titre->getDuree(); ?>
         </div>
         <div class="justify-center items-center flex">
-            <button class="text-white text-lg hidden group-hover:block"><i class="fas fa-ellipsis-h"></i></button>
+            <button id="AddTitleToPlaylistButton" hx-get="/popup_playlist?id=<?php echo $titres[$i]->getIdT(); ?>" hx-target="#main" hx-swap="beforeend" class="text-gray-light text-lg hidden group-hover:block hover:text-white"><i class="fas fa-plus"></i></button>
         </div>
     </li>
 <?php } ?>

@@ -167,7 +167,7 @@ class Playlist {
      * @param int $idT
      * @return bool
      */
-    public function addTitreToPlaylist(int $idP, int $idT): bool {
+    public static function addTitreToPlaylist(int $idP, int $idT): bool {
         return (new Appartient($idP, $idT))->create();
     }
 
@@ -176,7 +176,7 @@ class Playlist {
      * @param int $idT
      * @return bool
      */
-    public function removeTitreFromPlaylist(int $idP, int $idT): bool {
+    public static function removeTitreFromPlaylist(int $idP, int $idT): bool {
         return (new Appartient($idP, $idT))->delete();
     }
 

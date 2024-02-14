@@ -9,6 +9,7 @@ use models\favAlbum;
 use models\favTitre;
 use pdoFactory\PDOFactory;
 use models\Playlist;
+use models\Titre;
 
 $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
 
@@ -125,6 +126,9 @@ switch (parse_url($route)['path']){
    case '/titrefav':
       require __DIR__ . $viewDir . 'titresfav.php';
       break;
+   case '/popup_playlist':
+      require __DIR__ . $viewDir . 'popup_playlist.php';
+      break;
    case '/favalbum':
       if (isset($_SESSION["id"]) && isset($_GET['id'])){
          $fav = favAlbum::getFavAlbum($_SESSION["id"], $_GET['id']);
@@ -146,7 +150,7 @@ switch (parse_url($route)['path']){
          if ($fav != null){
             $fav = new favTitre($_SESSION["id"], $_GET['id']);
             $fav->delete();
-            echo '<button hx-get="/favtitre?id='. intval($_GET['id']) . '" hx-swap="outerHTML" class="text-white text-xl hidden group-hover:block"><i class="far fa-heart"></i></button>';
+            echo '<button hx-get="/favtitre?id='. intval($_GET['id']) . '" hx-swap="outerHTML" class="text-gray-light text-xl hidden group-hover:block hover:text-white"><i class="far fa-heart"></i></button>';
          }
          else {
             $fav = new favTitre($_SESSION["id"], $_GET['id']); 
@@ -180,6 +184,28 @@ switch (parse_url($route)['path']){
          if ($playlist != null){
             $playlist->setNomP($_GET['name']);
             $playlist->update();
+         }
+      };
+      header('HX-Trigger: refreshnav');
+      require __DIR__ . $viewDir . 'playlists.php';
+      break;
+   case '/addtoplaylist':
+      if (isset($_SESSION["id"]) && isset($_GET['id']) && isset($_GET['idT'])){
+         $playlist = Playlist::getPlaylistById($_GET['id']);
+         $titre = Titre::getTitreById($_GET['idT']);
+         if ($playlist != null && $titre != null){
+            Playlist::addTitreToPlaylist($playlist->getIdP(), $titre->getIdT());
+         }
+      };
+      header('HX-Trigger: refreshnav');
+      require __DIR__ . $viewDir . 'playlists.php';
+      break;
+   case '/removefromplaylist':
+      if (isset($_SESSION["id"]) && isset($_GET['id']) && isset($_GET['idT'])){
+         $playlist = Playlist::getPlaylistById($_GET['id']);
+         $titre = Titre::getTitreById($_GET['idT']);
+         if ($playlist != null && $titre != null){
+            Playlist::removeTitreFromPlaylist($playlist->getIdP(), $titre->getIdT());
          }
       };
       header('HX-Trigger: refreshnav');
