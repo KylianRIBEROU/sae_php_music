@@ -20,18 +20,21 @@ use models\Titre;
         <?php 
             $titre = Titre::getTitreById($_GET['id']);
             $playlists = Playlist::getPlaylistsByIdU($_SESSION["id"] );
-            if (count($playlists) == 0){
-                echo '<h1 class="text-white text-center">Vous n\'avez pas de playlist</h1>';
-            }
+            $c = 0;
+
             foreach ($playlists as $playlist) {
                 $titres = Titre::getTitresByPlaylistId($playlist->getIdP());
-                if (!in_array($titre, $titres)){ ?>
+                if (!in_array($titre, $titres)){ $c++;?>
+                    
                     <li hx-get="/addtoplaylist?id=<?php echo $playlist->getIdP(); ?>&idT=<?php echo $_GET['id']; ?>" hx-target="#main" class="flex h-16 p-2 items-center cursor-pointer rounded-md  hover:bg-gray-dark-hover">
                         <img class="rounded-md h-full" src="https://api.dicebear.com/7.x/initials/svg?seed=<?php echo $playlist->getNomP(); ?>" alt="Image de la playlist">
                         <h3 class="text-white text-base ml-2"><?php echo $playlist->getNomP(); ?></h3>
                     </li>
                 <?php   
                 }
+            }
+            if ($c == 0){
+                echo '<li class="text-white text-center">Aucune playlist disponible</li>';
             }
             ?>
         </ul>

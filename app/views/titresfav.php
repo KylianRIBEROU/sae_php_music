@@ -41,7 +41,7 @@ $titres = favTitre::GetFavTitresByIdU($_SESSION["id"]);
     <li class="text-white grid grid-cols-[48px_1fr_48px_48px_48px] gap-3 h-16 rounded-md hover:bg-gray-dark-hover group">
         <div class="flex justify-center items-center">
             <div class="group-hover:hidden"><?php echo $i+1; ?></div>
-            <div class="text-white text-xs hidden group-hover:block"><i class="fas fa-play"></i></div>
+            <button class="text-gray-light text-xs hidden group-hover:block hover:text-white"><i class="fas fa-play"></i></button>
         </div>
         <div class="flex items-center">
             <?php echo $titre->getLabelT(); ?>
