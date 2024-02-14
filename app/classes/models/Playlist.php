@@ -106,8 +106,10 @@ class Playlist {
      * @param string $nomP
      * @return int
      */
-    public function create(int $idU, string $nomP): int {
+    public function create(): int {
         $db = PDOFactory::getInstancePDOFactory()->get_PDO();
+        $idU = $this->idU;
+        $nomP = $this->nomP;
         $sql = "INSERT INTO playlist (nomP, idU) VALUES (:nomP, :idU)";
         $stmt = $db->prepare($sql);
         $stmt->bindValue(":nomP", $nomP);
@@ -121,7 +123,9 @@ class Playlist {
      * @param string $nomP
      * @return void
      */
-    public function update(int $idP, string $nomP): void {
+    public function update(): void {
+        $idP = $this->idP;
+        $nomP = $this->nomP;
         $sql = "UPDATE playlist SET nomP = :nomP WHERE idP = :idP";
         $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->prepare($sql);
         $stmt->bindValue(":nomP", $nomP);
@@ -163,7 +167,7 @@ class Playlist {
      * @param int $idT
      * @return bool
      */
-    public function addTitreToPlaylist(int $idP, int $idT): bool {
+    public static function addTitreToPlaylist(int $idP, int $idT): bool {
         return (new Appartient($idP, $idT))->create();
     }
 
@@ -172,7 +176,7 @@ class Playlist {
      * @param int $idT
      * @return bool
      */
-    public function removeTitreFromPlaylist(int $idP, int $idT): bool {
+    public static function removeTitreFromPlaylist(int $idP, int $idT): bool {
         return (new Appartient($idP, $idT))->delete();
     }
 
