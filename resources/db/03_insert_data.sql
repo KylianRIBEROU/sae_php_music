@@ -5,6 +5,19 @@ INSERT INTO genre (nomG) VALUES ('Punk');
 INSERT INTO detient (idAlbum, idG) VALUES (1, 1);
 INSERT INTO detient (idAlbum, idG) VALUES (1, 2);
 
+INSERT INTO titre (labelT, anneeSortie, duree, url, idAlbum, idA) VALUES
+('Cuts & Scars', 1998, '2:10', 'Superdrag - Cuts & Scars (128 kbps).mp3', 1, 1),
+('H.H.T.', 1998, '4:08', 'Superdrag - H.H.T. (128 kbps) (1).mp3', 1, 1),
+('My Prayer', 1998, '2:29', 'Superdrag - My Prayer (128 kbps).mp3', 1, 1),
+('Nothing Good Is Real', 1998, '3:49', 'Superdrag - Nothing Good Is Real (128 kbps).mp3', 1, 1),
+('Senorita', 1998, '3:22', 'Superdrag - Senorita (128 kbps) (1).mp3', 1, 1),
+('Whiteys Theme', 1998, '6:08', 'Superdrag - Whiteys Theme (64 kbps).mp3', 1, 1);
+
+
+
+
+Superdrag - Cuts & Scars (128 kbps).mp3
+
 INSERT INTO artiste (nomA) VALUES ('16 Horsepower');
 INSERT INTO album (titreAlbum, imageAlbum, anneeSortie, idA) VALUES ('Folklore', '220px-Folklore_hp.jpg', 2002, 2);
 INSERT INTO genre (nomG) VALUES ('Alternative country');

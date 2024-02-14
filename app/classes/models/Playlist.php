@@ -102,6 +102,20 @@ class Playlist {
     }
 
     /**
+     * Get toutes les playlist contenant le titre passé en paramètres
+     * @param int $idT
+     * @return array
+     */
+    public static function getPlaylistsByIdT(int $idT): array{
+        $playlists = [];
+        $appartenances = Appartient::getAppartientsByIdT($idT);
+        foreach ($appartenances as $appartient){
+            array_push($playlists, self::getPlaylistById($appartient->getIdP()));
+        }
+        return $playlists;
+    }
+
+    /**
      * @param int $idU
      * @param string $nomP
      * @return int

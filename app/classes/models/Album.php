@@ -29,7 +29,7 @@ class Album {
         $this->idAlbum = $idAlbum;
         $this->titreAlbum = $titreAlbum;
         if ( $imageAlbum === null || $imageAlbum === "") {
-            $this->imageAlbum = "default.jpg";
+            $this->imageAlbum = "default.png";
         } else {
             $this->imageAlbum = $imageAlbum;
         }
@@ -282,6 +282,13 @@ class Album {
         $albums = self::getAlbumsByIdA($idA);
         foreach ($albums as $album) {
             Album::deleteById($album->getIdAlbum());
+        }
+    }
+
+    public function removeAllGenres(): void {
+        $detients = Detient::getDetientByIdAlbum($this->getIdAlbum());
+        foreach ($detients as $detient) {
+            $detient->delete();
         }
     }
 }

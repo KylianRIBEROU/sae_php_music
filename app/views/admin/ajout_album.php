@@ -1,5 +1,14 @@
 <?php
 
+if (!isset ($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
+    header('Location: /login');
+    exit;
+}
+if (!isset ($_SESSION['isadmin']) || !$_SESSION['isadmin']) {
+    header('Location: /');
+    exit;
+}
+
 use models\Artiste;
 use models\Album;
 use models\Genre;
@@ -8,8 +17,6 @@ $artiste_empty_erreur = "";
 $genre_already_exists_erreur = "Un genre existe déjà avec ce nom !";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-
-    var_dump($_POST);
 
     if (isset($_POST['ajout_album'])){
 
@@ -31,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $dossier_images = __DIR__. "/../../static/img/";
 
     if ($_FILES["image-album"]["error"] > 0 || $_FILES["image-album"]["name"] == "") {
-        $image = "default.jpg";
+        $image = "default.png";
         }
     else {
     $chemin_image = $dossier_images . basename($_FILES["image-album"]["name"]);
@@ -39,9 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         try {
             move_uploaded_file($_FILES["image-album"]["tmp_name"], $chemin_image);
         } catch (Exception $e) {
-            echo "Erreur lors de l'upload de l'image";
-            $image = "default.jpg";
-            var_dump($e->getMessage());
+            $image = "default.png";
         }
     }  
 
@@ -53,26 +58,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $album = Album::getAlbumByTitreAlbum($nom_album);
 
     foreach ($_POST['genres'] as $genre) {
-        if ($genre != "" && !Genre::existsByNomG($genre)){
-            $new_genre = new Genre(0, $genre);
-            $new_genre->create();
-
-            // marche pas psk idAlbum = 0, et idGenre aussi !!
-            // sauf si on change le modèle, il faut  une Clef fonctionnelle
-            // de chaque coté
+        if ($genre != ""){
+            if (!Genre::existsByNomG($genre)) {
+                $new_genre = new Genre(0, $genre);
+                $new_genre->create();
+            }
             $genre = Genre::getGenreByNom($genre);
             $album->addGenre($genre);
         }
     }    
-    
-    // rediriger vers l'accueil du panel admin 
-    // header('Location: /admin');
-    // exit();
-    }
-}
 
-elseif (isset($_POST['valider_nouveau_genre'])){
-   
+    // rediriger vers l'accueil du panel admin 
+    // go to previous page
+    header('Location: /admin');
+    exit();
+    }
 }
 }
 ?>
@@ -98,6 +98,7 @@ elseif (isset($_POST['valider_nouveau_genre'])){
         <div class="left-container">
             <label for="labelAlbum">Nom de l'album</label>
             <input class="input-album" type="text" name="labelAlbum" id="labelAlbum" required>
+            <p class="erreur-album"><?php echo $artiste_empty_erreur; ?></p>
 
 
             <label for="anneeSortie">Année de sortie</label>

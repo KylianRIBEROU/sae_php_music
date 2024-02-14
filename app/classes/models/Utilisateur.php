@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace models;
 use pdoFactory\PDOFactory;
-use models\favTitre;
+use models\Album;
 use models\favAlbum;
+use models\favTitre;
 
 class Utilisateur
 {
@@ -122,6 +123,35 @@ class Utilisateur
             return null;
         }
     }
+
+    /**
+     * get tous les utilisateurs
+     * @return array
+     */
+    public static function getAllUtilisateurs(): array
+    {
+        $query = 'SELECT * FROM utilisateur';
+        $utilisateurs = [];
+
+        try {
+            $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->query($query);
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+            foreach ($result as $row) {
+                array_push($utilisateurs, new Utilisateur(
+                    (int)$row['idU'],
+                    $row['nomU'],
+                    $row['motdepasse'],
+                    (bool)$row['admin']
+                ));
+            }
+
+            return $utilisateurs;
+        } catch (\PDOException $e) {
+            return [];
+        }
+    }
+
     /**
      * Récupère un utilisateur par nom depuis la base de données.
      *
@@ -150,7 +180,6 @@ class Utilisateur
 
             return null;
         } catch (\PDOException $e) {
-            // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
             return null;
         }
     }
@@ -174,7 +203,6 @@ class Utilisateur
             $stmt->bindValue(':admin', $this->getAdmin(), \PDO::PARAM_BOOL);
             return $stmt->execute();
         } catch (\PDOException $e) {
-            // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
             return false;
         }
     }
@@ -199,7 +227,6 @@ class Utilisateur
             $stmt->bindValue(':idU', $idU);
             return $stmt->execute();
         } catch (\PDOException $e) {
-            // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
             return false;
         }
     }
@@ -252,6 +279,18 @@ class Utilisateur
             // Gérer l'exception (par exemple, journaliser l'erreur ou lancer une exception personnalisée)
             return false;
         }
+    }
+
+    /**
+     * Obtenir tous les albums favoris d'un utilisateur
+     */
+    public static function getAllAlbumsFavoris(int $idU):array{
+        $favAlbums = favAlbum::getFavAlbumsByIdU($idU);
+        $albums = [];
+        foreach ($favAlbums as $favAlbum){
+            array_push($albums, Album::getAlbumById($favAlbum->getIdAlbum()));
+        }
+        return $albums;
     }
     
 }

@@ -187,7 +187,6 @@ class Genre {
         $req->execute();
         return true;
     }
-
     public static function deleteById(int $idG): bool {
         Detient::deleteDetientByIdG($idG);
 
@@ -206,6 +205,7 @@ class Genre {
         $req->execute();
         return true;
     }
+
 
     public static function deleteAll(): bool {
         Detient::deleteAll();
