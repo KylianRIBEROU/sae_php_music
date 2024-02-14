@@ -1,8 +1,25 @@
 <?php
+
+$artiste_exists_erreur = "";
+
+if (!isset ($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
+    header('Location: /login');
+    exit;
+}
+if (!isset ($_SESSION['isadmin']) || !$_SESSION['isadmin']) {
+    header('Location: /');
+    exit;
+}
+
 use models\Album;
 use models\Artiste;
 use models\Titre;
 use models\Genre;
+
+if (isset($_GET['id'])){
+    $id = $_GET['id'];
+    $artiste = Artiste::getArtisteById($id);
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -21,6 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image_artiste = $_FILES['imageArtiste']['name'];
 
         $dossier_images = __DIR__ . "/../../static/img/";
+
+
 
         if ($_FILES['imageArtiste']['error'] > 0 || $image_artiste == "") {
             $image_artiste = $artiste->getImageA();
@@ -90,6 +109,7 @@ else {
         </div>
         <div class="infos">
             <input class="input-nom-artiste" type="text" name="nomArtiste" id="nomArtiste" value="<?php echo $artiste->getNomA(); ?>" required>
+            <p class="error-message"><?php echo $artiste_exists_erreur ?></p>
             <p>Genres : 
             <?php
                 $cpt = count($genres);

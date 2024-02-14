@@ -1,4 +1,14 @@
 <?php 
+
+if (!isset ($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
+    header('Location: /login');
+    exit;
+}
+if (!isset ($_SESSION['isadmin']) || !$_SESSION['isadmin']) {
+    header('Location: /');
+    exit;
+}
+
 use models\Genre;
 $genre_exists_erreur = "";
 

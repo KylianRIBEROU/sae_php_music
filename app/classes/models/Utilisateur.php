@@ -122,6 +122,35 @@ class Utilisateur
             return null;
         }
     }
+
+    /**
+     * get tous les utilisateurs
+     * @return array
+     */
+    public static function getAllUtilisateurs(): array
+    {
+        $query = 'SELECT * FROM utilisateur';
+        $utilisateurs = [];
+
+        try {
+            $stmt = PDOFactory::getInstancePDOFactory()->get_PDO()->query($query);
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+            foreach ($result as $row) {
+                array_push($utilisateurs, new Utilisateur(
+                    (int)$row['idU'],
+                    $row['nomU'],
+                    $row['motdepasse'],
+                    (bool)$row['admin']
+                ));
+            }
+
+            return $utilisateurs;
+        } catch (\PDOException $e) {
+            return [];
+        }
+    }
+
     /**
      * Récupère un utilisateur par nom depuis la base de données.
      *

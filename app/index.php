@@ -72,6 +72,10 @@ register_shutdown_function(function () {
       http_response_code(200);
       require __DIR__ . $adminDir . 'albums.php';
    }
+   elseif ($route == '/admin/utilisateurs'){
+      http_response_code(200);
+      require __DIR__ . $adminDir . 'utilisateurs.php'; // IL FAUDRA FACTORISER TOUT CA
+   }
    elseif ($route == '/admin/artistes'){
       http_response_code(200);
       require __DIR__ . $adminDir . 'artistes.php'; // IL FAUDRA FACTORISER TOUT CA

@@ -1,4 +1,15 @@
 <?php 
+
+if (!isset ($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
+    header('Location: /login');
+    exit;
+}
+if (!isset ($_SESSION['isadmin']) || !$_SESSION['isadmin']) {
+    header('Location: /');
+    exit;
+}
+
+
 use models\Album;
 use models\Artiste;
 use models\Titre;
