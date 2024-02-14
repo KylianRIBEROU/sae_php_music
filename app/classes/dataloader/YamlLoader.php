@@ -65,7 +65,7 @@ class YamlLoader // implements LoaderInterface
                     $album->setTitreAlbum($value);
                     break;
                 case 'img':
-                    $album->setImageAlbum($value);
+                    $album->setImageAlbum(str_replace("%","%25",$value));
                     break;
                 case 'releaseYear':
                     $album->setAnneeSortie((int) $value);
