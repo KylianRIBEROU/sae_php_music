@@ -220,14 +220,21 @@ class Album {
      * créer un album
      */
     public function create(): void {
-        $sql = "INSERT INTO album (titreAlbum, imageAlbum, anneeSortie, idA) VALUES (:titreAlbum, :imageAlbum, :anneeSortie, :idA)";
         $db = PDOFactory::getInstancePDOFactory()->get_PDO();
-        $stmt = $db->prepare($sql);        
+        if ($this->getIdAlbum() != 0){
+            $sql = "INSERT INTO album (idAlbum, titreAlbum, imageAlbum, anneeSortie, idA) VALUES (:idAlbum, :titreAlbum, :imageAlbum, :anneeSortie, :idA)";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(":idAlbum", $this->getIdAlbum());
+        }
+        else {
+            $sql = "INSERT INTO album (titreAlbum, imageAlbum, anneeSortie, idA) VALUES (:titreAlbum, :imageAlbum, :anneeSortie, :idA)";
+            $stmt = $db->prepare($sql);
+        }
         $stmt->bindValue(":titreAlbum", $this->getTitreAlbum());
         $stmt->bindValue(":imageAlbum", $this->getImageAlbum());
         $stmt->bindValue(":anneeSortie", $this->getAnneeSortie());
         $stmt->bindValue(":idA", $this->getIdA());
-        $stmt->execute();
+        echo $stmt->execute();
     }
 
     /**

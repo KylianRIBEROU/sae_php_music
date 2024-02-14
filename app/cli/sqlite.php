@@ -38,18 +38,27 @@ switch ($action){
         echo '→ Suppression base de données "' . SQLITE_DB . '"' . PHP_EOL;
         unlink(SQLITE_DB);
         break;
-
     case 'import-yml':
         $file = $args[0];
         echo '→ Importation du fichier "' . $file . '"' . PHP_EOL;
         try {
             $albums = YamlLoader::load($file);
+            echo '→ ' . count($albums) . ' albums importés' . PHP_EOL;
+            foreach ($albums as $album) {
+                try {
+                    $album->create();
+                }
+                catch (Exception $e) {
+                    if (str_contains($e->getMessage(), 'UNIQUE constraint failed')) {
+                        echo '→ Album déjà existant'. PHP_EOL;
+                    }
+                    else {
+                        echo '→ ' . $e->getMessage() . PHP_EOL;
+                    }
+                }
+            }
         } catch (Exception $e) {
             echo '→ ' . $e->getMessage() . PHP_EOL;
-        }
-        echo '→ ' . count($albums) . ' albums importés' . PHP_EOL;
-        foreach ($albums as $album) {
-            $album->create();
         }
         break;
     default:
