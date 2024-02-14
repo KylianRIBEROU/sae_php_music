@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['deleteaccount'])) {
         $user = Utilisateur::getUtilisateurById($_SESSION['id']);
         $user->delete();
-        header('Location: /logout');
+        header('HX-Redirect: /logout');
         exit;
     }
 
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="text-gray-light">Mettez à jour votre mot de passe associé à votre compte.</p>
     </div>
     <div>
-        <form method="post">
+        <form hx-post="/profil" hx-target="#main">
             <div class="flex flex-col gap-3">
                 <label class="text-white" for="currentpassword">Mot de passe actuel</label>
                 <input class="  bg-gray block w-full rounded-md border-0 px-3 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-light placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-purple sm:text-sm sm:leading-6 focus:outline-none" type="password" name="currentpassword" required>
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="text-gray-light">Permet de supprimer définitivement votre compte utilisateur, effaçant toutes les données associées. Veuillez procéder avec prudence car cette action est irréversible.</p>
     </div>
     <div>
-        <form method = "post">
+        <form hx-post="/profil" hx-target="#main">
             <button class="flex w-60 justify-center rounded-md bg-purple px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple" type="submit" name="deleteaccount">Supprimer mon compte</button>
         </form>
     </div>

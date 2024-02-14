@@ -6,7 +6,10 @@ Autoloader::register();
 
 use models\Utilisateur;
 use models\favAlbum;
+use models\favTitre;
 use pdoFactory\PDOFactory;
+use models\Playlist;
+use models\Titre;
 
 $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
 
@@ -120,6 +123,12 @@ switch (parse_url($route)['path']){
    case '/profil':
       require __DIR__ . $viewDir . 'profil.php';
       break;
+   case '/titrefav':
+      require __DIR__ . $viewDir . 'titresfav.php';
+      break;
+   case '/popup_playlist':
+      require __DIR__ . $viewDir . 'popup_playlist.php';
+      break;
    case '/favalbum':
       if (isset($_SESSION["id"]) && isset($_GET['id'])){
          $fav = favAlbum::getFavAlbum($_SESSION["id"], $_GET['id']);
@@ -134,6 +143,73 @@ switch (parse_url($route)['path']){
       };
       header('HX-Trigger: refreshnav');
       require __DIR__ . $viewDir . 'albums.php';
+      break;
+   case '/favtitre':
+      if (isset($_SESSION["id"]) && isset($_GET['id'])){
+         $fav = favTitre::getFavTitre($_SESSION["id"], $_GET['id']);
+         if ($fav != null){
+            $fav = new favTitre($_SESSION["id"], $_GET['id']);
+            $fav->delete();
+            echo '<button hx-get="/favtitre?id='. intval($_GET['id']) . '" hx-swap="outerHTML" class="text-gray-light text-xl hidden group-hover:block hover:text-white"><i class="far fa-heart"></i></button>';
+         }
+         else {
+            $fav = new favTitre($_SESSION["id"], $_GET['id']); 
+            $fav->create();
+            echo '<button hx-get="/favtitre?id='. intval($_GET['id']) . '" hx-swap="outerHTML" class="text-purple text-xl"><i class="fas fa-heart"></i></button>';
+         };
+      };
+      break;
+   case '/createplaylist':
+      if (isset($_SESSION["id"])){
+         $playlist = new Playlist(0,'Nouvelle playlist',$_SESSION["id"]);
+         $idP = $playlist->create();
+         $_GET['id'] = $idP; // warning: this is a hack
+      };
+      header('HX-Trigger: refreshnav');
+      require __DIR__ . $viewDir . 'playlists.php';
+      break;
+   case '/deleteplaylist':
+      if (isset($_SESSION["id"]) && isset($_GET['id'])){
+         $playlist = Playlist::getPlaylistById($_GET['id']);
+         if ($playlist != null){
+            $playlist->delete();
+         }
+      };
+      header('HX-Trigger: refreshnav');
+      require __DIR__ . $viewDir . 'main.php';
+      break;
+   case '/editplaylist':
+      if (isset($_SESSION["id"]) && isset($_GET['id']) && isset($_GET['name'])){
+         $playlist = Playlist::getPlaylistById($_GET['id']);
+         if ($playlist != null){
+            $playlist->setNomP($_GET['name']);
+            $playlist->update();
+         }
+      };
+      header('HX-Trigger: refreshnav');
+      require __DIR__ . $viewDir . 'playlists.php';
+      break;
+   case '/addtoplaylist':
+      if (isset($_SESSION["id"]) && isset($_GET['id']) && isset($_GET['idT'])){
+         $playlist = Playlist::getPlaylistById($_GET['id']);
+         $titre = Titre::getTitreById($_GET['idT']);
+         if ($playlist != null && $titre != null){
+            Playlist::addTitreToPlaylist($playlist->getIdP(), $titre->getIdT());
+         }
+      };
+      header('HX-Trigger: refreshnav');
+      require __DIR__ . $viewDir . 'playlists.php';
+      break;
+   case '/removefromplaylist':
+      if (isset($_SESSION["id"]) && isset($_GET['id']) && isset($_GET['idT'])){
+         $playlist = Playlist::getPlaylistById($_GET['id']);
+         $titre = Titre::getTitreById($_GET['idT']);
+         if ($playlist != null && $titre != null){
+            Playlist::removeTitreFromPlaylist($playlist->getIdP(), $titre->getIdT());
+         }
+      };
+      header('HX-Trigger: refreshnav');
+      require __DIR__ . $viewDir . 'playlists.php';
       break;
    default:
       require __DIR__ . $viewDir . '404.php';

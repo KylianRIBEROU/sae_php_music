@@ -55,13 +55,16 @@ class favTitre {
         $this->idT = $idT;
     }
 
-    public static function GetFavTitre(int $idU, int $idT): favTitre{
+    public static function GetFavTitre(int $idU, int $idT): ?favTitre{
         $db = PDOFactory::getInstancePDOFactory()->get_PDO();
         $req = $db->prepare("SELECT * FROM favTitre WHERE idU = :idU AND idT = :idT");
         $req->bindParam(":idU", $idU);
         $req->bindParam(":idT", $idT);
         $req->execute();
         $favTitre = $req->fetch();
+        if (!$favTitre) {
+            return null; // Return null if no results found
+        }
         $favTitre = new favTitre($favTitre['idU'], $favTitre['idT']);
         return $favTitre;
     }

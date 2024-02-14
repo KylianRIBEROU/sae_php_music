@@ -70,26 +70,26 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
             loadTrack(track_index);
             seekToTime(parseInt(data['seek_slider']));
         }
-        else {
-            console.error('No track list found');
-            console.log("Creating default track list");
-            track_list = [
-                {
-                name: "Spectre",
-                artist: "Alan Walker",
-                image: "../static/img/ncs.jpg",
-                path: "../static/sound/Alan Walker - Spectre [COPYRIGHTED NCS Release].mp3"
-                },
-                {
-                    name: "Faded",
-                    artist: "Alan Walker",
-                    image: "../static/img/ncs.jpg",
-                    path: "../static/sound/Alan Walker - Fade [COPYRIGHTED NCS Release].mp3"
-                },
-            ];
-            track_index = 0;
-            loadTrack(track_index);
-        }
+        // else {
+        //     console.error('No track list found');
+        //     console.log("Creating default track list");
+        //     track_list = [
+        //         {
+        //         name: "Spectre",
+        //         artist: "Alan Walker",
+        //         image: "../static/img/ncs.jpg",
+        //         path: "../static/sound/Alan Walker - Spectre [COPYRIGHTED NCS Release].mp3"
+        //         },
+        //         {
+        //             name: "Faded",
+        //             artist: "Alan Walker",
+        //             image: "../static/img/ncs.jpg",
+        //             path: "../static/sound/Alan Walker - Fade [COPYRIGHTED NCS Release].mp3"
+        //         },
+        //     ];
+        //     track_index = 0;
+        //     loadTrack(track_index);
+        // }
     })
     .catch(error => {
         console.error('Error:', error);

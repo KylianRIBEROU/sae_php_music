@@ -2,6 +2,7 @@
 use models\Album;
 use models\Artiste;
 use models\Titre;
+use models\favTitre;
 
 if (isset($_GET['id'] )){
     $id = $_GET['id'];
@@ -53,19 +54,29 @@ else{
     <li class="text-white grid grid-cols-[48px_1fr_48px_48px_48px] gap-3 h-16 rounded-md hover:bg-gray-dark-hover group">
         <div class="flex justify-center items-center">
             <div class="group-hover:hidden"><?php echo $i+1; ?></div>
-            <div class="text-white text-xs hidden group-hover:block"><i class="fas fa-play"></i></div>
+            <button class="text-gray-light text-xs hidden group-hover:block hover:text-white"><i class="fas fa-play"></i></button>
         </div>
         <div class="flex items-center">
             <?php echo $titres[$i]->getLabelT(); ?>
         </div>
         <div class="justify-center items-center flex">
-            <button class="text-white text-xl hidden group-hover:block"><i class="far fa-heart"></i></button>
+            <?php 
+                $favTitre = favTitre::getFavTitre($_SESSION["id"], $titres[$i]->getIdT());
+                if ($favTitre == null){ ?>
+                    <button hx-get="/favtitre?id=<?php echo $titres[$i]->getIdT(); ?>" hx-swap="outerHTML" class="text-gray-light text-xl hidden group-hover:block hover:text-white"><i class="far fa-heart"></i></button>
+                <?php 
+                }
+                else{ ?>
+                    <button hx-get="/favtitre?id=<?php echo $titres[$i]->getIdT(); ?>" hx-swap="outerHTML" class="text-purple text-xl"><i class="fas fa-heart"></i></button>
+                <?php 
+                }
+            ?>
         </div>
         <div class="flex justify-center items-center">
             <?php echo $titres[$i]->getDuree(); ?>
         </div>
         <div class="justify-center items-center flex">
-            <button class="text-white text-lg hidden group-hover:block"><i class="fas fa-ellipsis-h"></i></button>
+            <button class="text-gray-light text-lg hidden group-hover:block hover:text-white"><i class="fas fa-plus"></i></button>
         </div>
     </li>
 <?php } ?>
