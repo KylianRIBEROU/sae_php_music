@@ -234,7 +234,7 @@ class Album {
         $stmt->bindValue(":imageAlbum", $this->getImageAlbum());
         $stmt->bindValue(":anneeSortie", $this->getAnneeSortie());
         $stmt->bindValue(":idA", $this->getIdA());
-        $stmt->execute();
+        echo $stmt->execute();
     }
 
     /**
