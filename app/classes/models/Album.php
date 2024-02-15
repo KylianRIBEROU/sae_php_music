@@ -94,7 +94,7 @@ class Album {
      * @param string $imageAlbum
      * @return void
      */
-    public function setImageAlbum(string $imageAlbum): void {
+    public function setImageAlbum(string|null $imageAlbum): void {
         $this->imageAlbum = $imageAlbum;
     }
 
