@@ -18,9 +18,19 @@ Voir sujet de la SAE pour plus de détails.
 
 Un fichier SQLite `app.db` étant déjà présent avec des données pour le projet, il n'est pas obligatoire d'utiliser les commandes suivantes.
 
-Cependant, si vous souhaiteriez partir d'une base de données vide pour charger vos propres données, voici comment initialiser la base de données.
+Cependant, si vous souhaiteriez partir d'une base de données vide pour charger vos propres données ( ou que le fichier app.db serait manquant ), voici comment initialiser la base de données.
 
 Se rendre dans le dossier `app`.
+
+Pour créer la base de données : 
+```bash
+php cli/sqlite.php create-database
+```
+
+Pour supprimer la base de données :
+```bash
+php cli/sqlite.php delete-database
+```
 
 Pour créer les tables : 
 ```bash
