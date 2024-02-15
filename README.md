@@ -64,8 +64,7 @@ Un provider pour charger le fichier YAML est à disposition, qui permettra au be
 ## Documentations
 
 Diagramme de classes du modèle. Pas de relations directes entre les classes car la majorité des méthodes sont statiques.
-
-
+Schéma trop volumineux pour être placé içi. Les diagrammes sont dans le dossier `diagrams/classes`.
 
 diagramme d'activité et de séquence .....
 TODO

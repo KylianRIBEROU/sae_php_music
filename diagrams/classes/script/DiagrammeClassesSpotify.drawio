@@ -1,27 +1,27 @@
-<mxfile host="app.diagrams.net" modified="2024-02-03T14:53:53.740Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 OPR/106.0.0.0" etag="b1870kdOVfbynucnh32V" version="22.1.21" type="device">
+<mxfile host="app.diagrams.net" modified="2024-02-15T02:32:07.134Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 OPR/106.0.0.0" etag="cshJdoGPhYvvvz7ZEaFp" version="23.1.4" type="device">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1393" dy="797" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2568" dy="2165" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-0" value="PDOFactory" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="220" y="570" width="230" height="180" as="geometry">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-0" value="PDOFactory" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="-650" y="249" width="230" height="180" as="geometry">
             <mxRectangle x="130" y="380" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-2" value="- PDO : pdo" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-0">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-2" value="- PDO : pdo" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="VHGTeXbrOyVlLReoBfd2-0" vertex="1">
           <mxGeometry y="26" width="230" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-3" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-0">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-3" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="VHGTeXbrOyVlLReoBfd2-0" vertex="1">
           <mxGeometry y="52" width="230" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-4" value="- __construct()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-0">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-4" value="- __construct()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="VHGTeXbrOyVlLReoBfd2-0" vertex="1">
           <mxGeometry y="60" width="230" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-5" value="+ (static) getInstance(): PDOFactory &#xa;&#xa;- (static) get_sqlite_connection(): PDO&#xa;&#xa;+ getPDO(): PDO" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-0">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-5" value="+ (static) getInstance(): PDOFactory &#xa;&#xa;- (static) get_sqlite_connection(): PDO&#xa;&#xa;+ getPDO(): PDO" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="VHGTeXbrOyVlLReoBfd2-0" vertex="1">
           <mxGeometry y="86" width="230" height="84" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-15" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;edgeStyle=elbowEdgeStyle;exitX=1.009;exitY=0.333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="VHGTeXbrOyVlLReoBfd2-0" source="VHGTeXbrOyVlLReoBfd2-5" target="VHGTeXbrOyVlLReoBfd2-4">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-15" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;edgeStyle=elbowEdgeStyle;exitX=1.009;exitY=0.333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="VHGTeXbrOyVlLReoBfd2-0" source="VHGTeXbrOyVlLReoBfd2-5" target="VHGTeXbrOyVlLReoBfd2-4" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="250" y="90" as="sourcePoint" />
             <mxPoint x="360" y="10" as="targetPoint" />
@@ -30,48 +30,228 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-16" value="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="450" y="610" width="30" height="30" as="geometry" />
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-16" value="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="330" y="600" width="30" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-19" value="Detient" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="80" y="190" width="310" height="280" as="geometry">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-19" value="Detient" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="850" y="-50" width="310" height="280" as="geometry">
             <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-20" value="- int : idG" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-19">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-20" value="- int : idG" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="VHGTeXbrOyVlLReoBfd2-19" vertex="1">
           <mxGeometry y="26" width="310" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-21" value="- int : idAlbum" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-19">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-21" value="- int : idAlbum" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="VHGTeXbrOyVlLReoBfd2-19" vertex="1">
           <mxGeometry y="52" width="310" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-25" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-19">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-25" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="VHGTeXbrOyVlLReoBfd2-19" vertex="1">
           <mxGeometry y="78" width="310" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-26" value="+ __construct(idG: int, idA: int )" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-19">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-26" value="+ __construct(idG: int, idA: int )" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="VHGTeXbrOyVlLReoBfd2-19" vertex="1">
           <mxGeometry y="86" width="310" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-27" value="+ getters/setters&#xa;&#xa;+ (static) getDetient(idG: int, IdAlbum: int): Detient&#xa;+ (static): getDetientByIdG( idG: int): array&#xa;+ (static): getDetientByIdAlbum( idAlbum: int): array&#xa;+ save(): bool&#xa;+ update(): bool&#xa;+ delete(): bool&#xa;+ (static) deleteAll(): bool&#xa;+ (static) deleteDetientByIdG( idG: int): bool&#xa;+ (static) deleteDetientByIdAlbum( idAlbum: int): bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-19">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-27" value="+ getters/setters&#xa;&#xa;+ (static) getDetient(idG: int, IdAlbum: int): Detient&#xa;+ (static): getDetientByIdG( idG: int): array&#xa;+ (static): getDetientByIdAlbum( idAlbum: int): array&#xa;+ create(): bool&#xa;+ update(): bool&#xa;+ delete(): bool&#xa;+ (static) deleteAll(): bool&#xa;+ (static) deleteDetientByIdG( idG: int): bool&#xa;+ (static) deleteDetientByIdAlbum( idAlbum: int): bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="VHGTeXbrOyVlLReoBfd2-19" vertex="1">
           <mxGeometry y="112" width="310" height="168" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-28" value="Appartient" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="460" y="270" width="310" height="280" as="geometry">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-28" value="Appartient" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="450" y="230" width="310" height="280" as="geometry">
             <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-29" value="- int : idP" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-28">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-29" value="- int : idP" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="VHGTeXbrOyVlLReoBfd2-28" vertex="1">
           <mxGeometry y="26" width="310" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-30" value="- int : idT" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-28">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-30" value="- int : idT" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="VHGTeXbrOyVlLReoBfd2-28" vertex="1">
           <mxGeometry y="52" width="310" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-31" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-28">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-31" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="VHGTeXbrOyVlLReoBfd2-28" vertex="1">
           <mxGeometry y="78" width="310" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-32" value="+ __construct(idP: int, idT: int )" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-28">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-32" value="+ __construct(idP: int, idT: int )" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="VHGTeXbrOyVlLReoBfd2-28" vertex="1">
           <mxGeometry y="86" width="310" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VHGTeXbrOyVlLReoBfd2-33" value="+ getters/setters&#xa;&#xa;+ (static) getAppartient(idP: int, idT: int): Appartient&#xa;+ (static) getAppartientByIdP(idP: int): array&#xa;+ (static) getAppartientByIdT(idT: int): array&#xa;+ save(): bool&#xa;+ update(): bool&#xa;+ delete(): bool&#xa;+ (static) deleteAll(): bool&#xa;+ (static) deleteAppartientByIdP(idP: int): bool&#xa;+ (static) deleteAppartientByIdT(idT: int): bool&#xa;&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="VHGTeXbrOyVlLReoBfd2-28">
+        <mxCell id="VHGTeXbrOyVlLReoBfd2-33" value="+ getters/setters&#xa;&#xa;+ (static) getAppartient(idP: int, idT: int): Appartient&#xa;+ (static) getAppartientByIdP(idP: int): array&#xa;+ (static) getAppartientByIdT(idT: int): array&#xa;+ create(): bool&#xa;+ update(): bool&#xa;+ delete(): bool&#xa;+ (static) deleteAll(): bool&#xa;+ (static) deleteAppartientByIdP(idP: int): bool&#xa;+ (static) deleteAppartientByIdT(idT: int): bool&#xa;&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="VHGTeXbrOyVlLReoBfd2-28" vertex="1">
           <mxGeometry y="112" width="310" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-0" value="Playlist" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="-310" y="20" width="310" height="330" as="geometry">
+            <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-1" value="- int : idP&#xa;- string : nomP&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="DCYnFj6lS7DxhxE1vNiN-0" vertex="1">
+          <mxGeometry y="26" width="310" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-2" value="- int : idU" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="DCYnFj6lS7DxhxE1vNiN-0" vertex="1">
+          <mxGeometry y="70" width="310" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-3" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="DCYnFj6lS7DxhxE1vNiN-0" vertex="1">
+          <mxGeometry y="100" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-4" value="+ __construct(idP: int, nomP: string, idU: int )" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="DCYnFj6lS7DxhxE1vNiN-0" vertex="1">
+          <mxGeometry y="108" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-5" value="+ getters/setters&#xa;&#xa;+ (static) getPlaylistsByIdU(idU: int,: array&#xa;+ (static): getPlaylistById( idP: int): Playlist&#xa;+ (static): getPlaylistsByIdT( idT: int): array&#xa;+ create(): bool&#xa;+ update(): bool&#xa;+ delete(): bool&#xa;+ (static): deleteById( idP: int): void&#xa;+ (static) deleteAllPlaylistByIdU( idU: int): void&#xa;+ (static) addTitreToPlaylist(idP: int, idT: int): bool&#xa;+ (static) removeTitreFromPlaylist(idP: int, idT: int): bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="DCYnFj6lS7DxhxE1vNiN-0" vertex="1">
+          <mxGeometry y="134" width="310" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-7" value="FavAlbum" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="1190" y="-40" width="310" height="280" as="geometry">
+            <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-9" value="- int : idU" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="DCYnFj6lS7DxhxE1vNiN-7" vertex="1">
+          <mxGeometry y="26" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-8" value="- int : idAlbum" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="DCYnFj6lS7DxhxE1vNiN-7" vertex="1">
+          <mxGeometry y="52" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-10" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="DCYnFj6lS7DxhxE1vNiN-7" vertex="1">
+          <mxGeometry y="78" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-11" value="+ __construct(idAlbum: int, idU: int )" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="DCYnFj6lS7DxhxE1vNiN-7" vertex="1">
+          <mxGeometry y="86" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="DCYnFj6lS7DxhxE1vNiN-12" value="+ getters/setters&#xa;&#xa;+ (static) getFavAlbum(idAlbum: int, IdU: int): FavAlbum&#xa;+ (static): getFavAlbums(): array&#xa;+ (static): getFavAlbumsByIdU( idU: int): array&#xa;+ create(): bool&#xa;+ update(): bool&#xa;+ delete(): bool&#xa;+ (static) deleteAll(): bool&#xa;+ (static) deleteFavAlbumByIdU( idU: int): bool&#xa;+ (static) deleteFavAlbumByIdAlbum( idAlbum: int): bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="DCYnFj6lS7DxhxE1vNiN-7" vertex="1">
+          <mxGeometry y="112" width="310" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="EHCQnyq9LsiOd8fbNTL6-0" value="FavTItre" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="1160" y="240" width="310" height="280" as="geometry">
+            <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EHCQnyq9LsiOd8fbNTL6-1" value="- int : idT" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="EHCQnyq9LsiOd8fbNTL6-0" vertex="1">
+          <mxGeometry y="26" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="EHCQnyq9LsiOd8fbNTL6-2" value="- int : idU" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="EHCQnyq9LsiOd8fbNTL6-0" vertex="1">
+          <mxGeometry y="52" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="EHCQnyq9LsiOd8fbNTL6-3" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="EHCQnyq9LsiOd8fbNTL6-0" vertex="1">
+          <mxGeometry y="78" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="EHCQnyq9LsiOd8fbNTL6-4" value="+ __construct(idT: int, idU: int )" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="EHCQnyq9LsiOd8fbNTL6-0" vertex="1">
+          <mxGeometry y="86" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="EHCQnyq9LsiOd8fbNTL6-5" value="+ getters/setters&#xa;&#xa;+ (static) getFavTitre(idT: int, IdU: int): FavTitre&#xa;+ (static): getFavTitres(): array&#xa;+ (static): getFavTitresByIdU( idU: int): array&#xa;+ create(): bool&#xa;+ update(): bool&#xa;+ delete(): bool&#xa;+ (static) deleteAll(): bool&#xa;+ (static) deleteFavTitreByIdU( idU: int): bool&#xa;+ (static) deleteFavTitreByIdTitre( idT: int): bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="EHCQnyq9LsiOd8fbNTL6-0" vertex="1">
+          <mxGeometry y="112" width="310" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-0" value="Note" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="800" y="249" width="350" height="310" as="geometry">
+            <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-1" value="- int : idAlbum" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-0">
+          <mxGeometry y="26" width="350" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-2" value="- int : idU&#xa;&#xa;- int: note" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-0">
+          <mxGeometry y="52" width="350" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-3" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-0">
+          <mxGeometry y="100" width="350" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-4" value="+ __construct(idAlbum: int, idU: int, note: int )" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-0">
+          <mxGeometry y="108" width="350" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-5" value="+ getters/setters&#xa;&#xa;+ (static) getNoteByIdUAndidAlbum(idAlbum: int, IdU: int): Note&#xa;+ (static): getNotes(): array&#xa;+ (static): getNotesByAlbumId( idAlbum: int): array&#xa;+ create(): bool&#xa;+ update(): bool&#xa;+ delete(): bool&#xa;+ (static) deleteAll(): bool&#xa;+ (static) deleteNoteByIdU( idU: int): bool&#xa;+ (static) deleteNoteByIdAlbum( idAlbum: int): bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-0">
+          <mxGeometry y="134" width="350" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-8" value="Genre" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="490" y="-145" width="310" height="350" as="geometry">
+            <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-9" value="- int : idG" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-8">
+          <mxGeometry y="26" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-10" value="- string:  nomG" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-8">
+          <mxGeometry y="52" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-11" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-8">
+          <mxGeometry y="78" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-12" value="+ __construct(idG: int, nomG: string )" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-8">
+          <mxGeometry y="86" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-13" value="+ getters/setters&#xa;&#xa;+ (static) existsById(idG: int): bool&#xa;+ (static): existsByNomG(nomG: string): bool&#xa;+ (static): getGenreById( idG: int): Genre&#xa;+ (static): getGenreByNom( nomG: string): Genre&#xa;+ (static): getAllGenres(): array&#xa;+ (static): getGenresByIdAlbum(IdAlbum: int): array&#xa;+ (static): getGenresByIdA(idA: int): array&#xa;+ (static): getGenresByNomA(nomA: string): array&#xa;&#xa;+ create(): bool&#xa;+ update(): bool&#xa;+ delete(): bool&#xa;+ (static) deleteAll(): bool&#xa;+ (static) deletebyId( idG: int): bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-8">
+          <mxGeometry y="112" width="310" height="238" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-14" value="Utilisateur" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="40" y="-150" width="360" height="360" as="geometry">
+            <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-15" value="- int : idU" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-14">
+          <mxGeometry y="26" width="360" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-16" value="- string:  nom&#xa;&#xa;- string: password&#xa;&#xa;- bool: admin" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-14">
+          <mxGeometry y="52" width="360" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-17" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-14">
+          <mxGeometry y="130" width="360" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-18" value="+ __construct(idU int, nom: string, password: string, admin: bool) " style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-14">
+          <mxGeometry y="138" width="360" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-19" value="+ getters/setters&#xa;&#xa;+ (static) getUtilisateurByid(idU: int): Utilisateur&#xa;+ (static): getAllUtilisateurs(): array&#xa;+ (static) getUtilisateurByNom( nom: string): Utilisateur&#xa;+ (static) checkUtilisateurExiste(nom: string): Utilisateur&#xa;+ (static) checkCredentials(nom: String, password: String): bool&#xa;+ (static) getAllAlbumsFavoris(): array&#xa;&#xa;+ create(): bool&#xa;+ update(): bool&#xa;+ delete(): bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-14">
+          <mxGeometry y="164" width="360" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-20" value="Titre" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="10" y="270" width="360" height="400" as="geometry">
+            <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-21" value="- int : idT" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-20">
+          <mxGeometry y="26" width="360" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-22" value="- string:  labelT&#xa;- int: anneeSortie&#xa;- string: url&#xa;- strinng: duree&#xa;- int: idA&#xa;- int: IdAlbum" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-20">
+          <mxGeometry y="52" width="360" height="98" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-23" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-20">
+          <mxGeometry y="150" width="360" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-24" value="+ __construct(idT int, labelT: string, anneeSortie: int,&#xa; url: string, duree: string, idA: int, idAlbum: int) " style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-20">
+          <mxGeometry y="158" width="360" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-25" value="+ getters/setters&#xa;&#xa;+ (static) getTitreById(idT: int): Titre&#xa;+ (static): getAllTitres(): array&#xa;+ (static) getTitresByAuteurId( idA: int): array&#xa;+ (static) getTitresByAlbumId( idAlbum: int): array&#xa;+ (static) getTitresByPlaylistId( idP: int): array&#xa;+ (static) deleteTitresByIdA(idA: int): void&#xa;+ (static) deleteTitresByIdAlbum(idAlbum): void&#xa;&#xa;+ create(): bool&#xa;+ update(): bool&#xa;+ delete(): bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-20">
+          <mxGeometry y="200" width="360" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-26" value="Artiste" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-300" y="370" width="310" height="310" as="geometry">
+            <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-27" value="- int : idA" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-26">
+          <mxGeometry y="26" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-28" value="- string:  nomA&#xa;&#xa;- string; imageA" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-26">
+          <mxGeometry y="52" width="310" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-29" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-26">
+          <mxGeometry y="100" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-30" value="+ __construct(idA: int, nomA: string, imageA: string )" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-26">
+          <mxGeometry y="108" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-31" value="+ getters/setters&#xa;+ (static): getArtisteById( idA: int): Artiste&#xa;+ (static): getArtisteByNom( nomA: string): Artiste&#xa;+ (static): getAllArtistes(): array&#xa;+ (static): getGenresByIdAlbum(IdAlbum: int): array&#xa;+ (static): getGenresByIdA(idA: int): array&#xa;+ (static): getGenresByNomA(nomA: string): array&#xa;&#xa;+ create(): bool&#xa;+ update(): bool&#xa;+ delete(): bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-26">
+          <mxGeometry y="134" width="310" height="176" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-32" value="Album" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-700" y="-200" width="360" height="380" as="geometry">
+            <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-33" value="- int : idAlbum" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-32">
+          <mxGeometry y="26" width="360" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-34" value="- string:  titreAlbum&#xa;- string: imageAlbum&#xa;- int: anneeSortie&#xa;- int: idA" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-32">
+          <mxGeometry y="52" width="360" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-35" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-32">
+          <mxGeometry y="120" width="360" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-36" value="+ __construct(idAlbum: int, titreAlbum: string, imageAlbum: string,&#xa;anneeSortie: int, idA: int) " style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-32">
+          <mxGeometry y="128" width="360" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="7kRRNsHZWIkONq-SYuE7-37" value="+ getters/setters&#xa;+ (static) getAlbumById(idAlbum int): Album&#xa;+ (static) getAlbumByTitreAlbum( titreAlbum: string): Album&#xa;+ (static): getAllAlbums(): array&#xa;+ (static): getAllNomsAlbums(): array&#xa;+ (static): getAlbumsByIdA(idA: int):array&#xa;+ (static): getAlbumsByIdG(idG: int):array&#xa;+ create(): bool&#xa;+ update(): bool&#xa;+ delete(): bool&#xa;+ addGenre(genre: Genre): void&#xa;+ removeGenre(genre:Genre): void&#xa;+ removeAllGenres(): void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7kRRNsHZWIkONq-SYuE7-32">
+          <mxGeometry y="170" width="360" height="196" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
