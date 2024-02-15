@@ -135,6 +135,7 @@ function debug_to_console($data) {
 ob_start();
 switch (parse_url($route)['path']){
    case '/player':
+      $_SESSION['player'] = [];
       debug_to_console($_GET['titles']);
       if (isset($_GET['titles'])){
          $track_index = 0;
@@ -150,6 +151,10 @@ switch (parse_url($route)['path']){
                'path' => '../static/sound/' . $title->getUrl()
             ));
          }
+         if (count($_GET['titles']) == 0){
+            $_SESSION['player'] = [];
+         }
+
          $_SESSION['player'] = Array('track_index' => $track_index, 'track_list' => $track_list, 'seek_slider' => $seek_slider);
       }
       else{
