@@ -67,6 +67,10 @@ register_shutdown_function(function () {
       http_response_code(200);
       require __DIR__ . $adminDir . 'ajout_artiste.php'; // IL FAUDRA FACTORISER TOUT CA
    }
+   elseif ($route == '/admin/ajout-utilisateur'){
+      http_response_code(200);
+      require __DIR__ . $adminDir . 'ajout_utilisateur.php'; // IL FAUDRA FACTORISER TOUT CA
+   }
    elseif ($route == '/admin/ajout-genre'){
       http_response_code(200);
       require __DIR__ . $adminDir . 'ajout_genre.php';

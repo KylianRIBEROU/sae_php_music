@@ -16,7 +16,7 @@ try {
     }
 }
 catch (Exception $e) {
-    echo 'argument manquant. Syntaxe : php sqlite.php [create-database, create-tables, drop-tables]' . PHP_EOL;
+    echo 'argument manquant. Syntaxe : php sqlite.php [create-database, delete-database, create-tables, drop-tables, import-yml <nom_fichier_yml>]' . PHP_EOL;
     exit(1);
 }
 
@@ -62,7 +62,7 @@ switch ($action){
         }
         break;
     default:
-        echo 'Action incorrecte 🙀. Actions possibles [create-database, create-tables, drop-tables]' . PHP_EOL;
+        echo 'Action incorrecte 🙀. Actions possibles [create-database, delete-database, create-tables, drop-tables, import-yml <nom_fichier_yml>]' . PHP_EOL;
         break;
 }
 
