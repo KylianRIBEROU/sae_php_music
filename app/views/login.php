@@ -53,7 +53,6 @@
                     $_SESSION['isadmin'] = $user->getAdmin();
                     $_SESSION['loggedin'] = true;
                     // on redirige l'utilisateur vers la page d'accueil
-                    echo '<h1> redirect </h1>';
                     header('Location: /');
                     exit;
                 }
@@ -63,9 +62,7 @@
             }
             else{
               echo '<p class="text-gray-light my-2 text-sm font-medium leading-6">Identifiant ou mot de passe incorrect.</p>';
-            }
-            // si l'utilisateur n'existe pas ou si le mot de passe est incorrect, on affiche un message d'erreur
-            
+            }            
         }
         ?>
         </div>
