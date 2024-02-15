@@ -66,7 +66,7 @@ class YamlLoader // implements LoaderInterface
                     break;
                 case 'img':
                     if ($value == "null"){
-                        $album->setImageAlbum(null);
+                        $album->setImageAlbum('default.png');
                     }
                     else {
                         $album->setImageAlbum(str_replace("%","%25",$value));
