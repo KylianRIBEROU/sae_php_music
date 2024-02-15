@@ -23,7 +23,15 @@ $titres = favTitre::GetFavTitresByIdU($_SESSION["id"]);
 
 
 <div class="flex gap-8 items-center my-5">
-<button class=" size-14 text-xl bg-purple text-black justify-center items-center rounded-full transition-transform hover:scale-105"><i class="fas fa-play"></i></button>
+<button hx-get="/player?titles[]=
+<?php for ($i = 0; $i < count($titres); $i++) { 
+    if ($i != 0){
+        echo "&titles[]=";
+    }
+    $titre = Titre::getTitreById($titres[$i]->getIdT());
+    echo $titre->getIdT();
+}
+?>" hx-target="#player" class=" size-14 text-xl bg-purple text-black justify-center items-center rounded-full transition-transform hover:scale-105"><i class="fas fa-play"></i></button>
 </div>
 
 
