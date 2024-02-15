@@ -33,11 +33,20 @@ else{
     <?php
     $albums = Album::getAlbumsByIdA($artiste->getIdA());
     foreach ($albums as $album) {
+        $titres = Titre::getTitresByAlbumId($album->getIdAlbum());
         ?>
         <li hx-get="/albums?id=<?php echo $album->getIdAlbum(); ?>" hx-target="#main" class="group  p-4 bg-gray rounded hover:bg-gray-dark-hover transition-colors cursor-pointer ">
             <div class="relative">
                 <img class="rounded-md" src="../static/img/<?php echo $album->getImageAlbum(); ?>" alt="Image de l'album <?php echo $album->getTitreAlbum(); ?>">
-                <button class="absolute bottom-0 right-0 m-2 size-10 bg-purple text-black text-base justify-center items-center rounded-full transition-transform hidden hover:scale-105 group-hover:flex"><i class="fas fa-play"></i></button>
+                <button hx-get="/player?titles[]=
+                <?php for ($i = 0; $i < count($titres); $i++) { 
+                    if ($i != 0){
+                        echo "&titles[]=";
+                    }
+                    $titre = Titre::getTitreById($titres[$i]->getIdT());
+                    echo $titre->getIdT();
+                }
+                ?>" hx-target="#player" class="absolute bottom-0 right-0 m-2 size-10 bg-purple text-black text-base justify-center items-center rounded-full transition-transform hidden hover:scale-105 group-hover:flex z-50"><i class="fas fa-play"></i></button>
             </div>
             <p class="text-white text-base mt-3 font-bold"><?php echo $album->getTitreAlbum(); ?></p>
             <p class="text-gray-light text-sm"><?php echo $album->getTitreAlbum(); ?> • <?php echo $artiste->getNomA(); ?></p>
@@ -54,7 +63,7 @@ else{
     <li class="text-white grid grid-cols-[48px_1fr_48px_48px_48px] gap-3 h-16 rounded-md hover:bg-gray-dark-hover group">
         <div class="flex justify-center items-center">
             <div class="group-hover:hidden"><?php echo $i+1; ?></div>
-            <button class="text-gray-light text-xs hidden group-hover:block hover:text-white"><i class="fas fa-play"></i></button>
+            <button hx-get="/player?titles[]=<?php echo $titres[$i]->getIdT() ?>" hx-target="#player" class="text-gray-light text-xs hidden group-hover:block hover:text-white"><i class="fas fa-play"></i></button>
         </div>
         <div class="flex items-center">
             <?php echo $titres[$i]->getLabelT(); ?>

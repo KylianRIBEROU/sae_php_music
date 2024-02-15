@@ -37,7 +37,17 @@ $artiste = Artiste::getArtisteById($album->getIdA());
     </div>
 </div>
 <div class="flex gap-8 items-center my-5">
-<button class=" size-14 text-xl bg-purple text-black justify-center items-center rounded-full transition-transform hover:scale-105"><i class="fas fa-play"></i></button>
+<button hx-get="/player?titles[]=
+<?php for ($i = 0; $i < count($titres); $i++) { 
+    if ($i != 0){
+        echo "&titles[]=";
+    }
+    $titre = Titre::getTitreById($titres[$i]->getIdT());
+    echo $titre->getIdT();
+}
+?>" hx-target="#player" class=" size-14 text-xl bg-purple text-black justify-center items-center rounded-full transition-transform hover:scale-105"><i class="fas fa-play"></i></button>
+</div>
+
 <?php 
     $favAlbum = favAlbum::getFavAlbum($_SESSION["id"], $album->getIdAlbum());
     if ($favAlbum == null){ ?>
@@ -64,7 +74,7 @@ $artiste = Artiste::getArtisteById($album->getIdA());
     <li class="text-white grid grid-cols-[48px_1fr_48px_48px_48px] gap-3 h-16 rounded-md hover:bg-gray-dark-hover group relative ">
         <div class="flex justify-center items-center">
             <div class="group-hover:hidden"><?php echo $i+1; ?></div>
-            <button class="text-gray-light text-xs hidden group-hover:block hover:text-white"><i class="fas fa-play"></i></button>
+            <button hx-get="/player?titles[]=<?php echo $titres[$i]->getIdT() ?>" hx-target="#player" class="text-gray-light text-xs hidden group-hover:block hover:text-white"><i class="fas fa-play"></i></button>
         </div>
         <div class="flex items-center">
             <?php echo $titres[$i]->getLabelT(); ?>
