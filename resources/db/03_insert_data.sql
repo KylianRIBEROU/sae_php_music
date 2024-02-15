@@ -13,6 +13,10 @@ INSERT INTO titre (labelT, anneeSortie, duree, url, idAlbum, idA) VALUES
 ('Senorita', 1998, '3:22', 'Superdrag - Senorita (128 kbps) (1).mp3', 1, 1),
 ('Whiteys Theme', 1998, '6:08', 'Superdrag - Whiteys Theme (64 kbps).mp3', 1, 1);
 
+INSERT INTO titre (labelT, anneeSortie, duree, url, idAlbum, idA) VALUES
+('imminent Galactic War', 2010, '1:48', 'Ryan Adams - Imminent Galactic War (Orion track 2) (128 kbps).mp3', 12, 3),
+('Star for Hire', 2010, '3:05', 'Ryan Adams - Star for Hire (Orion track 2) (128 kbps).mp3', 12, 3);
+
 INSERT INTO artiste (nomA) VALUES ('16 Horsepower');
 INSERT INTO album (titreAlbum, imageAlbum, anneeSortie, idA) VALUES ('Folklore', '220px-Folklore_hp.jpg', 2002, 2);
 INSERT INTO genre (nomG) VALUES ('Alternative country');
