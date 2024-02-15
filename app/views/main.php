@@ -4,8 +4,6 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
 }
 ?>
 
-<h1 class="text-white mb-2">Parcourir tout</h1>
-
 <ul class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-5">
     <?php 
 
@@ -23,4 +21,7 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
             echo '</li>';
         }
     ?>
+
 </ul>
+
+<?php print_r($_SESSION['player'])?>

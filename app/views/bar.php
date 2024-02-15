@@ -28,6 +28,13 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
 
     <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded bg-gray py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu">
         <a hx-get="/profil" hx-target="#main" class="block p-3 mx-1 text-sm text-white rounded hover:bg-gray-dark-hover ">Profil</a>
+        <?php
+        if (isset($_SESSION['isadmin']) && $_SESSION['isadmin']){
+            ?>
+            <a href="/admin" class="block p-3 mx-1 text-sm text-white rounded hover:bg-gray-dark-hover">Administration</a>
+            <?php
+        }
+        ?>
         <a href="/logout" class="block p-3 mx-1 text-sm text-white rounded hover:bg-gray-dark-hover">Déconnexion</a>
     </div>
 </div>

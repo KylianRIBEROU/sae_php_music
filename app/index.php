@@ -10,6 +10,8 @@ use models\favTitre;
 use pdoFactory\PDOFactory;
 use models\Playlist;
 use models\Titre;
+use models\Artiste;
+use models\Album;
 
 $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
 
@@ -29,6 +31,12 @@ register_shutdown_function(function () {
    if ($hxRequest) {
       if ($route == '/nav'){
          echo $nav;
+      }
+      elseif ($route == '/bar'){
+         echo $bar;
+      }
+      elseif (parse_url($route)['path'] == '/player'){
+         echo $player;
       }
       else{
          echo $main;
@@ -111,8 +119,43 @@ ob_start();
 require __DIR__ . $viewDir . 'bar.php';
 $bar = ob_get_clean();
 
+
+function debug_to_console($data) {
+   $output = $data;
+   if (is_array($output))
+       $output = implode(',', $output);
+
+   echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
+
 ob_start();
-require __DIR__ . $viewDir . 'player.php';
+switch (parse_url($route)['path']){
+   case '/player':
+      debug_to_console($_GET['titles']);
+      if (isset($_GET['titles'])){
+         $track_index = 0;
+         $seek_slider = 0;
+         $track_list = [];
+         foreach ($_GET['titles'] as $idTitre){
+            $title = Titre::getTitreById($idTitre);
+            debug_to_console($title->getLabelT());
+            array_push($track_list,Array(
+               'name' => $title->getLabelT(),
+               'artist' => Artiste::getArtisteById($title->getIdA())->getNomA(),
+               'image' => '../static/img/' . Album::getAlbumById($title->getIdAlbum())->getImageAlbum(),
+               'path' => '../static/sound/' . $title->getUrl()
+            ));
+         }
+         $_SESSION['player'] = Array('track_index' => $track_index, 'track_list' => $track_list, 'seek_slider' => $seek_slider);
+      }
+      else{
+         $_SESSION['player'] = [];
+      }
+      require __DIR__ . $viewDir . 'player.php';
+      break;
+   default:
+      require __DIR__ . $viewDir . 'player.php';
+}
 $player = ob_get_clean();
 
 ob_start();

@@ -38,7 +38,11 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
     <input type="range" min="0" max="100" value="50" id="volume-slider" class="accent-purple" onchange="setVolume()">
 </div>
 <script src="../static/js/player.js" ></script>
+
+
 <script>
+    
+
     // if (localStorage.getItem('track_list') != null) {
     //     try {
     //         track_list = JSON.parse(localStorage.getItem('track_list'));
@@ -66,9 +70,15 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
         if (Object.keys(data).length > 1) {
             console.log('Track list found');
             track_list = data['track_list'];
+            console.log(track_list);
             track_index = data['track_index'];
+            console.log(track_index);
             loadTrack(track_index);
+            console.log('loadTrack');
             seekToTime(parseInt(data['seek_slider']));
+        }
+        else{
+            deactivateButtons();
         }
         // else {
         //     console.error('No track list found');

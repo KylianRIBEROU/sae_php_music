@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_SESSION['player'])) {
         $response = $_SESSION['player'];
+        // header($_SESSION['player']);
     } else {
         $response = array();
     }

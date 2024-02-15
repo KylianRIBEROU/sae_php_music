@@ -33,7 +33,7 @@ use models\Playlist;
     <?php
 
 
-        $favAlbums = favAlbum::getFavAlbums($_SESSION["id"]);
+        $favAlbums = favAlbum::getFavAlbumsByIdU($_SESSION["id"]);
 
         foreach ($favAlbums as $favAlbum) {
             $album = Album::getAlbumById($favAlbum->getIdAlbum());
