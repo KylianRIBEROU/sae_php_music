@@ -14,7 +14,7 @@ use models\Genre;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['supprimer_artiste'])) {
-        $artiste_id = $_POST['artiste_id'];
+        $artiste_id = $_POST['id'];
         $artiste = Artiste::getArtisteById($artiste_id);
         $artiste->delete();
     }
@@ -70,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               echo "</form>";
               
               echo "<form method='post'>";
+              echo "<input type='hidden' name='id' value='" . $artiste->getIdA() . "'>"; 
               echo "<button class='btn-supprimer' type='submit' name='supprimer_artiste'><i style='margin: 4px; color: red; margin-right:2em;' class='fas fa-trash'></i></button>"; // Icône de poubelle
               echo "</form>";
               echo "</div>";

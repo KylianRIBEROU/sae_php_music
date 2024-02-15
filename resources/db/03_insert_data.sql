@@ -68,7 +68,6 @@ INSERT INTO titre (labelT, anneeSortie, duree, url, idAlbum, idA) VALUES
 ('imminent Galactic War', 2010, '1:48', 'Ryan Adams - Imminent Galactic War (Orion track 2) (128 kbps) (2).mp3', 12, 3),
 ('Star for Hire', 2010, '3:05', 'Ryan Adams - Star for Hire (Orion track 2) (128 kbps).mp3', 12, 3);
 
-Ryan Adams - Imminent Galactic War (Orion track 2) (128 kbps) (2).mp3
 INSERT INTO genre (nomG) VALUES ('Heavy metal');
 INSERT INTO genre (nomG) VALUES ('Hard rock');
 INSERT INTO detient (idAlbum, idG) VALUES (12, 9);
