@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace dataloader;
 
-use dataloader\LoaderInterface;
 use Exception;
 use models\Album;
 use models\Artiste;
+use models\Genre;
 
 class YamlLoader // implements LoaderInterface
 {
@@ -65,11 +65,34 @@ class YamlLoader // implements LoaderInterface
                     $album->setTitreAlbum($value);
                     break;
                 case 'img':
-                    $album->setImageAlbum(str_replace("%","%25",$value));
+                    if ($value == "null"){
+                        $album->setImageAlbum(null);
+                    }
+                    else {
+                        $album->setImageAlbum(str_replace("%","%25",$value));
+                    }
                     break;
                 case 'releaseYear':
                     $album->setAnneeSortie((int) $value);
                     break;
+                case 'genre':
+                    if (strlen($value) <= 2) {
+                        break;
+                    }
+                    $value = substr($value, 1, strlen($value)-2);
+                    $genres = explode(",", $value);
+                    foreach ($genres as $g){
+                        $genre = Genre::getGenreByNom($g);
+                        if (!$genre){
+                            $genre = new Genre(0, $g);
+                            $genre->create();
+                            $genre = Genre::getGenreByNom($g);
+                            if (!$genre){
+                                throw new Exception("Error creating genre");
+                            }
+                        }
+                        $album->addGenre($genre);
+                    }
             }
         }
         if ($album) {
