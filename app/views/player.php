@@ -18,15 +18,15 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
 
 <div class="">
     <div class="flex justify-center items-center p-2 gap-5">
-        <button class="text-gray-light text-xl hover:text-white transition-colors" onclick="shuffleTrack()" id="shuffle-track"><i class="fas fa-random"></i></button>
-        <button class="text-gray-light text-xl hover:text-white transition-colors" onclick="prevTrack()" id="prev-track"><i class="fas fa-step-backward"></i></button>
-        <button class="text-white text-3xl" onclick="playpauseTrack()" id="playpause-track"><i class="fas fa-play-circle"></i></button>
-        <button class="text-gray-light text-xl hover:text-white transition-colors" onclick="nextTrack()" id="next-track"><i class="fas fa-step-forward"></i></button>   
-        <button class="text-gray-light text-xl hover:text-white transition-colors" onclick="repeatTrack()" id="repeat-track"><i class="fas fa-redo"></i></button>
+        <button class="text-gray-light text-xl hover:text-white transition-colors" onclick="window.player.shuffleTrack()" id="shuffle-track"><i class="fas fa-random"></i></button>
+        <button class="text-gray-light text-xl hover:text-white transition-colors" onclick="window.player.prevTrack()" id="prev-track"><i class="fas fa-step-backward"></i></button>
+        <button class="text-white text-3xl" onclick="window.player.playpauseTrack()" id="playpause-track"><i class="fas fa-play-circle"></i></button>
+        <button class="text-gray-light text-xl hover:text-white transition-colors" onclick="window.player.nextTrack()" id="next-track"><i class="fas fa-step-forward"></i></button>   
+        <button class="text-gray-light text-xl hover:text-white transition-colors" onclick="window.player.repeatTrack()" id="repeat-track"><i class="fas fa-redo"></i></button>
     </div>
     <div class="flex justify-center gap-5">
         <div id="current-time" class="text-white">00:00</div>
-        <input type="range" min="0" max="100" value="0"  class="accent-purple w-2/4" id="seek-slider" onchange="seekTo()">
+        <input type="range" min="0" max="100" value="0"  class="accent-purple w-2/4" id="seek-slider" onchange="window.player.seekTo()">
         <div id="total-duration" class="text-white">00:00</div>
     </div>
 
@@ -35,7 +35,7 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
 
 <div class="flex items-center justify-end p-2 gap-5">
     <button class="text-white text-2xl" id="volume-btn" onclick="mute()"><i class="fas fa-volume-up"></i></button>
-    <input type="range" min="0" max="100" value="50" id="volume-slider" class="accent-purple" onchange="setVolume()">
+    <input type="range" min="0" max="100" value="50" id="volume-slider" class="accent-purple" onchange="window.player.setVolume()">
 </div>
 <script src="../static/js/player.js" ></script>
 
@@ -69,16 +69,15 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
         console.log(data)
         if (Object.keys(data).length > 1) {
             console.log('Track list found');
-            track_list = data['track_list'];
-            console.log(track_list);
-            track_index = data['track_index'];
-            console.log(track_index);
-            loadTrack(track_index);
+            window.player.track_list = data['track_list'];
+            window.player.setTrackList(data['track_list']);
+            window.player.setTrackIndex(data['track_index']);
+            window.player.loadTrack(window.player.track_index);
             console.log('loadTrack');
-            seekToTime(parseInt(data['seek_slider']));
+            window.player.seekToTime(parseInt(data['seek_slider']));
         }
         else{
-            deactivateButtons();
+            windows.player.deactivateButtons();
         }
         // else {
         //     console.error('No track list found');

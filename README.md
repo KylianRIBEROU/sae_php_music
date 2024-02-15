@@ -44,6 +44,8 @@ php cli/sqlite.php drop-tables
 
 ### Lancer l'application
 
+Dans le dossier `app`
+
 ```bash
 php -S localhost:8000
 ```
@@ -63,7 +65,7 @@ Un visiteur peut créer un compte ou se connecter. Cela lui permet de liker des 
 
 Des titres ont été rajoutés aux albums. Un utilisateur peut donc aussi effectuer des recherches sur des titres, mais aussi les écouter grâce au lecteur vidéo implémenté.
 
-Il est donc possible pour un utilisateur d'écouter des albums ou des playlist qu'il a composé.
+Il est donc possible pour un utilisateur d'écouter des albums ou des playlists qu'il a composé.
 
 ## Contraintes
 
