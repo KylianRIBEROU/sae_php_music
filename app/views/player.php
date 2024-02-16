@@ -77,7 +77,7 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
             window.player.seekToTime(parseInt(data['seek_slider']));
         }
         else{
-            windows.player.deactivateButtons();
+            window.player.deactivateButtons();
         }
         // else {
         //     console.error('No track list found');
