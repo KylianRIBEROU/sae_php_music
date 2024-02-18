@@ -283,7 +283,6 @@ switch (parse_url($route)['path']){
    case '/notealbum':
       if (isset($_SESSION["id"]) && isset($_GET['id']) && isset($_GET['note']) && is_numeric($_GET['note']) && $_GET['note'] >= 0 && $_GET['note'] <= 5){
          $notealbum = note::getNoteByIdUAndidAlbum($_SESSION["id"], $_GET['id']);
-         debug_to_console(gettype($note));
          if ($notealbum != null){
             $notealbum->setNote($_GET['note']);
             $notealbum->update();
