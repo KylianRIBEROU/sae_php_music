@@ -1,5 +1,8 @@
 # SAE_PHP_MUSICS
 
+
+lien github du projet : https://github.com/KylianRIBEROU/sae_php_music
+
 ## Attendus initiaux du projet
 
 Réaliser une application web avec PHP permettant la gestion et l'affichage d'albums et d'artistes. L'application permettra notamment d'effectuer différentes opérations ( CRUD ) et permettra à des utilisateurs de se connecter, de liker des albums, ....
