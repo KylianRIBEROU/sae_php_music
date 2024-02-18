@@ -5,6 +5,7 @@ use models\Artiste;
 use models\Titre;
 use models\favAlbum;
 use models\favTitre;
+use models\Note;
 
 if (isset($_GET['id'] )){
     $id = $_GET['id'];
@@ -32,7 +33,20 @@ $artiste = Artiste::getArtisteById($album->getIdA());
         <h1 class="text-white text-7xl font-bold"><?php echo $album->getTitreAlbum(); ?></h1>
         <div class="flex items-center gap-3">
             <img class="rounded-full h-10" src="../static/img/default.png" alt="Image de l'artiste <?php echo $artiste->getNomA(); ?>">
-            <h3 class="text-white"><span hx-get="/artists?id=<?php echo $artiste->getIdA(); ?>" hx-target="#main" class="font-bold hover:cursor-pointer hover:underline"><?php echo $artiste->getNomA(); ?></span> • <?php echo $album->getAnneeSortie(); ?> • <?php echo count($titres); ?> titre(s)</h3>
+            <?php
+                $notes = Note::getNoteByAlbumId($album->getIdAlbum());
+                $moyenne = 0;
+                if (count($notes) > 0){
+                    foreach ($notes as $note) {
+                        $moyenne += $note->getNote();
+                    }
+                    $moyenne = $moyenne / count($notes);
+                }
+                else{
+                    $moyenne = "X";
+                }
+            ?>
+            <h3 class="text-white"><span hx-get="/artists?id=<?php echo $artiste->getIdA(); ?>" hx-target="#main" class="font-bold hover:cursor-pointer hover:underline"><?php echo $artiste->getNomA(); ?></span> • <?php echo $album->getAnneeSortie(); ?> • <?php echo count($titres); ?> titre(s) • <?php echo $moyenne ?>/5</h3>
         </div>
     </div>
 </div>
@@ -46,7 +60,6 @@ $artiste = Artiste::getArtisteById($album->getIdA());
     echo $titre->getIdT();
 }
 ?>" hx-target="#player" class=" size-14 text-xl bg-purple text-black justify-center items-center rounded-full transition-transform hover:scale-105"><i class="fas fa-play"></i></button>
-</div>
 
 <?php 
     $favAlbum = favAlbum::getFavAlbum($_SESSION["id"], $album->getIdAlbum());
@@ -59,6 +72,21 @@ $artiste = Artiste::getArtisteById($album->getIdA());
     <?php 
     } 
 ?>
+
+<div class="flex items-center gap-2">
+    <label for="note" class="text-sm font-medium text-white text-center">Notes</label>
+    <?php
+        $note = Note::getNoteByIdUAndidAlbum($_SESSION["id"], $album->getIdAlbum());
+    ?>
+    <select name="note" id="note" class="bg-gray border border-gray text-white text-sm rounded-lg focus:ring-purple focus:border-purple p-2.5" hx-get="/notealbum?id=<?php echo $album->getIdAlbum() ?>" hx-target="#main">
+        <?php if ($note == null) { echo '<option value="X" selected>X</option>' ; }?>
+        <option value="1" <?php if ($note != null && $note->getNote() == 1) { echo 'selected'; } ?>>1</option>
+        <option value="2" <?php if ($note != null && $note->getNote() == 2) { echo 'selected'; } ?>>2</option>
+        <option value="3" <?php if ($note != null && $note->getNote() == 3) { echo 'selected'; } ?>>3</option>
+        <option value="4" <?php if ($note != null && $note->getNote() == 4) { echo 'selected'; } ?>>4</option>
+        <option value="5" <?php if ($note != null && $note->getNote() == 5) { echo 'selected'; } ?>>5</option>
+    </select>
+</div>
 </div>
 
 

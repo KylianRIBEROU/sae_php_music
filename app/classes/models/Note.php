@@ -24,7 +24,7 @@ class Note {
      */
     public function __construct(int $idU, int $idAlbum, int $note) {
         $this->idU = $idU;
-        $this->$idAlbum = $idAlbum;
+        $this->idAlbum = $idAlbum;
         $this->note = $note;
     }
 
@@ -74,13 +74,16 @@ class Note {
         $this->note = $note;
     }
 
-    public static function getNoteByIdUAndidAlbum(int $idU, int $idAlbum): Note {
+    public static function getNoteByIdUAndidAlbum(int $idU, int $idAlbum): ?Note {
         $db = PDOFactory::getInstancePDOFactory()->get_PDO();
         $req = $db->prepare("SELECT * FROM note WHERE idU = :idU AND idAlbum = :idAlbum");
         $req->bindParam(":idU", $idU);
         $req->bindParam(":idAlbum", $idAlbum);
         $req->execute();
         $noteBD = $req->fetch();
+        if (!$noteBD){
+            return null;
+        }
         return new Note((int)$noteBD['idU'], (int)$noteBD['idAlbum'], (int)$noteBD['note']);
     }
 
@@ -110,11 +113,16 @@ class Note {
     }
 
     public function create(): bool{
+        $idU = $this->getIdU();
+        $idAlbum = $this->getIdAlbum();
+        $notep = $this->getNote();
+
+
         $db = PDOFactory::getInstancePDOFactory()->get_PDO();
         $req = $db->prepare("INSERT INTO note (idU, idAlbum, note) VALUES (:idU, :idAlbum, :note)");
-        $req->bindParam(":idU", $this->idU);
-        $req->bindParam(":idAlbum", $this->idAlbum);
-        $req->bindParam(":note", $this->note);
+        $req->bindParam(":idU", $idU);
+        $req->bindParam(":idAlbum", $idAlbum);
+        $req->bindParam(":note", $notep);
         return $req->execute();
     }
 

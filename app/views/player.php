@@ -10,9 +10,6 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
         <h1 class="text-white text-xl font-bold" id="track-name">No sound</h1>
         <h2 class="text-gray-light text-base font-bold" id="track-artist" >No artist</h2>
     </div>
-    <div>
-        <button class="text-white text-2xl"><i class="far fa-heart"></i></button>
-    </div>
 
 </div>
 

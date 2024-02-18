@@ -23,5 +23,3 @@ if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
     ?>
 
 </ul>
-
-<?php print_r($_SESSION['player'])?>

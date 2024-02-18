@@ -12,6 +12,7 @@ use models\Playlist;
 use models\Titre;
 use models\Artiste;
 use models\Album;
+use models\Note;
 
 $pdo = PDOFactory::getInstancePDOFactory()->get_PDO();
 
@@ -278,6 +279,21 @@ switch (parse_url($route)['path']){
       };
       header('HX-Trigger: refreshnav');
       require __DIR__ . $viewDir . 'playlists.php';
+      break;
+   case '/notealbum':
+      if (isset($_SESSION["id"]) && isset($_GET['id']) && isset($_GET['note']) && is_numeric($_GET['note']) && $_GET['note'] >= 0 && $_GET['note'] <= 5){
+         $notealbum = note::getNoteByIdUAndidAlbum($_SESSION["id"], $_GET['id']);
+         debug_to_console(gettype($note));
+         if ($notealbum != null){
+            $notealbum->setNote($_GET['note']);
+            $notealbum->update();
+         }
+         else {
+            $notealbum = new Note($_SESSION["id"], $_GET['id'], $_GET['note']); 
+            $notealbum->create();
+         };
+      };
+      require __DIR__ . $viewDir . 'albums.php';
       break;
    default:
       require __DIR__ . $viewDir . '404.php';
