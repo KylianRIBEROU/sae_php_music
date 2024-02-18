@@ -16,7 +16,7 @@ Voir sujet de la SAE pour plus de détails.
 
 ### Configurer la base de données
 
-Un fichier SQLite `app.db` étant déjà présent avec des données pour le projet, il n'est pas obligatoire d'utiliser les commandes suivantes.
+Un fichier SQLite `app.db` étant déjà présent avec des données pour le projet, il n'est pas obligatoire d'utiliser les commandes suivantes. Nous vous recommandons de lancer le projet avec le fichier déjà existant pour avoir assez de données et pour pouvoir lire des titres.
 
 Cependant, si vous souhaiteriez partir d'une base de données vide pour charger vos propres données ( ou que le fichier app.db serait manquant ), voici comment initialiser la base de données.
 
@@ -42,13 +42,24 @@ Pour supprimer les tables :
 php cli/sqlite.php drop-tables
 ```
 
+Pour charger un fichier de données YAML :
+```
+php cli/sqlite.php import-yml [nom_fichier]
+```
 ### Lancer l'application
+
+> Le lecteur de musique ne fonctionnant pas sur les navigateurs Chromium, nous conseillons d'ouvrir le site sur Mozilla Firefox pour une expérience complète.
 
 Dans le dossier `app`
 
 ```bash
 php -S localhost:8000
 ```
+
+Un compte administrateur est à disposition pour avoir accès à toutes les fonctionnalités et au panel admin.
+
+ Pseudo : **dalaigre**, Mot de passe : **dalaigre**
+
 ## Modèle Conceptuel de Données
 
 ![](./mcd/MCD.png)

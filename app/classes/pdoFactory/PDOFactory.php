@@ -34,7 +34,6 @@ class PDOFactory
            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
            return $db;
         } catch (PDOException $e) {
-           // Gérer l'exception
             $e -> getMessage();
            return null; 
         }

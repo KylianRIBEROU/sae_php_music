@@ -182,7 +182,6 @@ function createTables()
 ];
 
 
-    // Execute the table creation queries
     foreach ($tableQueries as $tableName => $tableQuery) {
         // print $tableQuery;
         print $tableName;
@@ -215,7 +214,6 @@ function dropTables()
         'utilisateur' => 'DROP TABLE IF EXISTS utilisateur',
     ];
 
-    // Execute the table deletion queries
     foreach ($tableDeletionQueries as $tableName => $tableDeletionQuery) {
         try {
             $pdo->exec($tableDeletionQuery);

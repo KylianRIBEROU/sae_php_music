@@ -66,11 +66,11 @@ register_shutdown_function(function () {
    }
    elseif ($route == '/admin/ajout-artiste'){
       http_response_code(200);
-      require __DIR__ . $adminDir . 'ajout_artiste.php'; // IL FAUDRA FACTORISER TOUT CA
+      require __DIR__ . $adminDir . 'ajout_artiste.php'; 
    }
    elseif ($route == '/admin/ajout-utilisateur'){
       http_response_code(200);
-      require __DIR__ . $adminDir . 'ajout_utilisateur.php'; // IL FAUDRA FACTORISER TOUT CA
+      require __DIR__ . $adminDir . 'ajout_utilisateur.php'; 
    }
    elseif ($route == '/admin/ajout-genre'){
       http_response_code(200);
@@ -86,15 +86,15 @@ register_shutdown_function(function () {
    }
    elseif ($route == '/admin/utilisateurs'){
       http_response_code(200);
-      require __DIR__ . $adminDir . 'utilisateurs.php'; // IL FAUDRA FACTORISER TOUT CA
+      require __DIR__ . $adminDir . 'utilisateurs.php'; 
    }
    elseif ($route == '/admin/artistes'){
       http_response_code(200);
-      require __DIR__ . $adminDir . 'artistes.php'; // IL FAUDRA FACTORISER TOUT CA
+      require __DIR__ . $adminDir . 'artistes.php'; 
    }
    elseif (parse_url($route)['path'] == '/admin/artiste') { 
       http_response_code(200);
-      require __DIR__ . $adminDir . 'detail_artiste.php'; // IL FAUDRA FACTORISER TOUT CA
+      require __DIR__ . $adminDir . 'detail_artiste.php'; 
    }
    elseif (parse_url($route)['path'] == '/admin/update-genre') { 
       http_response_code(200);
